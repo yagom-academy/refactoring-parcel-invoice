@@ -8,12 +8,17 @@ import UIKit
 
 final class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
   
-  private let parcelOrderService: ParcelOrderService
+  struct Dependency {
+    let invoiceViewControllerFactory: (ParcelInformation) -> InvoiceViewController
+    let parcelOrderService: ParcelOrderService
+  }
+  
+  private let dependency: Dependency
   
   init(
-    parcelOrderService: ParcelOrderService
+    dependency: Dependency
   ) {
-    self.parcelOrderService = parcelOrderService
+    self.dependency = dependency
     super.init(nibName: nil, bundle: nil)
     navigationItem.title = "택배보내기"
   }
@@ -23,8 +28,8 @@ final class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate
   }
   
   func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-    parcelOrderService.process(parcelInformation: parcelInformation) { (parcelInformation) in
-      let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
+    dependency.parcelOrderService.process(parcelInformation: parcelInformation) { (parcelInformation) in
+      let invoiceViewController = dependency.invoiceViewControllerFactory(parcelInformation)
       navigationController?.pushViewController(invoiceViewController, animated: true)
     }
   }

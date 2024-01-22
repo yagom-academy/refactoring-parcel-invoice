@@ -6,8 +6,8 @@
 
 import UIKit
 
-class InvoiceViewController: UIViewController {
-  
+final class InvoiceViewController: UIViewController {
+
   private let parcelInformation: ParcelInformation
   
   init(parcelInformation: ParcelInformation) {

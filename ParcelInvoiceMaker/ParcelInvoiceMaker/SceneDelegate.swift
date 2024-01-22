@@ -1,8 +1,8 @@
 //
 //  ParcelInvoiceMaker - SceneDelegate.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -14,18 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     guard let scene: UIWindowScene = (scene as? UIWindowScene) else { return }
     
-    let databaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
-    let parcelOrderProcess = ParcelOrderProcessor(databaseParcelInformationPersistence: databaseParcelInformationPersistence)
-    let viewController: ParcelOrderViewController = ParcelOrderViewController(parcelOrderService: parcelOrderProcess)
-    let navigationController: UINavigationController = UINavigationController(rootViewController: viewController)
-    navigationController.navigationBar.prefersLargeTitles = true
-    navigationController.navigationBar.tintColor = .black
-    
-    let window: UIWindow = UIWindow(windowScene: scene)
-    window.rootViewController = navigationController
-    
-    self.window = window
-    window.makeKeyAndVisible()
+    let appDependency = AppDependency.resolve(scene)
+    self.window = appDependency.window
   }
 }
-
