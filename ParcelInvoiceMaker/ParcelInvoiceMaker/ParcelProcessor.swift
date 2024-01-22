@@ -7,9 +7,14 @@
 import Foundation
 
 final class ParcelOrderProcessor {
+  private let databaseParcelInformationPersistence: DatabaseParcelInformationPersistence
   
-  private let databaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
-  
+  init(databaseParcelInformationPersistence: DatabaseParcelInformationPersistence) {
+    self.databaseParcelInformationPersistence = databaseParcelInformationPersistence
+  }
+}
+ 
+extension ParcelOrderProcessor: ParcelOrderService {
   // 택배 주문 처리 로직
   func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
     
