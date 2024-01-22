@@ -7,9 +7,10 @@
 import UIKit
 
 class InvoiceView: UIView {
-    let parcelInformation: ParcelInformation
+    // SOLID DIP 적용 추상화된 프로토콜을 가지도록 수정
+    let parcelInformation: ParcelInformationProvider
     
-    init(parcelInformation: ParcelInformation) {
+    init(parcelInformation: ParcelInformationProvider) {
         self.parcelInformation = parcelInformation
         super.init(frame: .zero)
         backgroundColor = .systemBrown
@@ -24,22 +25,26 @@ class InvoiceView: UIView {
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.receiverName)"
+        // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
+        nameLabel.text = "이름 : \(parcelInformation.getReceiverName())"
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.receiverMobile)"
+        // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
+        mobileLabel.text = "전화 : \(parcelInformation.getReceiverMobile())"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.address)"
+        // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
+        addressLabel.text = "주소 : \(parcelInformation.getAdress())"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
         costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        costLabel.text = "요금 : \(parcelInformation.discountedCost)"
+        // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
+        costLabel.text = "요금 : \(parcelInformation.getDiscountedCost())"
                 
         let mainStackView: UIStackView = .init(arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel])
         mainStackView.axis = .vertical

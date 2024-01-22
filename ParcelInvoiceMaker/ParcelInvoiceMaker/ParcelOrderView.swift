@@ -7,7 +7,7 @@
 import UIKit
 
 protocol ParcelOrderViewDelegate {
-    func parcelOrderMade(_ parcelInformation: ParcelInformation)
+    func parcelOrderMade(_ parcelInformation: ParcelInformationProvider)
 }
 
 class ParcelOrderView: UIView {
@@ -70,17 +70,19 @@ class ParcelOrderView: UIView {
               mobile.isEmpty == false,
               address.isEmpty == false,
               costString.isEmpty == false,
-              let cost: Int = Int(costString),
+              let cost: Double = Double(costString),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
         else {
             return
         }
         
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
-                                                         discount: discount)
+        // 객체미용체조 7원칙 '2개 이상의 원시타입 프로퍼티를 갖는 타입 금지'를 적용하면서 변경
+        let parcelInformation: ParcelInformationProvider = 
+        ParcelInformation(parcelInfo: ParcelInfo(address: address,
+                                                 receiver: ReceiverInfo(receiverName: name,
+                                                                        receiverMobile: mobile),
+                                                 cost: ParcelCost(deliveryCost: cost,
+                                                                  discount: discount)))
         delegate.parcelOrderMade(parcelInformation)
     }
     
