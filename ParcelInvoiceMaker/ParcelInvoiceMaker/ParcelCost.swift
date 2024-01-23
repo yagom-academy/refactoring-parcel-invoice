@@ -10,21 +10,14 @@ import Foundation
 // 소포 비용
 struct ParcelCost {
     let deliveryCost: Double
-    private let discount: Discount
+    private let discountStrategy: DiscountStrategy
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return Int(deliveryCost)
-        case .vip:
-            return Int(deliveryCost * DiscountRate.vip)
-        case .coupon:
-            return Int(deliveryCost * DiscountRate.coupon)
-        }
+        discountStrategy.applyDiscount(deliveryCost)
     }
     
     init(deliveryCost: Double, discount: Discount) {
         self.deliveryCost = deliveryCost
-        self.discount = discount
+        self.discountStrategy = discount.strategy
     }
     
     func getDiscountedCost() -> Int{
