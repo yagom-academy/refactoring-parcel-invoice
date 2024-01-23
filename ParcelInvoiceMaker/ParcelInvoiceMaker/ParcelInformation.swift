@@ -11,13 +11,12 @@ import Foundation
 struct ParcelInformation {
     private(set) var address: Address
     private(set) var deliveryCost: Cost
-    private(set) var discount: Discount
+    private(set) var discountStrategy: DiscountStrategy
     
     private var receiverInfomation: ReceiverInformation
     
     var discountedCost: Cost {
-        let strategy = discount.strategy
-        return strategy.applyDiscount(deliveryCost: deliveryCost)
+        discountStrategy.applyDiscount(deliveryCost: deliveryCost)
     }
     
     var receiverName: PersonName {
@@ -32,10 +31,10 @@ struct ParcelInformation {
          receiverName: String,
          receiverMobile: String,
          deliveryCost: Int,
-         discount: Discount) throws {
+         discountType: String) throws {
         self.address = try Address(address)
         self.deliveryCost = Cost(deliveryCost)
-        self.discount = discount
+        self.discountStrategy = DiscountStrategyFactory.createStrategy(type: discountType)
         
         let name = try PersonName(receiverName)
         let mobile = try PhoneNumber(receiverMobile)
@@ -106,38 +105,43 @@ struct Cost {
 
 //MARK: Discount
 protocol DiscountStrategy {
+    var discountType: String { get }
     func applyDiscount(deliveryCost: Cost) -> Cost
 }
 
 struct NoDiscount: DiscountStrategy {
+    private(set) var discountType: String = "없음"
+    
     func applyDiscount(deliveryCost: Cost) -> Cost {
         Cost(deliveryCost.value)
     }
 }
 
 struct VIPDiscount: DiscountStrategy {
+    private(set) var discountType: String = "VIP"
+    
     func applyDiscount(deliveryCost: Cost) -> Cost {
         Cost(deliveryCost.value / 5 * 4)
     }
 }
 
 struct CouponDiscount: DiscountStrategy {
+    private(set) var discountType: String = "쿠폰"
+    
     func applyDiscount(deliveryCost: Cost) -> Cost {
         Cost(deliveryCost.value / 2)
     }
 }
 
-enum Discount: Int {
-    case none = 0, vip, coupon
-    
-    var strategy: DiscountStrategy {
-        switch self {
-        case .none:
-            NoDiscount()
-        case .vip:
-            VIPDiscount()
-        case .coupon:
-            CouponDiscount()
-        }
+struct DiscountStrategyFactory {
+    private static var strategies: [DiscountStrategy] = [
+        VIPDiscount(),
+        CouponDiscount(),
+        NoDiscount()
+    ]
+
+    static func createStrategy(type: String) -> DiscountStrategy {
+        let discountStrategy = strategies.first(where: { $0.discountType == type })
+        return discountStrategy ?? NoDiscount()
     }
 }

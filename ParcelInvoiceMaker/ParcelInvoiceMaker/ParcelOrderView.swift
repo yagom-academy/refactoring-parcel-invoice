@@ -71,7 +71,7 @@ class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
+              let discountType: String = discountSegmented.titleForSegment(at: discountSegmented.selectedSegmentIndex)
         else {
             return
         }
@@ -81,7 +81,7 @@ class ParcelOrderView: UIView {
                                                           receiverName: name,
                                                           receiverMobile: mobile,
                                                           deliveryCost: cost,
-                                                          discount: discount)
+                                                          discountType: discountType)
             
             delegate.parcelOrderMade(parcelInformation)
         } catch {
