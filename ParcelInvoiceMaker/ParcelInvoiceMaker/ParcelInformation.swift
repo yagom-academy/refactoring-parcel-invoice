@@ -13,18 +13,10 @@ struct ParcelInformation {
     private(set) var deliveryCost: Cost
     private(set) var discountStrategy: DiscountStrategy
     
-    private var receiverInfomation: ReceiverInformation
+    private(set) var receiverInfomation: ReceiverInformation
     
     var discountedCost: Cost {
         discountStrategy.applyDiscount(deliveryCost: deliveryCost)
-    }
-    
-    var receiverName: PersonName {
-        receiverInfomation.name
-    }
-    
-    var receiverMobile: PhoneNumber {
-        receiverInfomation.mobile
     }
 
     init(address: String,
