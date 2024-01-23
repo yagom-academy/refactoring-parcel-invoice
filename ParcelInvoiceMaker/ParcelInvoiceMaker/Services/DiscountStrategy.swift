@@ -5,4 +5,6 @@
 //  Created by hyosung on 1/23/24.
 //
 
-import Foundation
+protocol DiscountStrategy {
+  func applyDiscount(deliveryCost: Cost) -> Cost
+}

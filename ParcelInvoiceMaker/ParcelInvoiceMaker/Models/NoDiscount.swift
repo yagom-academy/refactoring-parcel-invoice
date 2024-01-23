@@ -5,4 +5,8 @@
 //  Created by hyosung on 1/23/24.
 //
 
-import Foundation
+struct NoDiscount: DiscountStrategy {
+  func applyDiscount(deliveryCost: Cost) -> Cost {
+    deliveryCost
+  }
+}
