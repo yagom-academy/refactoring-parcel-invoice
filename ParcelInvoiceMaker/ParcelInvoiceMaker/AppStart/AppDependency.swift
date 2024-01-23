@@ -10,20 +10,22 @@ import UIKit
 
 struct AppDependency {
   let window: UIWindow
+  let databaseParcelInformationPersistence: ParcelInformationPersistence?
+  let parcelOrderProcess: ParcelOrderService?
 }
 
 extension AppDependency {
   static func resolve(_ scene: UIWindowScene) -> AppDependency {
     let window: UIWindow = UIWindow(windowScene: scene)
     window.makeKeyAndVisible()
-    
+
+    let databaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
+    let parcelOrderProcess = ParcelOrderProcessor(databaseParcelInformationPersistence: databaseParcelInformationPersistence)
+
     let invoiceViewControllerFactory = { parcelInformation in
       InvoiceViewController(parcelInformation: parcelInformation)
     }
-    
-    let databaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
-    let parcelOrderProcess = ParcelOrderProcessor(databaseParcelInformationPersistence: databaseParcelInformationPersistence)
-    
+        
     let parcelOrderViewController = ParcelOrderViewController(
       dependency: .init(
         invoiceViewControllerFactory: invoiceViewControllerFactory,
@@ -38,7 +40,9 @@ extension AppDependency {
     window.rootViewController = navigationController
     
     return AppDependency(
-      window: window
+      window: window,
+      databaseParcelInformationPersistence: databaseParcelInformationPersistence,
+      parcelOrderProcess: parcelOrderProcess
     )
   }
 }

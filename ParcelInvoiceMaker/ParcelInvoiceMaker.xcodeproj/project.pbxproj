@@ -90,17 +90,52 @@
 		C741F4F82B46658300A4DDC0 /* ParcelInvoiceMaker */ = {
 			isa = PBXGroup;
 			children = (
+				EFCC01522B5F6AE400224977 /* Models */,
+				EFCC01512B5F6AD700224977 /* Services */,
+				EFCC01502B5F693000224977 /* Scenes */,
+				EFCC014F2B5F66AA00224977 /* AppStart */,
+				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
+				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
+				C741F5072B46658400A4DDC0 /* Info.plist */,
+			);
+			path = ParcelInvoiceMaker;
+			sourceTree = "<group>";
+		};
+		EFCC014F2B5F66AA00224977 /* AppStart */ = {
+			isa = PBXGroup;
+			children = (
+				EFCC014D2B5ED7C300224977 /* AppDependency.swift */,
 				C741F4F92B46658300A4DDC0 /* AppDelegate.swift */,
 				C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */,
-				EFCC014D2B5ED7C300224977 /* AppDependency.swift */,
+			);
+			path = AppStart;
+			sourceTree = "<group>";
+		};
+		EFCC01502B5F693000224977 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
 				C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */,
 				C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */,
 				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
 				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		EFCC01512B5F6AD700224977 /* Services */ = {
+			isa = PBXGroup;
+			children = (
 				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
 				EFCC014B2B5ECC7A00224977 /* ParcelOrderService.swift */,
 				EFCC01472B5EC88C00224977 /* DatabaseParcelInformationPersistence.swift */,
 				EFCC01492B5EC93900224977 /* ParcelInformationPersistence.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EFCC01522B5F6AE400224977 /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				EFCC01392B5EBC6C00224977 /* Discount.swift */,
 				EFCC01372B5EBC5C00224977 /* ParcelInformation.swift */,
 				EFCC013B2B5EC2D300224977 /* ReceiverInformation.swift */,
@@ -111,11 +146,8 @@
 				EFCC01352B5EBB2400224977 /* Delivery.swift */,
 				EFCC01432B5EC31000224977 /* Cost.swift */,
 				EFCC01452B5EC34C00224977 /* DiscountCost.swift */,
-				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
-				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
-				C741F5072B46658400A4DDC0 /* Info.plist */,
 			);
-			path = ParcelInvoiceMaker;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
