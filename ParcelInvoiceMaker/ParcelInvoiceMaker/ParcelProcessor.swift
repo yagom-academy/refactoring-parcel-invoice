@@ -6,27 +6,39 @@
 
 import Foundation
 
-class ParcelInformation {
+struct ReceiverInfo {
     let address: String
     var receiverName: String
     var receiverMobile: String
-    let deliveryCost: Int
+}
+
+struct DeliveryCost {
+    let cost: Int
+    init(cost: Int) throws {
+        guard cost > 0 else {
+            throw NSError() as Error
+        }
+        self.cost = cost
+    }
+}
+
+class ParcelInformation {
+    var receiverInfo: ReceiverInfo
+    let deliveryCost: DeliveryCost
     private let discount: Discount
     var discountedCost: Int {
         switch discount {
         case .none:
-            return deliveryCost
+                return deliveryCost.cost
         case .vip:
-            return deliveryCost / 5 * 4
+                return deliveryCost.cost / 5 * 4
         case .coupon:
-            return deliveryCost / 2
+                return deliveryCost.cost / 2
         }
     }
 
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    init(receiverInfo: ReceiverInfo, deliveryCost: DeliveryCost, discount: Discount) {
+        self.receiverInfo = receiverInfo
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
