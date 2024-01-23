@@ -77,12 +77,16 @@ class ParcelOrderView: UIView {
         }
         
         // 객체미용체조 7원칙 '2개 이상의 원시타입 프로퍼티를 갖는 타입 금지'를 적용하면서 변경
-        let parcelInformation: ParcelInformationProvider = 
-        ParcelInformation(parcelInfo: ParcelInfo(address: address,
-                                                 receiver: ReceiverInfo(receiverName: name,
-                                                                        receiverMobile: mobile),
-                                                 cost: ParcelCost(deliveryCost: cost,
-                                                                  discount: discount)))
+        let parcelInformation: ParcelInformationProvider = ParcelInformation(
+            parcelInfo: ParcelInfo(
+                address: address,
+                receiver: ReceiverInfo(
+                    receiverName: name,
+                    receiverMobile: mobile),
+                cost: ParcelCost(
+                    deliveryCost: cost,
+                    discount: discount)))
+        
         delegate.parcelOrderMade(parcelInformation)
     }
     

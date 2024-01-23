@@ -8,7 +8,7 @@ import Foundation
 
 class ParcelOrderProcessor {
     // SOLID DIP 적용 추상화된 프로토콜을 가지도록 수정
-    let databaseParcelInformationPersistence: ParcelInformationPersistence
+    private let databaseParcelInformationPersistence: ParcelInformationPersistence
     
     init(databaseParcelInformationPersistence: ParcelInformationPersistence) {
         // 인스턴스를 생성해 주입
@@ -25,13 +25,3 @@ class ParcelOrderProcessor {
     }
 }
 
-class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
-    func save(parcelInformation: ParcelInformationProvider) {
-        // 데이터베이스에 주문 정보 저장
-        print("발송 정보를 데이터베이스에 저장했습니다.")
-    }
-}
-
-protocol ParcelInformationPersistence {
-    func save(parcelInformation: ParcelInformationProvider)
-}

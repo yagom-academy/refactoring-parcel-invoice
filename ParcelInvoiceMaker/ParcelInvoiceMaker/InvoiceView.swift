@@ -38,7 +38,7 @@ class InvoiceView: UIView {
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
         // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
-        addressLabel.text = "주소 : \(parcelInformation.getAdress())"
+        addressLabel.text = "주소 : \(parcelInformation.getAddress())"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
