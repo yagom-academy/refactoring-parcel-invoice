@@ -10,7 +10,7 @@ protocol ParcelOrderViewDelegate {
     func parcelOrderMade(_ parcelInformation: ParcelInformation)
 }
 
-class ParcelOrderView: UIView {
+final class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
     
