@@ -6,11 +6,15 @@
 
 import Foundation
 
-class ParcelOrderProcessor {
-    private let dataBase: DatabaseParcelInformationPersistence
+protocol ParcelOrderable {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+class ParcelOrderProcessor: ParcelOrderable {
+    private let dataBase: ParcelInformationPersistence
     
-    init(dataBase: DatabaseParcelInformationPersistence) {
-        self.dataBase = dataBase
+    init() {
+        self.dataBase = DatabaseParcelInformationPersistence()
     }
     
     // 택배 주문 처리 로직

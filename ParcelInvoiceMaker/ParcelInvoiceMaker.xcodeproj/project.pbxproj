@@ -70,6 +70,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		765D27B72B5FC37100B91505 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				765D27B52B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		C741F4ED2B46658300A4DDC0 = {
 			isa = PBXGroup;
 			children = (
@@ -96,8 +104,8 @@
 				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
 				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
 				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
-				765D27B52B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift */,
 				765D27AA2B5F72A000B91505 /* Model */,
+				765D27B72B5FC37100B91505 /* Service */,
 				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
 				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
 				C741F5072B46658400A4DDC0 /* Info.plist */,
