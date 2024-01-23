@@ -31,21 +31,6 @@ struct CouponDiscountStrategy: DiscountStrategy {
     }
 }
 
-// 할인 타입
-enum Discount: Int {
-    case none = 0, vip, coupon
-    var strategy: DiscountStrategy {
-        switch self {
-        case .none:
-            NoDiscountStrategy()
-        case .vip:
-            VIPDiscountStrategy()
-        case .coupon:
-            CouponDiscountStrategy()
-        }
-    }
-}
-
 // 객체 미용 체조, 3원칙 매직넘버 사용x
 // 할인비율
 enum DiscountRate {

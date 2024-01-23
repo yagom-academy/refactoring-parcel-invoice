@@ -15,9 +15,9 @@ struct ParcelCost {
         discountStrategy.applyDiscount(deliveryCost)
     }
     
-    init(deliveryCost: Double, discount: Discount) {
+    init(deliveryCost: Double, discountStrategy: DiscountStrategy) {
         self.deliveryCost = deliveryCost
-        self.discountStrategy = discount.strategy
+        self.discountStrategy = discountStrategy
     }
     
     func getDiscountedCost() -> Int{
