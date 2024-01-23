@@ -8,13 +8,21 @@
 import Foundation
 
 struct ReceiverInfo {
-    private(set) var name: String
-    private(set) var mobile: String
-    private(set) var address: String
+    private var name: PersonName
+    private var mobile: PhoneNumber
+    private(set) var address: Address
     
-    init(name: String, mobile: String, address: String) {
-        self.name = name
-        self.mobile = mobile
-        self.address = address
+    init(name: String, mobile: String, address: String) throws {
+        self.name = try PersonName(value: name)
+        self.mobile = try PhoneNumber(value: mobile)
+        self.address = try Address(value: address)
+    }
+    
+    func getName() -> String {
+        name.value
+    }
+    
+    func getMobile() -> String {
+        mobile.value
     }
 }
