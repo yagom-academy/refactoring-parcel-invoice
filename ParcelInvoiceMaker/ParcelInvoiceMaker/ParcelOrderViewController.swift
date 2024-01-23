@@ -7,9 +7,11 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
     
-    init() {
+    private let parcelProcessor: ParcelOrderProcessor
+    
+    init(parcelProcessor: ParcelOrderProcessor) {
+        self.parcelProcessor = parcelProcessor
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
     }
@@ -28,6 +30,4 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     override func loadView() {
         view = ParcelOrderView(delegate: self)
     }
-
 }
-

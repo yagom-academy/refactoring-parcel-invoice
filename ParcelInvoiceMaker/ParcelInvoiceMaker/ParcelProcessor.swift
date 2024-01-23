@@ -7,9 +7,28 @@
 import Foundation
 
 class ParcelInformation {
+    let receiver: Receiver
+    let charge: Charge
+    
+    init(receiver: Receiver, charge: Charge) {
+        self.receiver = receiver
+        self.charge = charge
+    }
+}
+
+class Receiver {
     let address: String
     var receiverName: String
     var receiverMobile: String
+    
+    init(address: String, receiverName: String, receiverMobile: String) {
+        self.address = address
+        self.receiverName = receiverName
+        self.receiverMobile = receiverMobile
+    }
+}
+
+class Charge {
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -22,11 +41,8 @@ class ParcelInformation {
             return deliveryCost / 2
         }
     }
-
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    
+    init(deliveryCost: Int, discount: Discount) {
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
@@ -36,19 +52,27 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
+protocol ParcelInformationPersistence {
+    func save(parcelInformation: ParcelInformation)
+}
+
 class ParcelOrderProcessor {
     
-    // 택배 주문 처리 로직
+    let parcelInformationPersistence: ParcelInformationPersistence
+    
+    init(parcelInformationPersistence: ParcelInformationPersistence) {
+        self.parcelInformationPersistence = parcelInformationPersistence
+    }
+    
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
-        
-        // 데이터베이스에 주문 저장
-        save(parcelInformation: parcelInformation)
+        parcelInformationPersistence.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }
-    
+}
+
+class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation) {
-        // 데이터베이스에 주문 정보 저장
         print("발송 정보를 데이터베이스에 저장했습니다.")
     }
 }
