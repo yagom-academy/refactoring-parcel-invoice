@@ -8,8 +8,8 @@
 import Foundation
 
 struct ParcelInformation {
-    let receiverInfo: ReceiverInfo
-    let costInfo: CostInfo
+    private(set) var receiverInfo: ReceiverInfo
+    private(set) var costInfo: CostInfo
     
     init(receiverInfo: ReceiverInfo, costInfo: CostInfo) {
         self.receiverInfo = receiverInfo

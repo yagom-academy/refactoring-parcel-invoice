@@ -8,9 +8,9 @@
 import Foundation
 
 struct ReceiverInfo {
-    var name: String
-    var mobile: String
-    let address: String
+    private(set) var name: String
+    private(set) var mobile: String
+    private(set) var address: String
     
     init(name: String, mobile: String, address: String) {
         self.name = name
