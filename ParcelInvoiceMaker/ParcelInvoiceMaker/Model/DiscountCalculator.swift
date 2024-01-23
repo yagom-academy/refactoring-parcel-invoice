@@ -19,9 +19,16 @@ struct DiscountCalculator {
         case .none:
             return cost
         case .vip:
-            return Cost(value: cost.value / 5 * 4)
+            let costValue: Int = Int(Double(cost.value) * DiscountRate.vip)
+            return Cost(value: costValue)
         case .coupon:
-            return Cost(value: cost.value / 2)
+            let costValue: Int = Int(Double(cost.value) * DiscountRate.coupon)
+            return Cost(value: costValue)
         }
     }
+}
+
+enum DiscountRate {
+    static let vip: Double = 0.8
+    static let coupon: Double = 0.5
 }

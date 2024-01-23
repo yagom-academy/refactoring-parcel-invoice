@@ -8,9 +8,13 @@
 import Foundation
 
 struct Cost {
-    let value: Int
+    private(set) var value: Int
     
     init(value: Int) {
-        self.value = value >= 0 ? value : 0
+        self.value = value >= CostNumber.freeCost ? value : CostNumber.freeCost
     }
+}
+
+enum CostNumber {
+    static let freeCost: Int = 0
 }
