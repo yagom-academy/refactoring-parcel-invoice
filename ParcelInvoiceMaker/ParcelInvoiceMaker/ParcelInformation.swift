@@ -38,7 +38,7 @@ struct ParcelInformation {
 }
 
 //MARK: Address
-struct Address {
+struct Address: CustomStringConvertible {
     private(set) var value: String
     
     init(_ address: String) throws {
@@ -47,6 +47,10 @@ struct Address {
             throw NSError() as Error
         }
         self.value = address
+    }
+    
+    var description: String {
+        value
     }
 }
 
@@ -57,7 +61,7 @@ struct ReceiverInformation {
     private(set) var mobile: PhoneNumber
 }
 
-struct PersonName {
+struct PersonName: CustomStringConvertible {
     private(set) var value: String
     
     init(_ name: String) throws {
@@ -67,9 +71,13 @@ struct PersonName {
         }
         self.value = name
     }
+    
+    var description: String {
+        value
+    }
 }
 
-struct PhoneNumber {
+struct PhoneNumber: CustomStringConvertible {
     private(set) var value: String
     
     init(_ phoneNumber: String) throws {
@@ -79,10 +87,14 @@ struct PhoneNumber {
         }
         self.value = phoneNumber
     }
+    
+    var description: String {
+        value
+    }
 }
 
 //MARK: Cost
-struct Cost {
+struct Cost: CustomStringConvertible {
     private(set) var value: Int
     
     init(_ cost: Int) {
@@ -92,6 +104,10 @@ struct Cost {
             return
         }
         self.value = cost
+    }
+    
+    var description: String {
+        "\(value)"
     }
 }
 
