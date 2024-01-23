@@ -7,7 +7,7 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor(databaseParcelInformationPersistence: DatabaseParcelInformationPersistence())
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -18,7 +18,7 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func parcelOrderMade(_ parcelInformation: ParcelInformation) {
+    func parcelOrderMade(_ parcelInformation: ParcelInformationProvider) {
         parcelProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
             let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
             navigationController?.pushViewController(invoiceViewController, animated: true)

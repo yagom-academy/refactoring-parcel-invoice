@@ -8,9 +8,9 @@ import UIKit
 
 class InvoiceViewController: UIViewController {
 
-    private let parcelInformation: ParcelInformation
+    private let parcelInformation: ParcelInformationProvider
     
-    init(parcelInformation: ParcelInformation) {
+    init(parcelInformation: ParcelInformationProvider) {
         self.parcelInformation = parcelInformation
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "송장정보"
