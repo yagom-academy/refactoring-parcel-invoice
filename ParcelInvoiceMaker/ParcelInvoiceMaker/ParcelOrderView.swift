@@ -77,9 +77,9 @@ class ParcelOrderView: UIView {
         }
         
         let discountStrategies: [DiscountStrategy] = [
-            NoDiscountStrategy(),
-            VIPDiscountStrategy(),
-            CouponDiscountStrategy()
+            NoDiscountStrategy(discountRate: 1),
+            VIPDiscountStrategy(discountRate: 0.8),
+            CouponDiscountStrategy(discountRate: 0.5)
         ]
         
         let selectedDiscountStrategy = discountStrategies[discountSegmented.selectedSegmentIndex]

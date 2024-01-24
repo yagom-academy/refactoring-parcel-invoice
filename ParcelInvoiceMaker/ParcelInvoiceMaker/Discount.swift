@@ -9,31 +9,26 @@ import Foundation
 
 // DiscountStrategy 프로토콜을 정의
 protocol DiscountStrategy {
+    var discountRate: Double { get }
     // 요구 메서드
     func applyDiscount(_ deliveryCost: Double) -> Int
 }
 
-struct NoDiscountStrategy: DiscountStrategy {
+// DiscountStrategy 프로토콜을 확장
+extension DiscountStrategy {
     func applyDiscount(_ deliveryCost: Double) -> Int {
-        return Int(deliveryCost)
+        return Int(deliveryCost * discountRate)
     }
+}
+
+struct NoDiscountStrategy: DiscountStrategy {
+    var discountRate: Double
 }
 
 struct VIPDiscountStrategy: DiscountStrategy {
-    func applyDiscount(_ deliveryCost: Double) -> Int {
-        return Int(deliveryCost * DiscountRate.vip)
-    }
+    var discountRate: Double
 }
 
 struct CouponDiscountStrategy: DiscountStrategy {
-    func applyDiscount(_ deliveryCost: Double) -> Int {
-        return Int(deliveryCost * DiscountRate.coupon)
-    }
-}
-
-// 객체 미용 체조, 3원칙 매직넘버 사용x
-// 할인비율
-enum DiscountRate {
-    static let vip = 0.8
-    static let coupon = 0.5
+    var discountRate: Double
 }
