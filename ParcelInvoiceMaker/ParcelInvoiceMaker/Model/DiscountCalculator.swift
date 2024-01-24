@@ -15,20 +15,7 @@ struct DiscountCalculator {
     }
     
     func calcDiscountedCost(cost: Cost) -> Cost {
-        switch discount {
-        case .none:
-            return cost
-        case .vip:
-            let costValue: Int = Int(Double(cost.value) * DiscountRate.vip)
-            return Cost(value: costValue)
-        case .coupon:
-            let costValue: Int = Int(Double(cost.value) * DiscountRate.coupon)
-            return Cost(value: costValue)
-        }
+        let discountedCost = discount.strategy.applyDiscount(deliveryCost: cost.value)
+        return Cost(value: discountedCost)
     }
-}
-
-enum DiscountRate {
-    static let vip: Double = 0.8
-    static let coupon: Double = 0.5
 }
