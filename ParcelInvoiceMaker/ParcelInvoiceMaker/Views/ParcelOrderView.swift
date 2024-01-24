@@ -50,6 +50,14 @@ class ParcelOrderView: UIView {
         return control
     }()
     
+    private let receiptSegmented: UISegmentedControl = {
+        let control: UISegmentedControl = .init()
+        control.insertSegment(withTitle: "이메일", at: 0, animated: false)
+        control.insertSegment(withTitle: "문자", at: 1, animated: false)
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
     init(delegate: ParcelOrderViewDelegate) {
         self.delegate = delegate
         super.init(frame: .zero)
@@ -72,7 +80,8 @@ class ParcelOrderView: UIView {
               mobile.isEmpty == false,
               address.isEmpty == false,
               costString.isEmpty == false,
-              let cost: Double = Double(costString)
+              let cost: Double = Double(costString),
+              let receipt = Receipt(rawValue: receiptSegmented.selectedSegmentIndex)
         else {
             return
         }
@@ -100,7 +109,8 @@ class ParcelOrderView: UIView {
                         receiverMobile: try Mobile(mobile)),
                     cost: ParcelCost(
                         deliveryCost: try Cost(cost),
-                        discountStrategy: selectedDiscountStrategy)))
+                        discountStrategy: selectedDiscountStrategy),
+                    receipt: receipt))
             
             delegate.parcelOrderMade(parcelInformation)
         } catch let error {
@@ -139,6 +149,11 @@ class ParcelOrderView: UIView {
         discountLabel.text = "할인"
         discountLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
+        let receiptLabel: UILabel = UILabel()
+        receiptLabel.textColor = .black
+        receiptLabel.text = "영수증"
+        receiptLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
         let notificationLabel: UILabel = UILabel()
         notificationLabel.textColor = .black
         notificationLabel.text = "알림"
@@ -165,12 +180,16 @@ class ParcelOrderView: UIView {
         discountStackView.spacing = 8
         discountStackView.axis = .horizontal
         
+        let receiptStackView: UIStackView = .init(arrangedSubviews: [receiptLabel, receiptSegmented])
+        receiptStackView.spacing = 8
+        receiptStackView.axis = .horizontal
+        
         let makeOrderButton: UIButton = UIButton(type: .system)
         makeOrderButton.backgroundColor = .white
         makeOrderButton.setTitle("택배 보내기", for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
-        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])
+        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, receiptStackView, makeOrderButton])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 8
@@ -183,7 +202,7 @@ class ParcelOrderView: UIView {
             mainStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
             mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: -16)
+            mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: 0)
         ])
     }
 }

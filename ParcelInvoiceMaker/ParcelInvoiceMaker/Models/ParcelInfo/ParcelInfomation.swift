@@ -12,6 +12,7 @@ protocol ParcelInformationProvider {
     func getReceiverName() -> String
     func getReceiverMobile() -> String
     func getDiscountedCost() -> Int
+    func getReceiptSendMethod() -> String
 }
 
 struct ParcelInformation: ParcelInformationProvider {
@@ -43,6 +44,10 @@ struct ParcelInformation: ParcelInformationProvider {
     // 할인비용을 반환합니다.
     func getDiscountedCost() -> Int {
         return parcelInfo.getDiscountedCost()
+    }
+    
+    func getReceiptSendMethod() -> String {
+        return parcelInfo.getReceiptSendMethod()
     }
 }
 
