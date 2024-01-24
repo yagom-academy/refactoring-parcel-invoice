@@ -62,6 +62,12 @@ final class ParcelOrderView: UIView {
     }
     
     @objc private func touchUpOrderButton(_ sender: UIButton) {
+        if let parcelInformation = makeParcelInformation() {
+            delegate.parcelOrderMade(parcelInformation)
+        }
+    }
+    
+    private func makeParcelInformation() -> ParcelInformation? {
         guard let name: String = receiverNameField.text,
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
@@ -71,23 +77,24 @@ final class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
-        else {
-            return
-        }
+              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex) else { return nil }
         
-        let receiver: Receiver = .init(address: address,
-                                       receiverName: name,
-                                       receiverMobile: mobile)
+        let receiver = makeReceiver(name: name, mobile: mobile, address: address)
+        let charge = makeCharge(cost: cost, discount: discount)
         
-        let charge: Charge = .init(deliveryCost: cost,
-                               discount: discount)
-        
-        let parcelInformation: ParcelInformation = .init(receiver: receiver,
-                                                         charge: charge)
-        
-        delegate.parcelOrderMade(parcelInformation)
+        return ParcelInformation(receiver: receiver, charge: charge)
     }
+    
+    private func makeReceiver(name: String, mobile: String, address: String) -> Receiver {
+        return Receiver(address: address, receiverName: name, receiverMobile: mobile)
+    }
+    
+    private func makeCharge(cost: Int, discount: Discount) -> Charge {
+        return Charge(deliveryCost: cost, discount: discount)
+    }
+}
+
+extension ParcelOrderView {
     
     private func layoutView() {
         
