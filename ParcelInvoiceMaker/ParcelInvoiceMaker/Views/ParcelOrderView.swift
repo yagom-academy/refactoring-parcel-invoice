@@ -62,6 +62,7 @@ class ParcelOrderView: UIView {
     }
     
     @objc private func touchUpOrderButton(_ sender: UIButton) {
+        
         guard let name: String = receiverNameField.text,
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
@@ -70,11 +71,18 @@ class ParcelOrderView: UIView {
               mobile.isEmpty == false,
               address.isEmpty == false,
               costString.isEmpty == false,
-              let cost: Double = Double(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
+              let cost: Double = Double(costString)
         else {
             return
         }
+        
+        let discountStrategies: [DiscountStrategy] = [
+            NoDiscountStrategy(discountRate: 1),
+            VIPDiscountStrategy(discountRate: 0.8),
+            CouponDiscountStrategy(discountRate: 0.5)
+        ]
+        
+        let selectedDiscountStrategy = discountStrategies[discountSegmented.selectedSegmentIndex]
         
         // 객체미용체조 7원칙 '2개 이상의 원시타입 프로퍼티를 갖는 타입 금지'를 적용하면서 변경
         let parcelInformation: ParcelInformationProvider = ParcelInformation(
@@ -85,7 +93,7 @@ class ParcelOrderView: UIView {
                     receiverMobile: mobile),
                 cost: ParcelCost(
                     deliveryCost: cost,
-                    discount: discount)))
+                    discountStrategy: selectedDiscountStrategy)))
         
         delegate.parcelOrderMade(parcelInformation)
     }
