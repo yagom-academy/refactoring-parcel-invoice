@@ -6,34 +6,136 @@
 
 import Foundation
 
-class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
-    let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
+struct BusinessLogic {
+    // 이름 유효성 체크
+    static func validateName(_ name: String) throws {
+        guard !name.isEmpty else {
+            throw ParcelInformationError.nameError
         }
     }
+    
+    // 전화번호 유효성 체크
+    static func validateMobile(_ mobile: String) throws {
+        let pattern = "^01[0-1,7][0-9]{7,8}$"
+        let regex = try? NSRegularExpression(pattern: pattern)
+        guard ((regex?.firstMatch(in: mobile, range: NSRange(location: 0, length: mobile.count))) != nil) else {
+            throw ParcelInformationError.mobileError
+        }
+    }
+}
 
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
-        self.deliveryCost = deliveryCost
-        self.discount = discount
+// 택배정보 입력 에러
+enum ParcelInformationError: Int, Error {
+    case nameError = 0,
+         mobileError
+}
+
+struct Name {
+    private let value: String
+    
+    init(value: String) throws {
+        try BusinessLogic.validateName(value)
+        self.value = value
+    }
+    
+    func getValue() -> String {
+        return value
+    }
+}
+
+struct Mobile {
+    private let value: String
+    
+    init(value: String) throws {
+        try BusinessLogic.validateMobile(value)
+        self.value = value
+    }
+    
+    func getValue() -> String {
+        return value
+    }
+}
+
+struct Receiver {
+    private let name: Name
+    private let mobile: Mobile
+    
+    func getName() -> String {
+        return name.getValue()
+    }
+    
+    func getMobile() -> String {
+        return mobile.getValue()
     }
 }
 
 enum Discount: Int {
-    case none = 0, vip, coupon
+    case none = 0,
+         vip,
+         coupon
+}
+
+protocol DiscountStrategy {
+    func getDiscountedCost(of cost: Int) -> Int
+    func canAccept(type: Discount) -> Bool
+}
+
+struct NoneDiscountStrategy: DiscountStrategy {
+    func getDiscountedCost(of cost: Int) -> Int {
+        return cost
+    }
+    
+    func canAccept(type: Discount) -> Bool {
+        return type == .none
+    }
+}
+
+struct VipDiscountStrategy: DiscountStrategy {
+    func getDiscountedCost(of cost: Int) -> Int {
+        return cost / 5 * 4
+    }
+    
+    func canAccept(type: Discount) -> Bool {
+        return type == .vip
+    }
+}
+
+struct CouponStrategy: DiscountStrategy {
+    func getDiscountedCost(of cost: Int) -> Int {
+        return cost / 2
+    }
+    
+    func canAccept(type: Discount) -> Bool {
+        return type == .coupon
+    }
+}
+
+struct Cost {
+    let value: Int
+    let strategies: [DiscountStrategy]
+    
+    init(value: Int, strategies: [DiscountStrategy]) {
+        self.value = value
+        self.strategies = strategies
+    }
+    
+    func getDiscountedCost(with type: Discount) -> Int {
+        strategies.filter { $0.canAccept(type: type) }
+            .first?
+            .getDiscountedCost(of: value) ?? 0
+    }
+}
+
+class ParcelInformation {
+    let address: String
+    let receiver: Receiver
+    let deliveryCost: Cost
+
+    init(address: String, receiver: Receiver, deliveryCost: Cost) {
+        self.address = address
+        self.receiver = receiver
+        self.deliveryCost = deliveryCost
+    }
 }
 
 class ParcelOrderProcessor {
