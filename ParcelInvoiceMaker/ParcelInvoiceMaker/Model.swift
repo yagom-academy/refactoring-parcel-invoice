@@ -29,26 +29,53 @@ struct Receiver {
     }
 }
 
+protocol DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int
+    func canAccept(method: Discount) -> Bool
+}
+
+struct NoDiscount: DiscountStrategy { 
+    func applyDiscount(deliveryCost: Int) -> Int { return deliveryCost }
+    func canAccept(method: Discount) -> Bool {
+        return method == .none
+    }
+}
+
+struct VIPDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int { return (deliveryCost / 5) * 4 }
+    func canAccept(method: Discount) -> Bool {
+        return method == .vip
+    }
+}
+
+struct CouponDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int { return deliveryCost / 2}
+    func canAccept(method: Discount) -> Bool {
+        return method == .coupon
+    }
+}
+
+enum Discount: Int {
+    case none = 0, vip, coupon
+    
+    var strategy: DiscountStrategy {
+        switch self {
+        case .none: NoDiscount()
+        case .vip: VIPDiscount()
+        case .coupon: CouponDiscount()
+        }
+    }
+}
+
 struct Charge {
     let deliveryCost: Int
-    private let discount: Discount
+    let discount: Discount
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+        return discount.strategy.applyDiscount(deliveryCost: deliveryCost)
     }
     
     init(deliveryCost: Int, discount: Discount) {
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
-}
-
-enum Discount: Int {
-    case none = 0, vip, coupon
 }
