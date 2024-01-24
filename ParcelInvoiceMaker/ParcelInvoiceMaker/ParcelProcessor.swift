@@ -18,7 +18,11 @@ class ParcelInformation {
 
 class ParcelOrderProcessor {
     
-    private let databasePersistence: DatabaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
+    private var databasePersistence: ParcelInformationPersistence
+    
+    init() {
+        self.databasePersistence = DatabaseParcelInformationPersistence()
+    }
     
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
