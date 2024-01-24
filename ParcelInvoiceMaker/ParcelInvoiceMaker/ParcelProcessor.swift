@@ -46,6 +46,9 @@ final class ParcelOrderProcessor: ParcelProcessing {
         // 데이터베이스에 주문 저장
         persistence.save(parcelInformation: parcelInformation)
         
+        let receiptDispatcher = parcelInformation.receiptStrategy
+        receiptDispatcher.sendReceipt()
+        
         onComplete(parcelInformation)
     }
 }
