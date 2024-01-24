@@ -24,7 +24,7 @@ struct ParcelInformation: ParcelInformationProvider {
     // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
     // 주소를 반환합니다.
     func getAddress() -> String {
-        return parcelInfo.address
+        return parcelInfo.getAddress()
     }
     
     // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용

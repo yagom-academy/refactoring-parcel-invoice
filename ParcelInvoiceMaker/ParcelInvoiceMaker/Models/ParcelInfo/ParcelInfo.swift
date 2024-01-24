@@ -8,20 +8,32 @@
 import Foundation
 
 struct ParcelInfo {
-    let address: String
-    let receiver: ReceiverInfo
-    let cost: ParcelCost
+    private let address: String
+    private let receiver: ReceiverInfo
+    private let cost: ParcelCost
+    
+    init(address: String, receiver: ReceiverInfo, cost: ParcelCost) {
+        self.address = address
+        self.receiver = receiver
+        self.cost = cost
+    }
+    
+    // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
+    // 받는사람 이름을 반환합니다.
+    func getAddress() -> String {
+        return address
+    }
     
     // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
     // 받는사람 이름을 반환합니다.
     func getReceiverName() -> String {
-        receiver.getReceiverName()
+        return receiver.getReceiverName()
     }
     
     // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
     // 받는사람 휴대폰을 반환합니다.
     func getReceiverMobile() -> String {
-        receiver.getReceiverMobile()
+        return receiver.getReceiverMobile()
     }
     
     // 객체 미용 체조, 4원칙 한 줄에 한 점만 사용
