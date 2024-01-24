@@ -16,7 +16,11 @@ class ParcelInformation {
     }
 }
 
-class ParcelOrderProcessor {
+protocol OrderProcessor {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+class ParcelOrderProcessor: OrderProcessor {
     
     private var databasePersistence: ParcelInformationPersistence
     
