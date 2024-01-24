@@ -92,7 +92,7 @@ final class ParcelOrderView: UIView {
     let deliveryCost = Cost(cost)
     let delivery: Delivery = .init(
       cost: deliveryCost,
-      discount: discount.strategy
+      discount: discount
     )
     
     let parcelInformation: ParcelInformation = .init(

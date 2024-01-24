@@ -9,7 +9,7 @@ struct DiscountCost {
   private var _cost: Cost = .init(0)
   
   init(
-    by discount: DiscountStrategy,
+    by discount: Discount,
     to cost: Cost
   ) {
     self._cost = calculateRate(
@@ -27,9 +27,9 @@ extension DiscountCost {
 
 extension DiscountCost {
   private func calculateRate(
-    by discount: DiscountStrategy,
+    by discount: Discount,
     to cost: Cost
   ) -> Cost {
-    return discount.applyDiscount(deliveryCost: cost)
+    return discount.apply(cost)
   }
 }

@@ -10,7 +10,7 @@ struct Delivery {
   
   init(
     cost: Cost,
-    discount: DiscountStrategy
+    discount: Discount
   ) {
     self.discountCost = DiscountCost(
       by: discount,
