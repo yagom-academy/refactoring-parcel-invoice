@@ -76,11 +76,20 @@ class ParcelOrderView: UIView {
             return
         }
         
+        /* 주소와 유저이름, 연락처를 유저정보로 묶었다.
         let parcelInformation: ParcelInformation = .init(address: address,
                                                          receiverName: name,
                                                          receiverMobile: mobile,
                                                          deliveryCost: cost,
                                                          discount: discount)
+         */
+        
+        let userInfo: UserInfo = .init(address: address, receiverName: name, receiverMobile: mobile)
+        
+        let parcelInformation: ParcelInformation = .init(userInfo: userInfo,
+                                                         deliveryCost: cost,
+                                                         discount: discount)
+        
         delegate.parcelOrderMade(parcelInformation)
     }
     
