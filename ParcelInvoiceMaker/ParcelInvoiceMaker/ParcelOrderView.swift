@@ -76,12 +76,17 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
-                                                         discount: discount)
-        delegate.parcelOrderMade(parcelInformation)
+        do {
+            let parcelInformation = try ParcelInformation(address: address,
+                                                          receiverName: name,
+                                                          receiverMobile: mobile,
+                                                          deliveryCost: cost,
+                                                          discount: discount)
+            
+            delegate.parcelOrderMade(parcelInformation)
+        } catch {
+            print("입력한 포맷을 다시 확인해주세요!")
+        }
     }
     
     private func layoutView() {
