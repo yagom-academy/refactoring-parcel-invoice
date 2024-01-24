@@ -45,6 +45,7 @@ class ParcelOrderView: UIView {
         control.insertSegment(withTitle: "없음", at: 0, animated: false)
         control.insertSegment(withTitle: "VIP", at: 1, animated: false)
         control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+        control.insertSegment(withTitle: "이벤트", at: 3, animated: false)
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -80,7 +81,8 @@ class ParcelOrderView: UIView {
         let discountStrategyManager = DiscountStrategyManager(items: [
             NoDiscountStrategy(discountRate: 1),
             VIPDiscountStrategy(discountRate: 0.8),
-            CouponDiscountStrategy(discountRate: 0.5)
+            CouponDiscountStrategy(discountRate: 0.5),
+            EventDiscountStrategy(discountRate: 0.9)
         ])
         
         let selectedDiscountStrategy = discountStrategyManager

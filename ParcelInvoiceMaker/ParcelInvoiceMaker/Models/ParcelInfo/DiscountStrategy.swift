@@ -32,3 +32,7 @@ struct VIPDiscountStrategy: DiscountStrategy {
 struct CouponDiscountStrategy: DiscountStrategy {
     var discountRate: Double
 }
+
+struct EventDiscountStrategy: DiscountStrategy {
+    var discountRate: Double
+}
