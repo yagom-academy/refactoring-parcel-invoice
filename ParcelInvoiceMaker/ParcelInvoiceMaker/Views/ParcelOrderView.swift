@@ -1,8 +1,8 @@
 //
 //  ParcelInvoiceMaker - ParcelOrderView.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -76,13 +76,18 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let discountStrategies: [DiscountStrategy] = [
+        // 객체 미용 체조, 8원칙 일급 콜렉션 사용
+        let discountStrategyManager = DiscountStrategyManager(items: [
             NoDiscountStrategy(discountRate: 1),
             VIPDiscountStrategy(discountRate: 0.8),
             CouponDiscountStrategy(discountRate: 0.5)
-        ]
+        ])
         
-        let selectedDiscountStrategy = discountStrategies[discountSegmented.selectedSegmentIndex]
+        let selectedDiscountStrategy = discountStrategyManager
+            .getStrategies()[
+                discountSegmented.selectedSegmentIndex
+            ]
+        
         do {
             // 객체미용체조 7원칙 '2개 이상의 원시타입 프로퍼티를 갖는 타입 금지'를 적용하면서 변경
             let parcelInformation: ParcelInformationProvider = ParcelInformation(
