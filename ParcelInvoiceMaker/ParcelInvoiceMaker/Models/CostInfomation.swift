@@ -9,20 +9,13 @@ import Foundation
 
 struct CostInfomation {
     let deliveryCost: DeliveryCost
-    private let discount: Discount
+    private let discountStrategy: DiscountStrategy
     var discountedCost: DeliveryCost {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return (try? .init(deliveryCost.value / 5 * 4)) ?? deliveryCost
-        case .coupon:
-            return (try? .init(deliveryCost.value / 2)) ?? deliveryCost
-        }
+        return discountStrategy.applyDiscount(deliveryCost: deliveryCost)
     }
     
-    init(deliveryCost: DeliveryCost, discount: Discount) {
+    init(deliveryCost: DeliveryCost, discountStrategy: DiscountStrategy) {
         self.deliveryCost = deliveryCost
-        self.discount = discount
+        self.discountStrategy = discountStrategy
     }
 }
