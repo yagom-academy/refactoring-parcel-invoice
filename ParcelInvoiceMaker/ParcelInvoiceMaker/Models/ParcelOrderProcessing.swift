@@ -1,12 +1,16 @@
 //
-//  ParcelInvoiceMaker - ParcelProcessor.swift
+//  ParcelInvoiceMaker - ParcelOrderProcessing.swift
 //  Created by yagom.
 //  Copyright © yagom. All rights reserved.
 // 
 
 import Foundation
 
-class ParcelOrderProcessor {
+protocol ParcelOrderProcessing {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+class ParcelOrderProcessor: ParcelOrderProcessing {
     private let database: ParcelInformationPersistence
     
     init(database: ParcelInformationPersistence) {
