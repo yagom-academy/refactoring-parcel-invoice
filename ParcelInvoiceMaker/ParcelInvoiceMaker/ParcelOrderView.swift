@@ -68,29 +68,45 @@ final class ParcelOrderView: UIView {
     }
     
     private func makeParcelInformation() -> ParcelInformation? {
+        if let parcelInputData = validateInformation() {
+            let receiver = makeReceiver(name: parcelInputData.name,
+                                        mobile: parcelInputData.mobile,
+                                        address: parcelInputData.address)
+            let charge = makeCharge(cost: parcelInputData.cost,
+                                    discount: parcelInputData.discount)
+            return ParcelInformation(receiver: receiver, charge: charge)
+        }
+        
+        return nil
+    }
+    
+    private func validateInformation() -> ParcelInputData? {
         guard let name: String = receiverNameField.text,
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
               let costString: String = costField.text,
               name.isEmpty == false,
-              mobile.isEmpty == false,
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex) else { return nil }
         
-        let receiver = makeReceiver(name: name, mobile: mobile, address: address)
-        let charge = makeCharge(cost: cost, discount: discount)
-        
-        return ParcelInformation(receiver: receiver, charge: charge)
+        return ParcelInputData(name: name,
+                               mobile: mobile,
+                               address: address,
+                               cost: cost,
+                               discount: discount)
     }
     
     private func makeReceiver(name: String, mobile: String, address: String) -> Receiver {
-        return Receiver(address: address, receiverName: name, receiverMobile: mobile)
+        return Receiver(address: address,
+                        receiverName: name,
+                        receiverMobile: mobile)
     }
     
     private func makeCharge(cost: Int, discount: Discount) -> Charge {
-        return Charge(deliveryCost: cost, discount: discount)
+        return Charge(deliveryCost: cost,
+                      discount: discount)
     }
 }
 

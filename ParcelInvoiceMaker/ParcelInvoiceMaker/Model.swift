@@ -52,3 +52,11 @@ struct Charge {
 enum Discount: Int {
     case none = 0, vip, coupon
 }
+
+struct ParcelInputData {
+    var name: String
+    var mobile: String
+    var address: String
+    var cost: Int
+    var discount: Discount
+}
