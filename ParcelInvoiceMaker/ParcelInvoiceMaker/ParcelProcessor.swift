@@ -17,30 +17,20 @@ class ReceiverInformation {
     }
 }
 class ParcelInformation {
-    let receiver : ReceiverInformation
+    let receiver: ReceiverInformation
     let deliveryCost: Int
     private let discount: Discount
+
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+        return discount.strategy.applyDiscount(deliveryCost: deliveryCost)
     }
-    init(receiver : ReceiverInformation,deliveryCost: Int, discount: Discount) {
+
+    init(receiver: ReceiverInformation, deliveryCost: Int, discount: Discount) {
         self.receiver = receiver
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
 }
-
-enum Discount: Int {
-    case none = 0, vip, coupon
-}
-
 class ParcelOrderProcessor {
     private let persistence: ParcelInformationPersistence
 
@@ -67,3 +57,39 @@ protocol ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation)
 }
 
+protocol DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int
+}
+
+class NoDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost
+    }
+}
+
+class VIPDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 5 * 4
+    }
+}
+
+class CouponDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 2
+    }
+}
+
+enum Discount: Int {
+    case none = 0, vip, coupon
+
+    var strategy: DiscountStrategy {
+        switch self {
+        case .none:
+            return NoDiscount()
+        case .vip:
+            return VIPDiscount()
+        case .coupon:
+            return CouponDiscount()
+        }
+    }
+}
