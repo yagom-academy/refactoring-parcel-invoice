@@ -71,15 +71,15 @@ class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
+              let deliveryCost: DeliveryCost = try? .init(cost),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
         else {
             return
         }
-        
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
+        let parcelInformation: ParcelInformation = .init(receiverInfo: ReceiverInfo(address: address, 
+                                                                                    receiverName: name,
+                                                                                    receiverMobile: mobile),
+                                                         deliveryCost: deliveryCost,
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)
     }
@@ -161,4 +161,5 @@ class ParcelOrderView: UIView {
             mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: -16)
         ])
     }
+    
 }
