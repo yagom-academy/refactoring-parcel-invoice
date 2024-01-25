@@ -7,28 +7,12 @@
 import Foundation
 
 class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
-    let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
-    }
+    let receiverInfomation: ReceiverInfomation
+    let costInfomation: CostInfomation
 
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
-        self.deliveryCost = deliveryCost
-        self.discount = discount
+    init(receiverInfomation: ReceiverInfomation, costInfomation: CostInfomation) {
+        self.receiverInfomation = receiverInfomation
+        self.costInfomation = costInfomation
     }
 }
 
