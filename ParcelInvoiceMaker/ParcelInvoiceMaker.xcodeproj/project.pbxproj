@@ -89,15 +89,15 @@
 		EE80874F2B62B91E004D91C2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EE80875D2B62D5EF004D91C2 /* ParcelInformationPersistence.swift */,
 				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
+				EE8087612B62D964004D91C2 /* ParcelInformation.swift */,
+				EE8087592B62CEF0004D91C2 /* ReceiverInfomation.swift */,
 				EE8087532B62CDE8004D91C2 /* Name.swift */,
 				EE8087552B62CE50004D91C2 /* PhoneNumber.swift */,
-				EE8087592B62CEF0004D91C2 /* ReceiverInfomation.swift */,
-				EE8087572B62CE9C004D91C2 /* DeliveryCost.swift */,
 				EE80875B2B62CFED004D91C2 /* CostInfomation.swift */,
-				EE80875D2B62D5EF004D91C2 /* ParcelInformationPersistence.swift */,
+				EE8087572B62CE9C004D91C2 /* DeliveryCost.swift */,
 				EE80875F2B62D8F4004D91C2 /* Discount.swift */,
-				EE8087612B62D964004D91C2 /* ParcelInformation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
