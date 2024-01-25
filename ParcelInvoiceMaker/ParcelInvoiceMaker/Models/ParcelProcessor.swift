@@ -21,9 +21,9 @@ enum Discount: Int {
 }
 
 class ParcelOrderProcessor {
-    private let database: ParcelInformationPersistable
+    private let database: ParcelInformationPersistence
     
-    init(database: ParcelInformationPersistable) {
+    init(database: ParcelInformationPersistence) {
         self.database = database
     }
     
