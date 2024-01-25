@@ -13,7 +13,7 @@ final class InvoiceViewController: UIViewController {
     init(parcelInformation: ParcelInformation) {
         self.parcelInformation = parcelInformation
         super.init(nibName: nil, bundle: nil)
-        navigationItem.title = "송장정보"
+        navigationItem.title = UI.parcelInformation
     }
     
     required init?(coder: NSCoder) {

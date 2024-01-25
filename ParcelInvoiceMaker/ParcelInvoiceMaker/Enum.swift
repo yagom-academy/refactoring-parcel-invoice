@@ -8,6 +8,7 @@
 import Foundation
 
 enum UI {
+    static let parcelInformation: String = "송장정보"
     static let name: String = "이름"
     static let mobile: String = "전화"
     static let address: String = "주소"
