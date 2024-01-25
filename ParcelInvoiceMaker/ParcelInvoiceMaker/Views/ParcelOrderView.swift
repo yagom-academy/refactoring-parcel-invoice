@@ -78,7 +78,7 @@ class ParcelOrderView: UIView {
             receiverInfomation: ReceiverInfomation(address: address,
                                                    receiverName: name,
                                                    receiverMobile: mobile),
-            costInfomation: CostInfomation(deliveryCost: cost, discount: discount))
+            costInfomation: CostInfomation(deliveryCost: cost, discountStrategy: discount.strategy))
         delegate.parcelOrderMade(parcelInformation)
     }
     
