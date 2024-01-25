@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B53BEA612B63648D00C8C052 /* ParcelInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BEA602B63648D00C8C052 /* ParcelInformation.swift */; };
-		B53BEA652B63825200C8C052 /* Discount+Strategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BEA642B63825200C8C052 /* Discount+Strategy.swift */; };
+		B53BEA632B637F4300C8C052 /* Discount+Strategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BEA622B637F4300C8C052 /* Discount+Strategy.swift */; };
 		C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4F92B46658300A4DDC0 /* AppDelegate.swift */; };
 		C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */; };
 		C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */; };
@@ -22,7 +22,7 @@
 
 /* Begin PBXFileReference section */
 		B53BEA602B63648D00C8C052 /* ParcelInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformation.swift; sourceTree = "<group>"; };
-		B53BEA642B63825200C8C052 /* Discount+Strategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Discount+Strategy.swift"; sourceTree = "<group>"; };
+		B53BEA622B637F4300C8C052 /* Discount+Strategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Discount+Strategy.swift"; sourceTree = "<group>"; };
 		C741F4F62B46658300A4DDC0 /* ParcelInvoiceMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParcelInvoiceMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C741F4F92B46658300A4DDC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
 				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
 				B53BEA602B63648D00C8C052 /* ParcelInformation.swift */,
-				B53BEA642B63825200C8C052 /* Discount+Strategy.swift */,
+				B53BEA622B637F4300C8C052 /* Discount+Strategy.swift */,
 				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
 				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
 				C741F5072B46658400A4DDC0 /* Info.plist */,
@@ -158,7 +158,7 @@
 				C741F50E2B46659500A4DDC0 /* ParcelProcessor.swift in Sources */,
 				C741F5102B4675AF00A4DDC0 /* InvoiceViewController.swift in Sources */,
 				C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */,
-				B53BEA652B63825200C8C052 /* Discount+Strategy.swift in Sources */,
+				B53BEA632B637F4300C8C052 /* Discount+Strategy.swift in Sources */,
 				C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */,
 				B53BEA612B63648D00C8C052 /* ParcelInformation.swift in Sources */,
 			);
