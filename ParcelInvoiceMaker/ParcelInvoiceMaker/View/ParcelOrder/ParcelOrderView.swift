@@ -11,7 +11,6 @@ protocol ParcelOrderViewDelegate {
 }
 
 class ParcelOrderView: UIView {
-    
     private var delegate: ParcelOrderViewDelegate!
     
     private let receiverNameField: UITextField = {
@@ -42,9 +41,9 @@ class ParcelOrderView: UIView {
     
     private let discountSegmented: UISegmentedControl = {
         let control: UISegmentedControl = .init()
-        control.insertSegment(withTitle: "없음", at: 0, animated: false)
-        control.insertSegment(withTitle: "VIP", at: 1, animated: false)
-        control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+        control.insertSegment(withTitle: ResourceText.none, at: 0, animated: false)
+        control.insertSegment(withTitle: ResourceText.vip, at: 1, animated: false)
+        control.insertSegment(withTitle: ResourceText.coupon, at: 2, animated: false)
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -66,58 +65,54 @@ class ParcelOrderView: UIView {
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
               let costString: String = costField.text,
-              name.isEmpty == false,
-              mobile.isEmpty == false,
-              address.isEmpty == false,
-              costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
+              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex),
+              BusinessLogic.validateAddress(address),
+              BusinessLogic.validateName(name),
+              BusinessLogic.validateMobile(mobile),
+              BusinessLogic.validateDeliveryCost(cost)
         else {
             return
         }
         
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
+        let receiver: Receiver = Receiver(address: Address(value: address), name: Name(value: name), mobile: Mobile(value: mobile))
+        let deliveryCost: Cost = Cost(value: cost)
+        
+        let parcelInformation: ParcelInformation = .init(receiver: receiver,
+                                                         deliveryCost: deliveryCost,
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)
     }
     
     private func layoutView() {
         
-        let logoImageView: UIImageView = UIImageView(image: UIImage(named: "post_office_logo"))
+        let logoImageView: UIImageView = UIImageView(image: UIImage(named: AssetName.postOfficeLogo))
         logoImageView.contentMode = .scaleAspectFit
         
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
-        nameLabel.text = "이름"
+        nameLabel.text = ResourceText.name
         nameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
-        mobileLabel.text = "전화"
+        mobileLabel.text = ResourceText.mobile
         mobileLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
-        addressLabel.text = "주소"
+        addressLabel.text = ResourceText.address
         addressLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
-        costLabel.text = "요금"
+        costLabel.text = ResourceText.cost
         costLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let discountLabel: UILabel = UILabel()
         discountLabel.textColor = .black
-        discountLabel.text = "할인"
+        discountLabel.text = ResourceText.discount
         discountLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        
-        let notificationLabel: UILabel = UILabel()
-        notificationLabel.textColor = .black
-        notificationLabel.text = "알림"
-        notificationLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let nameStackView: UIStackView = .init(arrangedSubviews: [nameLabel, receiverNameField])
         nameStackView.distribution = .fill
@@ -142,7 +137,7 @@ class ParcelOrderView: UIView {
         
         let makeOrderButton: UIButton = UIButton(type: .system)
         makeOrderButton.backgroundColor = .white
-        makeOrderButton.setTitle("택배 보내기", for: .normal)
+        makeOrderButton.setTitle(ResourceText.sendParcel, for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
         let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])

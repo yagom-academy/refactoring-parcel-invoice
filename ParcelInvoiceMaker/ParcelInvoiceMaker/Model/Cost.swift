@@ -10,8 +10,7 @@ import Foundation
 struct Cost {
     private let value: Int
     
-    init(value: Int) throws {
-        try BusinessLogic.validateDeliveryCost(value)
+    init(value: Int) {
         self.value = value
     }
     

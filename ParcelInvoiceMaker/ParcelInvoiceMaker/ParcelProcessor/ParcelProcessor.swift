@@ -22,12 +22,13 @@ class ParcelInformation {
     }
 }
 
-class ParcelOrderProcessor {
+class ParcelOrderProcessor: ParcelOrderProcessorProtocol {
     private var databaseParcelInformationPersistence: ParcelInformationPersistence
     
     init(databaseParcelInformationPersistence: ParcelInformationPersistence) {
         self.databaseParcelInformationPersistence = databaseParcelInformationPersistence
     }
+    
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         

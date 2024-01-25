@@ -10,8 +10,7 @@ import Foundation
 struct Address {
     private let value: String
     
-    init(value: String) throws {
-        try BusinessLogic.validateName(value)
+    init(value: String) {
         self.value = value
     }
     
@@ -23,8 +22,7 @@ struct Address {
 struct Name {
     private let value: String
     
-    init(value: String) throws {
-        try BusinessLogic.validateName(value)
+    init(value: String) {
         self.value = value
     }
     
@@ -36,8 +34,7 @@ struct Name {
 struct Mobile {
     private let value: String
     
-    init(value: String) throws {
-        try BusinessLogic.validateMobile(value)
+    init(value: String) {
         self.value = value
     }
     
@@ -50,6 +47,12 @@ struct Receiver {
     private let address: Address
     private let name: Name
     private let mobile: Mobile
+    
+    init(address: Address, name: Name, mobile: Mobile) {
+        self.address = address
+        self.name = name
+        self.mobile = mobile
+    }
     
     func getAddress() -> String {
         return address.getValue()

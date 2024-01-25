@@ -24,22 +24,22 @@ class InvoiceView: UIView {
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.receiver.name)"
+        nameLabel.text = "\(ResourceText.inputName) \(parcelInformation.receiver.getName())"
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.receiver.mobile)"
+        mobileLabel.text = "\(ResourceText.inputMobile) \(parcelInformation.receiver.getMobile())"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.address)"
+        addressLabel.text = "\(ResourceText.inputAddress) \(parcelInformation.receiver.getAddress())"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
         costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        costLabel.text = "요금 : \(parcelInformation.discountedCost)"
+        costLabel.text = "\(ResourceText.inputCost) \(parcelInformation.discountedCost)"
                 
         let mainStackView: UIStackView = .init(arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel])
         mainStackView.axis = .vertical
@@ -47,7 +47,7 @@ class InvoiceView: UIView {
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainStackView)
         
-        let stampImageView: UIImageView = UIImageView(image: UIImage(named: "stamp"))
+        let stampImageView: UIImageView = UIImageView(image: UIImage(named: AssetName.stamp))
         stampImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stampImageView)
         
