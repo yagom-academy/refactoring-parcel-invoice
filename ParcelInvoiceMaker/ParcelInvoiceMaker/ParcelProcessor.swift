@@ -62,7 +62,7 @@ struct NoDiscount: DiscountStrategy {
 
 struct VIPDiscount: DiscountStrategy {
     func applyDiscount(delieveryCost: Int) -> Int {
-        return delieveryCost / 5 * 4
+        return delieveryCost / 5 * 3
     }
 }
 
@@ -72,20 +72,38 @@ struct CouponDiscount: DiscountStrategy {
     }
 }
 
+struct SubscribeDiscount: DiscountStrategy {
+    func applyDiscount(delieveryCost: Int) -> Int {
+        return delieveryCost / 5 * 4
+    }
+}
+
 enum Discount: Int {
-    case none = 0, vip, coupon
+    static let noneTitle: String = "없음"
+    static let vipTitle: String = "VIP"
+    static let couponTitle: String = "쿠폰"
+    static let subscribeTitle: String = "구독"
+    
+    case none = 0, vip, coupon, subscribe
     var strategy: DiscountStrategy {
         switch self {
         case .none: return NoDiscount()
         case .vip: return VIPDiscount()
         case .coupon: return CouponDiscount()
+        case .subscribe: return SubscribeDiscount()
         }
     }
+}
+
+enum Receipt {
+    static let emailTitle: String = "이메일"
+    static let smsTitle: String = "문자"
 }
 
 protocol OrderProcessable {
     var persistence: ParcelInformationPersistence { get }
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+    func sendRecipt(parcelInformation: ParcelInformation)
 }
 
 final class ParcelOrderProcessor: OrderProcessable {
@@ -99,22 +117,37 @@ final class ParcelOrderProcessor: OrderProcessable {
         
         // 데이터베이스에 주문 저장
         persistence.save(parcelInformation: parcelInformation)
-        
         onComplete(parcelInformation)
+    }
+    
+    // 택배 주문 처리 완료 후 영수증 전송
+    func sendRecipt(parcelInformation: ParcelInformation) {
+        persistence.sendReceipt(parcelInformation: parcelInformation)
     }
 }
 
 protocol ParcelInformationPersistence: AnyObject {
     func save(parcelInformation: ParcelInformation)
+    func sendReceipt(parcelInformation: ParcelInformation)
 }
 
 extension ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation) {
         // 데이터베이스에 주문 정보 저장
-        print("발송 정보를 데이터베이스에 저장했습니다.")
+        print(PersistenceMessage.saveParcelInformation)
+    }
+    
+    func sendReceipt(parcelInformation: ParcelInformation) {
+        // 영수증 발송
+        print(PersistenceMessage.sendReceipt)
     }
 }
 
 final class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     static let shared: DatabaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
+}
+
+struct PersistenceMessage {
+    static let saveParcelInformation: String = "발송 정보를 데이터베이스에 저장했습니다."
+    static let sendReceipt: String = "영수증을 발송했습니다."
 }
