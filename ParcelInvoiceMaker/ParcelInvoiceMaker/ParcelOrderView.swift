@@ -62,32 +62,55 @@ final class ParcelOrderView: UIView {
     }
     
     @objc private func touchUpOrderButton(_ sender: UIButton) {
+        if let parcelInformation = makeParcelInformation() {
+            delegate.parcelOrderMade(parcelInformation)
+        }
+    }
+    
+    private func makeParcelInformation() -> ParcelInformation? {
+        if let parcelInputData = validateInformation() {
+            let receiver = makeReceiver(name: parcelInputData.name,
+                                        mobile: parcelInputData.mobile,
+                                        address: parcelInputData.address)
+            let charge = makeCharge(cost: parcelInputData.cost,
+                                    discount: parcelInputData.discount)
+            return ParcelInformation(receiver: receiver, charge: charge)
+        }
+        
+        return nil
+    }
+    
+    private func validateInformation() -> ParcelInputData? {
         guard let name: String = receiverNameField.text,
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
               let costString: String = costField.text,
               name.isEmpty == false,
-              mobile.isEmpty == false,
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
-        else {
-            return
-        }
+              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex) else { return nil }
         
-        let receiver: Receiver = .init(address: address,
-                                       receiverName: name,
-                                       receiverMobile: mobile)
-        
-        let charge: Charge = .init(deliveryCost: cost,
+        return ParcelInputData(name: name,
+                               mobile: mobile,
+                               address: address,
+                               cost: cost,
                                discount: discount)
-        
-        let parcelInformation: ParcelInformation = .init(receiver: receiver,
-                                                         charge: charge)
-        
-        delegate.parcelOrderMade(parcelInformation)
     }
+    
+    private func makeReceiver(name: String, mobile: String, address: String) -> Receiver {
+        return Receiver(address: address,
+                        receiverName: name,
+                        receiverMobile: mobile)
+    }
+    
+    private func makeCharge(cost: Int, discount: Discount) -> Charge {
+        return Charge(deliveryCost: cost,
+                      discount: discount)
+    }
+}
+
+extension ParcelOrderView {
     
     private func layoutView() {
         

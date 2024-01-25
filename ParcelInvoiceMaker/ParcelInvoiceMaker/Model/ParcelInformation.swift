@@ -41,3 +41,11 @@ struct Charge {
         self.discount = discount
     }
 }
+
+struct ParcelInputData {
+    var name: String
+    var mobile: String
+    var address: String
+    var cost: Int
+    var discount: Discount
+}
