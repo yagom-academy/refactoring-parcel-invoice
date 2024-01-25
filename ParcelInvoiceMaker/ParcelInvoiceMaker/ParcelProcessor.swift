@@ -40,14 +40,7 @@ final class ParcelInformation {
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+        return discount.strategy.applyDiscount(delieveryCost: deliveryCost)
     }
 
     init(receiverInfo: ReceiverInfo, deliveryCost: Int, discount: Discount) {
@@ -57,8 +50,37 @@ final class ParcelInformation {
     }
 }
 
+protocol DiscountStrategy {
+    func applyDiscount(delieveryCost: Int) -> Int
+}
+
+struct NoDiscount: DiscountStrategy {
+    func applyDiscount(delieveryCost: Int) -> Int {
+        return delieveryCost
+    }
+}
+
+struct VIPDiscount: DiscountStrategy {
+    func applyDiscount(delieveryCost: Int) -> Int {
+        return delieveryCost / 5 * 4
+    }
+}
+
+struct CouponDiscount: DiscountStrategy {
+    func applyDiscount(delieveryCost: Int) -> Int {
+        return delieveryCost / 2
+    }
+}
+
 enum Discount: Int {
     case none = 0, vip, coupon
+    var strategy: DiscountStrategy {
+        switch self {
+        case .none: return NoDiscount()
+        case .vip: return VIPDiscount()
+        case .coupon: return CouponDiscount()
+        }
+    }
 }
 
 protocol OrderProcessable {
