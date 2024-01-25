@@ -11,7 +11,6 @@
 		765D27AC2B5F72B300B91505 /* ReceiverInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27AB2B5F72B300B91505 /* ReceiverInfo.swift */; };
 		765D27AE2B5F72D300B91505 /* CostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27AD2B5F72D300B91505 /* CostInfo.swift */; };
 		765D27B02B5F72E000B91505 /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27AF2B5F72E000B91505 /* Cost.swift */; };
-		765D27B22B5F72FD00B91505 /* DiscountCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27B12B5F72FD00B91505 /* DiscountCalculator.swift */; };
 		765D27B42B5F730C00B91505 /* Discount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27B32B5F730C00B91505 /* Discount.swift */; };
 		765D27B62B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27B52B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift */; };
 		765D27BA2B601DD200B91505 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27B92B601DD200B91505 /* DataError.swift */; };
@@ -35,7 +34,6 @@
 		765D27AB2B5F72B300B91505 /* ReceiverInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInfo.swift; sourceTree = "<group>"; };
 		765D27AD2B5F72D300B91505 /* CostInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostInfo.swift; sourceTree = "<group>"; };
 		765D27AF2B5F72E000B91505 /* Cost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cost.swift; sourceTree = "<group>"; };
-		765D27B12B5F72FD00B91505 /* DiscountCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculator.swift; sourceTree = "<group>"; };
 		765D27B32B5F730C00B91505 /* Discount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discount.swift; sourceTree = "<group>"; };
 		765D27B52B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseParcelInformationPersistence.swift; sourceTree = "<group>"; };
 		765D27B92B601DD200B91505 /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
@@ -77,7 +75,6 @@
 				765D27BD2B60221800B91505 /* PhoneNumber.swift */,
 				765D27AD2B5F72D300B91505 /* CostInfo.swift */,
 				765D27AF2B5F72E000B91505 /* Cost.swift */,
-				765D27B12B5F72FD00B91505 /* DiscountCalculator.swift */,
 				765D27B32B5F730C00B91505 /* Discount.swift */,
 				765D27C12B6178FF00B91505 /* DiscountStrategy.swift */,
 			);
@@ -219,7 +216,6 @@
 				765D27C22B6178FF00B91505 /* DiscountStrategy.swift in Sources */,
 				765D27AE2B5F72D300B91505 /* CostInfo.swift in Sources */,
 				765D27B42B5F730C00B91505 /* Discount.swift in Sources */,
-				765D27B22B5F72FD00B91505 /* DiscountCalculator.swift in Sources */,
 				C741F50E2B46659500A4DDC0 /* ParcelProcessor.swift in Sources */,
 				C741F5102B4675AF00A4DDC0 /* InvoiceViewController.swift in Sources */,
 				C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */,
