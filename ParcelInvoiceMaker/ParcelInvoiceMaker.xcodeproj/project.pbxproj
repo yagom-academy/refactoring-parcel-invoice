@@ -62,18 +62,50 @@
 		C741F4F82B46658300A4DDC0 /* ParcelInvoiceMaker */ = {
 			isa = PBXGroup;
 			children = (
-				C741F4F92B46658300A4DDC0 /* AppDelegate.swift */,
-				C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */,
-				C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */,
-				C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */,
-				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
-				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
-				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
-				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
-				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
-				C741F5072B46658400A4DDC0 /* Info.plist */,
+				EE8087522B62B9AB004D91C2 /* App */,
+				EE80874F2B62B91E004D91C2 /* Models */,
+				EE8087512B62B92B004D91C2 /* Views */,
+				EE8087502B62B924004D91C2 /* Controllers */,
 			);
 			path = ParcelInvoiceMaker;
+			sourceTree = "<group>";
+		};
+		EE80874F2B62B91E004D91C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EE8087502B62B924004D91C2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
+				C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EE8087512B62B92B004D91C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
+				C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EE8087522B62B9AB004D91C2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */,
+				C741F4F92B46658300A4DDC0 /* AppDelegate.swift */,
+				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
+				C741F5072B46658400A4DDC0 /* Info.plist */,
+				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,8 +328,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G5RH9MF273;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ParcelInvoiceMaker/Info.plist;
+				INFOPLIST_FILE = ParcelInvoiceMaker/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -322,8 +355,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G5RH9MF273;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ParcelInvoiceMaker/Info.plist;
+				INFOPLIST_FILE = ParcelInvoiceMaker/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
