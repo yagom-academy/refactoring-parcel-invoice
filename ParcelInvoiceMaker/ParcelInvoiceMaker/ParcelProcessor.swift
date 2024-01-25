@@ -7,48 +7,34 @@
 import Foundation
 
 class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
-    let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
-    }
+    let reciverInformation: ReceiverInformation
+    let costInformation: CostInformation
 
     init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
-        self.deliveryCost = deliveryCost
-        self.discount = discount
+        self.reciverInformation = ReceiverInformation(address: address, name: receiverName, mobile: receiverMobile)
+        self.costInformation = CostInformation(deliveryCost: deliveryCost, discount: discount)
     }
 }
 
-enum Discount: Int {
-    case none = 0, vip, coupon
+protocol OrderProcessor {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
 }
 
-class ParcelOrderProcessor {
+class ParcelOrderProcessor: OrderProcessor {
+    
+    private var databasePersistence: ParcelInformationPersistence
+    
+    init() {
+        self.databasePersistence = DatabaseParcelInformationPersistence()
+    }
     
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        save(parcelInformation: parcelInformation)
+        databasePersistence.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }
     
-    func save(parcelInformation: ParcelInformation) {
-        // 데이터베이스에 주문 정보 저장
-        print("발송 정보를 데이터베이스에 저장했습니다.")
-    }
 }

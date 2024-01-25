@@ -7,9 +7,10 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+    private let orderProcessor: OrderProcessor
     
     init() {
+        self.orderProcessor = ParcelOrderProcessor()
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
     }
@@ -19,7 +20,7 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     }
     
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-        parcelProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
+        orderProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
             let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
             navigationController?.pushViewController(invoiceViewController, animated: true)
         }
