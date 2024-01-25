@@ -9,10 +9,10 @@ import Foundation
 class ParcelOrderProcessor {
     // SOLID DIP 적용 추상화된 프로토콜을 가지도록 수정
     private let databaseParcelInformationPersistence: ParcelInformationPersistence
-    private let receiptProcessor: ReceiptManagement
+    private let receiptProcessor: ReceiptManageable
     
     init(databaseParcelInformationPersistence: ParcelInformationPersistence,
-         receiptProcessor: ReceiptManagement) {
+         receiptProcessor: ReceiptManageable) {
         // 인스턴스를 생성해 주입
         self.databaseParcelInformationPersistence = databaseParcelInformationPersistence
         self.receiptProcessor = receiptProcessor
