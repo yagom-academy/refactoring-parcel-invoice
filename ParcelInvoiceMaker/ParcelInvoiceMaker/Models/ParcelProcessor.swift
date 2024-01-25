@@ -16,9 +16,6 @@ class ParcelInformation {
     }
 }
 
-enum Discount: Int {
-    case none = 0, vip, coupon
-}
 
 class ParcelOrderProcessor {
     private let database: ParcelInformationPersistence
