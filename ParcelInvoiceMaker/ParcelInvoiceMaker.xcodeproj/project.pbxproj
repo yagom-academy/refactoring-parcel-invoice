@@ -20,6 +20,7 @@
 		EE8087562B62CE50004D91C2 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8087552B62CE50004D91C2 /* PhoneNumber.swift */; };
 		EE8087582B62CE9C004D91C2 /* DeliveryCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8087572B62CE9C004D91C2 /* DeliveryCost.swift */; };
 		EE80875A2B62CEF0004D91C2 /* ReceiverInfomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8087592B62CEF0004D91C2 /* ReceiverInfomation.swift */; };
+		EE80875C2B62CFED004D91C2 /* CostInfomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE80875B2B62CFED004D91C2 /* CostInfomation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		EE8087552B62CE50004D91C2 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		EE8087572B62CE9C004D91C2 /* DeliveryCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryCost.swift; sourceTree = "<group>"; };
 		EE8087592B62CEF0004D91C2 /* ReceiverInfomation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInfomation.swift; sourceTree = "<group>"; };
+		EE80875B2B62CFED004D91C2 /* CostInfomation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostInfomation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				EE8087552B62CE50004D91C2 /* PhoneNumber.swift */,
 				EE8087592B62CEF0004D91C2 /* ReceiverInfomation.swift */,
 				EE8087572B62CE9C004D91C2 /* DeliveryCost.swift */,
+				EE80875B2B62CFED004D91C2 /* CostInfomation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE80875C2B62CFED004D91C2 /* CostInfomation.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
 				EE8087562B62CE50004D91C2 /* PhoneNumber.swift in Sources */,
