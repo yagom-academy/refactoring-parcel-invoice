@@ -6,10 +6,37 @@
 
 import Foundation
 
-class ParcelInformation {
+struct ReceiverInfo {
     let address: String
-    var receiverName: String
-    var receiverMobile: String
+    var name: String
+    var mobile: MobileNumber
+}
+
+struct MobileNumber {
+    let value: String
+    init(value: String) throws {
+        let mobileNumberRegex = #"^01[016789]\d{3,4}\d{4}$"#
+        
+        guard NSPredicate(format: "SELF MATCHES %@", mobileNumberRegex).evaluate(with: value) == true else {
+            throw NSError() as Error
+        }
+        self.value = value
+    }
+    
+    static func valid(with number: String) -> Bool {
+        return NSPredicate(format: "SELF MATCHES %@",
+                           #"^01[016789]\d{3,4}\d{4}$"#).evaluate(with: number)
+    }
+}
+
+extension MobileNumber: CustomStringConvertible {
+    var description: String {
+        return value
+    }
+}
+
+final class ParcelInformation {
+    var receiverInfo: ReceiverInfo
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -23,10 +50,8 @@ class ParcelInformation {
         }
     }
 
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    init(receiverInfo: ReceiverInfo, deliveryCost: Int, discount: Discount) {
+        self.receiverInfo = receiverInfo
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
