@@ -10,7 +10,7 @@ protocol ParcelOrderViewDelegate {
     func parcelOrderMade(_ parcelInformation: ParcelInformation)
 }
 
-class ParcelOrderView: UIView {
+final class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
     
@@ -62,6 +62,12 @@ class ParcelOrderView: UIView {
     }
     
     @objc private func touchUpOrderButton(_ sender: UIButton) {
+        if let parcelInformation = makeParcelInformation() {
+            delegate.parcelOrderMade(parcelInformation)
+        }
+    }
+    
+    private func makeParcelInformation() -> ParcelInformation? {
         guard let name: String = receiverNameField.text,
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
@@ -71,18 +77,24 @@ class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
-        else {
-            return
-        }
+              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex) else { return nil }
         
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
-                                                         discount: discount)
-        delegate.parcelOrderMade(parcelInformation)
+        let receiver = makeReceiver(name: name, mobile: mobile, address: address)
+        let charge = makeCharge(cost: cost, discount: discount)
+        
+        return ParcelInformation(receiver: receiver, charge: charge)
     }
+    
+    private func makeReceiver(name: String, mobile: String, address: String) -> Receiver {
+        return Receiver(address: address, receiverName: name, receiverMobile: mobile)
+    }
+    
+    private func makeCharge(cost: Int, discount: Discount) -> Charge {
+        return Charge(deliveryCost: cost, discount: discount)
+    }
+}
+
+extension ParcelOrderView {
     
     private func layoutView() {
         
@@ -162,3 +174,4 @@ class ParcelOrderView: UIView {
         ])
     }
 }
+
