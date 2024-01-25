@@ -18,8 +18,8 @@ struct NoDiscount: DiscountStrategy {
 }
 
 struct VIPDiscount: DiscountStrategy {
-    func applyDiscount(to delieveryCost: Int) -> Int {
-        return delieveryCost / 5 * 3
+    func applyDiscount(to deliveryCost: Int) -> Int {
+        return deliveryCost / 5 * 3
     }
 }
 
@@ -32,6 +32,12 @@ struct CouponDiscount: DiscountStrategy {
 struct SubscribeDiscount: DiscountStrategy {
     func applyDiscount(to delieveryCost: Int) -> Int {
         return delieveryCost / 5 * 4
+    }
+}
+
+struct SubscribeDiscount: DiscountStrategy {
+    func applyDiscount(to deliveryCost: Int) -> Int {
+        return deliveryCost / 5 * 4
     }
 }
 

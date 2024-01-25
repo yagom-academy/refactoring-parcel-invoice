@@ -184,7 +184,7 @@ final class ParcelOrderView: UIView {
     }
 }
 
-struct ParcelOrderInfo {
+enum ParcelOrderInfo {
     static let name: String = "이름"
     static let mobile: String = "전화"
     static let address: String = "주소"
