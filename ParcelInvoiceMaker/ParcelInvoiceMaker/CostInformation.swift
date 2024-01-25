@@ -12,22 +12,12 @@ struct CostInformation {
     private let discount: Discount
     
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+        let discountStrategy: DiscountStrategy = discount.strategy
+        return discountStrategy.discountedCost(self.deliveryCost)
     }
     
     init(deliveryCost: Int, discount: Discount) {
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
-}
-
-enum Discount: Int {
-    case none = 0, vip, coupon
 }
