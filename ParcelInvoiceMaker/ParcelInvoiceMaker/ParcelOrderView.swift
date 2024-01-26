@@ -73,12 +73,12 @@ class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Double = Double(costString),
-              let deliveryCost: DeliveryCost = try? .init(cost),
+              let deliveryCost: DeliveryCost = .init(cost),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
         else {
             return
         }
-        let receiverInfo = ReceiverInfo(name: name, mobile: mobile)
+        let receiverInfo = Receiver(name: name, mobile: mobile)
         let discountedCost = DiscountedCost(deliveryCost: deliveryCost, discount: discount, discountStrategies: currentDiscountStrategies)
         
         let parcelInformation: ParcelInformation = .init(address: Address(address), receiverInfo: receiverInfo, discountedCost: discountedCost)
