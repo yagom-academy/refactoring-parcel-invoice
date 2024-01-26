@@ -6,11 +6,11 @@
 
 import UIKit
 
-protocol ParcelOrderViewDelegate {
+protocol ParcelOrderViewDelegate: AnyObject {
     func parcelOrderMade(_ parcelInformation: ParcelInformation)
 }
 
-class ParcelOrderView: UIView {
+final class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
     
@@ -61,13 +61,14 @@ class ParcelOrderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func touchUpOrderButton(_ sender: UIButton) {
+    @objc private func touchUpOrderButton(_ sender: UIButton) throws {
         guard let name: String = receiverNameField.text,
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
               let costString: String = costField.text,
               name.isEmpty == false,
               mobile.isEmpty == false,
+              MobileNumber.valid(with: mobile) == true,
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
@@ -76,9 +77,11 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
+        let mobileNumber: MobileNumber = .init(value: mobile)
+        let receiverInfo: ReceiverInfo = .init(address: address,
+                                               name: name,
+                                               mobile: mobileNumber)
+        let parcelInformation: ParcelInformation = .init(receiverInfo: receiverInfo,
                                                          deliveryCost: cost,
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)
