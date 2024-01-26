@@ -1,5 +1,5 @@
 //
-//  Model.swift
+//  ParcelInformation.swift
 //  ParcelInvoiceMaker
 //
 //  Created by Kant on 1/24/24.
@@ -31,16 +31,9 @@ struct Receiver {
 
 struct Charge {
     let deliveryCost: Int
-    private let discount: Discount
+    let discount: Discount
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+        return discount.strategy.applyDiscount(deliveryCost: deliveryCost)
     }
     
     init(deliveryCost: Int, discount: Discount) {
@@ -49,6 +42,10 @@ struct Charge {
     }
 }
 
-enum Discount: Int {
-    case none = 0, vip, coupon
+struct ParcelInputData {
+    var name: String
+    var mobile: String
+    var address: String
+    var cost: Int
+    var discount: Discount
 }
