@@ -189,7 +189,7 @@ struct NoDiscount: DiscountStrategy {
     }
     
     func canDiscount(category: Discount) -> Bool {
-        return category == .none
+        return category == discountCategory
     }
 }
 
@@ -201,7 +201,7 @@ struct VIPDiscount: DiscountStrategy {
     }
     
     func canDiscount(category: Discount) -> Bool {
-        return category == .vip
+        return category == discountCategory
     }
 }
 
@@ -213,7 +213,7 @@ struct CouponDiscount: DiscountStrategy {
     }
     
     func canDiscount(category: Discount) -> Bool {
-        return category == .coupon
+        return category == discountCategory
     }
 }
 
