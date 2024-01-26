@@ -84,28 +84,36 @@ struct DeliveryCost {
 
 
 // MARK: - Parcel Information
-struct ReceiverInfo {
+struct Address {
     private let address: String
-    private let receiverName: String
-    private let receiverMobile: String
     
-    init(address: String, receiverName: String, receiverMobile: String) {
+    init(_ address: String) {
         self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
-    }
-    
-    func getName() -> String{
-        return receiverName
-    }
-    
-    func getMobile() -> String {
-        return receiverMobile
     }
     
     func getAddress() -> String {
         return address
     }
+}
+
+
+struct ReceiverInfo {
+    private let name: String
+    private let mobile: String
+    
+    init(name: String, mobile: String) {
+        self.name = name
+        self.mobile = mobile
+    }
+    
+    func getName() -> String{
+        return name
+    }
+    
+    func getMobile() -> String {
+        return mobile
+    }
+    
 }
 
 // 원칙 2 'else 사용 금지'에서 볼 수 있듯이 여기에서는 전략 패턴을 사용했습니다. DiscountedCost와 ParcelInformation를 변경하지 않고도 쉽게 할인 유형을 확장할 수 있다는 장점이 있습니다. 테스트로 "HolidayDiscount"라는 새로운 유형의 할인 정책을 추가했습니다. 디스카운트 전략(DiscountStrategy) 프로토콜을 준수하는 새로운 HolidayDiscount 구조체를 생성했고, Discount 열거형에 새로운 'holiday' 케이스를 추가했고, 마지막으로 ParcelOrderView의 currentDiscountStrategies 배열에 새로운 전략을 추가하는 것만으로만 충분했습니다. 여기서 OCP를 따르는 것의 장점을 느꼈습니다.
@@ -133,10 +141,12 @@ struct DiscountedCost {
 
 
 struct ParcelInformation {
+    private let address: Address
     private let receiverInfo: ReceiverInfo
     private let discountedCost: DiscountedCost
     
-    init(receiverInfo: ReceiverInfo, discountedCost: DiscountedCost) {
+    init(address: Address, receiverInfo: ReceiverInfo, discountedCost: DiscountedCost) {
+        self.address = address
         self.receiverInfo = receiverInfo
         self.discountedCost = discountedCost
     }
@@ -147,7 +157,7 @@ struct ParcelInformation {
     }
     
     func getReceiverAddress() -> String {
-        receiverInfo.getAddress()
+        address.getAddress()
     }
     
     func getReceiverMobile() -> String {
