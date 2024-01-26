@@ -14,7 +14,7 @@ struct CostInformation {
     init(deliveryCost: Int, discount: Discount) {
         self.deliveryCost = deliveryCost
         
-        let strategies: [DiscountStrategy] = [NoDiscount(), VipDiscount(), CouponDiscount()]
+        let strategies: [DiscountStrategy] = [NoDiscount(), VipDiscount(), CouponDiscount(), NewcomerDiscount()]
         strategy = strategies.first { $0.canApply(discount) }
     }
     

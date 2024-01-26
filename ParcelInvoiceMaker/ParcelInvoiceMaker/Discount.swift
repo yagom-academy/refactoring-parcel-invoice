@@ -42,6 +42,16 @@ struct CouponDiscount: DiscountStrategy {
     }
 }
 
+struct NewcomerDiscount: DiscountStrategy {
+    func discountedCost(_ deliveryCost: Int) -> Int {
+        return deliveryCost / 10 * 9
+    }
+    
+    func canApply(_ discount: Discount) -> Bool {
+        return discount == .newcomer
+    }
+}
+
 enum Discount: Int {
-    case none = 0, vip, coupon
+    case none = 0, vip, coupon, newcomer
 }
