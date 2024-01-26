@@ -118,7 +118,7 @@ struct DiscountCostCalculator {
     func getDiscountedCost() -> Int {
         discountStrategies.filter {$0.canAccept(discount: discount)}
             .first?
-            .applyDiscount(deliveryCost: deliveryCost, discountRate: discount.rate) ?? 0
+            .applyDiscount(deliveryCost: deliveryCost, discountRate: discount.rate) ?? Int(deliveryCost.cost)
     }
 }
 

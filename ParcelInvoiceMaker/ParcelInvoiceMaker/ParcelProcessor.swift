@@ -6,7 +6,6 @@
 
 import Foundation
 
-// DatabaseParcelInformationPersistence와 ParcelOrderProcessor를 위한 파일을 따로 따로 만들어서 분리해야 할까요?
 
 protocol ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation)
