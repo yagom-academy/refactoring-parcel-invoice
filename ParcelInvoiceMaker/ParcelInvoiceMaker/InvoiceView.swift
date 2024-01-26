@@ -7,7 +7,7 @@
 import UIKit
 
 final class InvoiceView: UIView {
-    let parcelInformation: ParcelInformation
+    private let parcelInformation: ParcelInformation
     
     init(parcelInformation: ParcelInformation) {
         self.parcelInformation = parcelInformation
@@ -24,17 +24,17 @@ final class InvoiceView: UIView {
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.receiverInfo.name)"
+        nameLabel.text = "이름 : \(parcelInformation.getReceiverName())"
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.receiverInfo.mobile)"
+        mobileLabel.text = "전화 : \(parcelInformation.getReceiverMobile())"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.receiverInfo.address)"
+        addressLabel.text = "주소 : \(parcelInformation.getReceiverAddress())"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
