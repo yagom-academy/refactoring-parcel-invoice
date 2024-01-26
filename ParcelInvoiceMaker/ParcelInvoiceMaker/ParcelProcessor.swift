@@ -14,7 +14,7 @@ enum Receipt {
 protocol OrderProcessable {
     var persistence: ParcelInformationPersistence { get }
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
-    func sendRecipt(parcelInformation: ParcelInformation)
+    func sendReceipt(parcelInformation: ParcelInformation)
 }
 
 final class ParcelOrderProcessor: OrderProcessable {
@@ -32,7 +32,7 @@ final class ParcelOrderProcessor: OrderProcessable {
     }
     
     // 택배 주문 처리 완료 후 영수증 전송
-    func sendRecipt(parcelInformation: ParcelInformation) {
+    func sendReceipt(parcelInformation: ParcelInformation) {
         persistence.sendReceipt(parcelInformation: parcelInformation)
     }
 }
