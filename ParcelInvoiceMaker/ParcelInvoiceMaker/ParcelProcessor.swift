@@ -96,11 +96,11 @@ enum Discount: Int {
 
 // MARK: - 수정 후 코드
 
-class ParcelOrderProcessor: ParcelOrderPersistence {
+class ParcelOrderProcessor: ParcelOrderPersistable {
     
-    let parcelInformationSaver: ParcelInformationPersistence
+    private let parcelInformationSaver: ParcelInformationPersistable
     
-    init(parcelInformationSaver: ParcelInformationPersistence = DatabaseParcelInformationPersistence()) {
+    init(parcelInformationSaver: ParcelInformationPersistable = DatabaseParcelInformationPersistence()) {
         self.parcelInformationSaver = parcelInformationSaver
     }
     
@@ -113,7 +113,7 @@ class ParcelOrderProcessor: ParcelOrderPersistence {
     }
 }
 
-struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
+struct DatabaseParcelInformationPersistence: ParcelInformationPersistable {
     
     func save(parcelInformation: ParcelInformation) {
         // 데이터베이스에 주문 정보 저장
@@ -121,10 +121,10 @@ struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     }
 }
 
-protocol ParcelInformationPersistence {
-    func save(parcelInformation: ParcelInformation) 
+protocol ParcelInformationPersistable {
+    func save(parcelInformation: ParcelInformation)
 }
 
-protocol ParcelOrderPersistence {
+protocol ParcelOrderPersistable {
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
 }
