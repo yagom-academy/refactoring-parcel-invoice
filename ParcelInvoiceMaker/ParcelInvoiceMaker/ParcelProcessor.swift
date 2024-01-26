@@ -6,95 +6,6 @@
 
 import Foundation
 
-struct ReceiverInfo {
-    let address: String
-    var name: String
-    var mobile: MobileNumber
-}
-
-struct MobileNumber {
-    let value: String
-    init(value: String) throws {
-        let mobileNumberRegex = #"^01[016789]\d{3,4}\d{4}$"#
-        
-        guard NSPredicate(format: "SELF MATCHES %@", mobileNumberRegex).evaluate(with: value) == true else {
-            throw NSError() as Error
-        }
-        self.value = value
-    }
-    
-    static func valid(with number: String) -> Bool {
-        return NSPredicate(format: "SELF MATCHES %@",
-                           #"^01[016789]\d{3,4}\d{4}$"#).evaluate(with: number)
-    }
-}
-
-extension MobileNumber: CustomStringConvertible {
-    var description: String {
-        return value
-    }
-}
-
-final class ParcelInformation {
-    var receiverInfo: ReceiverInfo
-    let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        return discount.strategy.applyDiscount(delieveryCost: deliveryCost)
-    }
-
-    init(receiverInfo: ReceiverInfo, deliveryCost: Int, discount: Discount) {
-        self.receiverInfo = receiverInfo
-        self.deliveryCost = deliveryCost
-        self.discount = discount
-    }
-}
-
-protocol DiscountStrategy {
-    func applyDiscount(delieveryCost: Int) -> Int
-}
-
-struct NoDiscount: DiscountStrategy {
-    func applyDiscount(delieveryCost: Int) -> Int {
-        return delieveryCost
-    }
-}
-
-struct VIPDiscount: DiscountStrategy {
-    func applyDiscount(delieveryCost: Int) -> Int {
-        return delieveryCost / 5 * 3
-    }
-}
-
-struct CouponDiscount: DiscountStrategy {
-    func applyDiscount(delieveryCost: Int) -> Int {
-        return delieveryCost / 2
-    }
-}
-
-struct SubscribeDiscount: DiscountStrategy {
-    func applyDiscount(delieveryCost: Int) -> Int {
-        return delieveryCost / 5 * 4
-    }
-}
-
-enum Discount: Int {
-    static let noneTitle: String = "없음"
-    static let vipTitle: String = "VIP"
-    static let couponTitle: String = "쿠폰"
-    static let subscribeTitle: String = "구독"
-    
-    case none = 0, vip, coupon, subscribe
-    var strategy: DiscountStrategy {
-        switch self {
-        case .none: return NoDiscount()
-        case .vip: return VIPDiscount()
-        case .coupon: return CouponDiscount()
-        case .subscribe: return SubscribeDiscount()
-        }
-    }
-}
-
 enum Receipt {
     static let emailTitle: String = "이메일"
     static let smsTitle: String = "문자"
@@ -126,7 +37,7 @@ final class ParcelOrderProcessor: OrderProcessable {
     }
 }
 
-protocol ParcelInformationPersistence: AnyObject {
+protocol ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation)
     func sendReceipt(parcelInformation: ParcelInformation)
 }
