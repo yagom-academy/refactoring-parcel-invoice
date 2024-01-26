@@ -86,18 +86,14 @@ final class ParcelOrderView: UIView {
             return
         }
         
-        do {
-            let mobileNumber: MobileNumber = try .init(value: mobile)
-            let receiverInfo: ReceiverInfo = .init(address: address,
-                                                   name: name,
-                                                   mobile: mobileNumber)
-            let parcelInformation: ParcelInformation = .init(receiverInfo: receiverInfo,
-                                                             deliveryCost: cost,
-                                                             discount: discount)
-            delegate.parcelOrderMade(parcelInformation)
-        } catch {
-            throw error
-        }
+        let mobileNumber: MobileNumber = .init(value: mobile)
+        let receiverInfo: ReceiverInfo = .init(address: address,
+                                               name: name,
+                                               mobile: mobileNumber)
+        let parcelInformation: ParcelInformation = .init(receiverInfo: receiverInfo,
+                                                         deliveryCost: cost,
+                                                         discount: discount)
+        delegate.parcelOrderMade(parcelInformation)
     }
     
     private func layoutView() {
