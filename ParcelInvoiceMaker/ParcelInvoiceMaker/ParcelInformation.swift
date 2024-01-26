@@ -84,7 +84,3 @@ struct MobileNumber: CustomStringConvertible {
         return value ?? ""
     }
 }
-
-enum Discount: Int {
-    case none = 0, vip, coupon
-}
