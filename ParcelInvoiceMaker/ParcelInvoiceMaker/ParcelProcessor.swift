@@ -36,7 +36,7 @@ import Foundation
 
 // MARK: - 수정 후 코드
 
-class ParcelInformation {
+final class ParcelInformation {
     struct User {
         let address: String
         let receiver: Receiver
