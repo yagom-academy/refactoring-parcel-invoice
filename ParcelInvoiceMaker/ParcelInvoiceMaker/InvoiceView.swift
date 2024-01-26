@@ -21,25 +21,34 @@ class InvoiceView: UIView {
     }
     
     private func layoutView() {
+        
+        let reciverInformation: ReceiverInformation = parcelInformation.reciverInformation
+        
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.reciverInformation.name)"
+        nameLabel.text = "이름 : \(reciverInformation.name)"
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.reciverInformation.mobile)"
+        mobileLabel.text = "전화 : \(reciverInformation.mobile)"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.reciverInformation.address)"
+        addressLabel.text = "주소 : \(reciverInformation.address)"
+        
+        let costInformation: CostInformation = parcelInformation.costInformation
+        var discountedCostInfoString: String = "unknown"
+        if let discountedCost = costInformation.discountedCost() {
+            discountedCostInfoString = "\(discountedCost)"
+        }
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
         costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        costLabel.text = "요금 : \(parcelInformation.costInformation.discountedCost)"
+        costLabel.text = "요금 : \(discountedCostInfoString)"
                 
         let mainStackView: UIStackView = .init(arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel])
         mainStackView.axis = .vertical

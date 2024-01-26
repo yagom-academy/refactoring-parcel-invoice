@@ -9,11 +9,16 @@ import Foundation
 
 protocol DiscountStrategy {
     func discountedCost(_ deliveryCost: Int) -> Int
+    func canApply(_ discount: Discount) -> Bool
 }
 
 struct NoDiscount: DiscountStrategy {
     func discountedCost(_ deliveryCost: Int) -> Int {
         return deliveryCost
+    }
+    
+    func canApply(_ discount: Discount) -> Bool {
+        return discount == .none
     }
 }
 
@@ -21,24 +26,22 @@ struct VipDiscount: DiscountStrategy {
     func discountedCost(_ deliveryCost: Int) -> Int {
         return deliveryCost / 5 * 4
     }
+    
+    func canApply(_ discount: Discount) -> Bool {
+        return discount == .vip
+    }
 }
 
 struct CouponDiscount: DiscountStrategy {
     func discountedCost(_ deliveryCost: Int) -> Int {
         return deliveryCost / 2
     }
+    
+    func canApply(_ discount: Discount) -> Bool {
+        return discount == .coupon
+    }
 }
 
 enum Discount: Int {
     case none = 0, vip, coupon
-    var strategy: DiscountStrategy {
-        switch self {
-        case .none:
-            return NoDiscount()
-        case .vip:
-            return VipDiscount()
-        case .coupon:
-            return CouponDiscount()
-        }
-    }
 }

@@ -9,15 +9,16 @@ import Foundation
 
 struct CostInformation {
     let deliveryCost: Int
-    private let discount: Discount
-    
-    var discountedCost: Int {
-        let discountStrategy: DiscountStrategy = discount.strategy
-        return discountStrategy.discountedCost(self.deliveryCost)
-    }
+    private var strategy: DiscountStrategy?
     
     init(deliveryCost: Int, discount: Discount) {
         self.deliveryCost = deliveryCost
-        self.discount = discount
+        
+        let strategies: [DiscountStrategy] = [NoDiscount(), VipDiscount(), CouponDiscount()]
+        strategy = strategies.first { $0.canApply(discount) }
+    }
+    
+    func discountedCost() -> Int? {
+        return strategy?.discountedCost(deliveryCost)
     }
 }
