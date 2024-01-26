@@ -7,83 +7,7 @@
 
 import Foundation
 
-// MARK: - Discount Strategies
 
-enum Discount: Int {
-    case none = 0, vip, coupon, holiday
-    
-    var rate: Double {
-           switch self {
-           case .none:
-               return 1 // no discount
-           case .vip:
-               return 0.8  // 20% discount
-           case .coupon:
-               return 0.5  // 50% discount
-           case .holiday:
-               return 0.85  // 15% discount
-           }
-       }
-}
-
-protocol DiscountStrategy {
-    func applyDiscount(deliveryCost: DeliveryCost, discountRate: Double) -> Int
-    func canAccept(discount: Discount) -> Bool
-}
-
-extension DiscountStrategy {
-    func applyDiscount(deliveryCost: DeliveryCost, discountRate: Double) -> Int {
-        Int(deliveryCost.cost * discountRate)
-    }
-}
-
-struct NoDiscount: DiscountStrategy {
-    func canAccept(discount: Discount) -> Bool {
-        return discount == .none
-    }
-}
-
-struct VIPDiscount: DiscountStrategy {
-    func canAccept(discount: Discount) -> Bool {
-        return discount == .vip
-    }
-}
-
-struct CouponDiscount: DiscountStrategy {
-    func canAccept(discount: Discount) -> Bool {
-        return discount == .coupon
-    }
-}
-
-// 이 새로운 전략은 테스트로 추가되었습니다.
-struct HolidayDiscount: DiscountStrategy {
-    func canAccept(discount: Discount) -> Bool {
-        return discount == .holiday
-    }
-}
-
-
-// MARK: - Delivery Cost
-
-// cost가 음수 또는 0이 아닌지 확인하기 위해 init()에서 배송 비용을 검증합니다.
-struct DeliveryCost {
-    private(set) var cost: Double
-    
-    private static func validate(_ cost: Double) -> Bool {
-        return cost >= 0
-    }
-    
-    init?(_ cost: Double) {
-        guard Self.validate(cost) else {
-            print("Invalid cost: Cost must be greater than or equal to 0.")
-            return nil
-        }
-        self.cost = cost
-    }
-}
-
-
-// MARK: - Parcel Information
 struct Address {
     private(set) var address: String
     
@@ -102,6 +26,25 @@ struct Receiver {
         self.mobile = mobile
     }
 }
+
+
+// cost가 음수 아닌지 확인하기 위해 init()에서 배송 비용을 검증합니다.
+struct DeliveryCost {
+    private(set) var cost: Double
+    
+    private static func validate(_ cost: Double) -> Bool {
+        return cost >= 0
+    }
+    
+    init?(_ cost: Double) {
+        guard Self.validate(cost) else {
+            print("Invalid cost: Cost must be greater than or equal to 0.")
+            return nil
+        }
+        self.cost = cost
+    }
+}
+
 
 // 원칙 2 'else 사용 금지'에서 볼 수 있듯이 여기에서는 전략 패턴을 사용했습니다. DiscountedCost와 ParcelInformation를 변경하지 않고도 쉽게 할인 유형을 확장할 수 있다는 장점이 있습니다. 테스트로 "HolidayDiscount"라는 새로운 유형의 할인 정책을 추가했습니다. 디스카운트 전략(DiscountStrategy) 프로토콜을 준수하는 새로운 HolidayDiscount 구조체를 생성했고, Discount 열거형에 새로운 'holiday' 케이스를 추가했고, 마지막으로 ParcelOrderView의 currentDiscountStrategies 배열에 새로운 전략을 추가하는 것만으로만 충분했습니다. 여기서 OCP를 따르는 것의 장점을 느꼈습니다.
 struct DiscountCostCalculator {

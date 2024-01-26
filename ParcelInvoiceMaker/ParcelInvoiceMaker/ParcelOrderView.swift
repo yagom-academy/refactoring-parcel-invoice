@@ -13,6 +13,7 @@ protocol ParcelOrderViewDelegate {
 class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
+    
     private let currentDiscountStrategies: [DiscountStrategy] = [NoDiscount(), VIPDiscount(), CouponDiscount(), HolidayDiscount()]
     
     private let receiverNameField: UITextField = {
