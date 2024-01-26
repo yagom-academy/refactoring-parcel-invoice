@@ -160,7 +160,7 @@ enum Discount: Int {
 //    }
 //}
 
-// MARK: - 수정 후 코드
+// MARK: - 수정 후 코드 (step 1)
 
 class ParcelOrderProcessor: ParcelOrderPersistable {
     
