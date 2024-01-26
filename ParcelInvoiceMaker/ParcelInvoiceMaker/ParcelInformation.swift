@@ -11,38 +11,45 @@ import Foundation
 
 enum Discount: Int {
     case none = 0, vip, coupon, holiday
+    
+    var rate: Double {
+           switch self {
+           case .none:
+               return 1 // no discount
+           case .vip:
+               return 0.8  // 20% discount
+           case .coupon:
+               return 0.5  // 50% discount
+           case .holiday:
+               return 0.85  // 15% discount
+           }
+       }
 }
 
 protocol DiscountStrategy {
-    func applyDiscount(deliveryCost: DeliveryCost) -> Int
+    func applyDiscount(deliveryCost: DeliveryCost, discountRate: Double) -> Int
     func canAccept(discount: Discount) -> Bool
 }
 
-struct NoDiscount: DiscountStrategy {
-    private var noDiscount: Double = 1
-    func applyDiscount(deliveryCost: DeliveryCost) -> Int {
-        Int(deliveryCost.cost)
+extension DiscountStrategy {
+    func applyDiscount(deliveryCost: DeliveryCost, discountRate: Double) -> Int {
+        Int(deliveryCost.cost * discountRate)
     }
+}
+
+struct NoDiscount: DiscountStrategy {
     func canAccept(discount: Discount) -> Bool {
         return discount == .none
     }
 }
 
 struct VIPDiscount: DiscountStrategy {
-    private let twentyPerDiscount: Double = 0.8
-    func applyDiscount(deliveryCost: DeliveryCost) -> Int {
-        Int(deliveryCost.cost * twentyPerDiscount)
-    }
     func canAccept(discount: Discount) -> Bool {
         return discount == .vip
     }
 }
 
 struct CouponDiscount: DiscountStrategy {
-    private let fiftyPerDiscount: Double = 0.5
-    func applyDiscount(deliveryCost: DeliveryCost) -> Int {
-        Int(deliveryCost.cost * fiftyPerDiscount)
-    }
     func canAccept(discount: Discount) -> Bool {
         return discount == .coupon
     }
@@ -50,10 +57,6 @@ struct CouponDiscount: DiscountStrategy {
 
 // 이 새로운 전략은 테스트로 추가되었습니다.
 struct HolidayDiscount: DiscountStrategy {
-    private let fifteenPerDiscount: Double = 0.85
-    func applyDiscount(deliveryCost: DeliveryCost) -> Int {
-        Int(Double(deliveryCost.cost) * fifteenPerDiscount)
-    }
     func canAccept(discount: Discount) -> Bool {
         return discount == .holiday
     }
@@ -101,7 +104,7 @@ struct Receiver {
 }
 
 // 원칙 2 'else 사용 금지'에서 볼 수 있듯이 여기에서는 전략 패턴을 사용했습니다. DiscountedCost와 ParcelInformation를 변경하지 않고도 쉽게 할인 유형을 확장할 수 있다는 장점이 있습니다. 테스트로 "HolidayDiscount"라는 새로운 유형의 할인 정책을 추가했습니다. 디스카운트 전략(DiscountStrategy) 프로토콜을 준수하는 새로운 HolidayDiscount 구조체를 생성했고, Discount 열거형에 새로운 'holiday' 케이스를 추가했고, 마지막으로 ParcelOrderView의 currentDiscountStrategies 배열에 새로운 전략을 추가하는 것만으로만 충분했습니다. 여기서 OCP를 따르는 것의 장점을 느꼈습니다.
-struct DiscountedCost {
+struct DiscountCostCalculator {
     private let deliveryCost: DeliveryCost
     private let discount: Discount
     private let discountStrategies: [DiscountStrategy]
@@ -115,7 +118,7 @@ struct DiscountedCost {
     func getDiscountedCost() -> Int {
         discountStrategies.filter {$0.canAccept(discount: discount)}
             .first?
-            .applyDiscount(deliveryCost: deliveryCost) ?? 0
+            .applyDiscount(deliveryCost: deliveryCost, discountRate: discount.rate) ?? 0
     }
 }
 
@@ -123,17 +126,17 @@ struct DiscountedCost {
 struct ParcelInformation {
     private(set) var addressInfo: Address
     private(set) var receiver: Receiver
-    private(set) var discountedCost: DiscountedCost
+    private(set) var discountCostCalculator: DiscountCostCalculator
     
-    init(address: Address, receiverInfo: Receiver, discountedCost: DiscountedCost) {
+    init(address: Address, receiverInfo: Receiver, discountCostCalculator: DiscountCostCalculator) {
         self.addressInfo = address
         self.receiver = receiverInfo
-        self.discountedCost = discountedCost
+        self.discountCostCalculator = discountCostCalculator
     }
     
     // InvoiceView 안에선 '4원칙: 한 줄에 한 점만 사용'을 지키기 위해서 함수 추가
     func getDiscountedCost() -> Int {
-        discountedCost.getDiscountedCost()
+        discountCostCalculator.getDiscountedCost()
     }
     
 }

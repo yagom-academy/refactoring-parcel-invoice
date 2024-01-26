@@ -79,9 +79,9 @@ class ParcelOrderView: UIView {
             return
         }
         let receiverInfo = Receiver(name: name, mobile: mobile)
-        let discountedCost = DiscountedCost(deliveryCost: deliveryCost, discount: discount, discountStrategies: currentDiscountStrategies)
+        let discountCostCalculator = DiscountCostCalculator(deliveryCost: deliveryCost, discount: discount, discountStrategies: currentDiscountStrategies)
         
-        let parcelInformation: ParcelInformation = .init(address: Address(address), receiverInfo: receiverInfo, discountedCost: discountedCost)
+        let parcelInformation: ParcelInformation = .init(address: Address(address), receiverInfo: receiverInfo, discountCostCalculator: discountCostCalculator)
         delegate.parcelOrderMade(parcelInformation)
     }
     
