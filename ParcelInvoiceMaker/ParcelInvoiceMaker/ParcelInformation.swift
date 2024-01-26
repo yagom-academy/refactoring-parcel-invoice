@@ -66,10 +66,11 @@ struct ReceiverInfo {
 }
 
 struct MobileNumber: CustomStringConvertible {
-    private let value: String
-    init(value: String) throws {
+    private let value: String?
+    init(value: String) {
         guard Self.valid(with: value) == true else {
-            throw NSError() as Error
+            self.value = nil
+            return
         }
         self.value = value
     }
@@ -80,7 +81,7 @@ struct MobileNumber: CustomStringConvertible {
     }
     
     var description: String {
-        return value
+        return value ?? ""
     }
 }
 
