@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D34DE142B63A8FF00A7EC6B /* ParcelReciptSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D34DE132B63A8FF00A7EC6B /* ParcelReciptSendable.swift */; };
+		7D34DE162B63A97C00A7EC6B /* SendMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D34DE152B63A97C00A7EC6B /* SendMethod.swift */; };
 		7DCE0C022B6128EB00EAA5CD /* ReceiverInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCE0C012B6128EB00EAA5CD /* ReceiverInformation.swift */; };
 		7DCE0C042B61298A00EAA5CD /* CostInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCE0C032B61298A00EAA5CD /* CostInformation.swift */; };
 		7DCE0C062B612F3400EAA5CD /* DatabaseParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCE0C052B612F3400EAA5CD /* DatabaseParcelInformationPersistence.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D34DE132B63A8FF00A7EC6B /* ParcelReciptSendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelReciptSendable.swift; sourceTree = "<group>"; };
+		7D34DE152B63A97C00A7EC6B /* SendMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMethod.swift; sourceTree = "<group>"; };
 		7DCE0C012B6128EB00EAA5CD /* ReceiverInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverInformation.swift; sourceTree = "<group>"; };
 		7DCE0C032B61298A00EAA5CD /* CostInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostInformation.swift; sourceTree = "<group>"; };
 		7DCE0C052B612F3400EAA5CD /* DatabaseParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseParcelInformationPersistence.swift; sourceTree = "<group>"; };
@@ -78,9 +82,11 @@
 				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
 				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
 				7DCE0C052B612F3400EAA5CD /* DatabaseParcelInformationPersistence.swift */,
+				7D34DE132B63A8FF00A7EC6B /* ParcelReciptSendable.swift */,
 				7DCE0C012B6128EB00EAA5CD /* ReceiverInformation.swift */,
 				7DCE0C032B61298A00EAA5CD /* CostInformation.swift */,
 				7DF00A912B62819900DC6DB7 /* Discount.swift */,
+				7D34DE152B63A97C00A7EC6B /* SendMethod.swift */,
 				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
 				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
 				C741F5072B46658400A4DDC0 /* Info.plist */,
@@ -158,7 +164,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D34DE162B63A97C00A7EC6B /* SendMethod.swift in Sources */,
 				7DCE0C042B61298A00EAA5CD /* CostInformation.swift in Sources */,
+				7D34DE142B63A8FF00A7EC6B /* ParcelReciptSendable.swift in Sources */,
 				7DF00A922B62819900DC6DB7 /* Discount.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,

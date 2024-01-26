@@ -50,6 +50,15 @@ class ParcelOrderView: UIView {
         return control
     }()
     
+    private let sendMethodSegmented: UISegmentedControl = {
+        let control: UISegmentedControl = .init()
+        control.insertSegment(withTitle: "없음", at: 0, animated: false)
+        control.insertSegment(withTitle: "이메일", at: 1, animated: false)
+        control.insertSegment(withTitle: "문자", at: 2, animated: false)
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
     init(delegate: ParcelOrderViewDelegate) {
         self.delegate = delegate
         super.init(frame: .zero)
@@ -72,7 +81,8 @@ class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
+              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex),
+              let sendMethod: SendMethod = SendMethod(rawValue: sendMethodSegmented.selectedSegmentIndex)
         else {
             return
         }
@@ -81,7 +91,8 @@ class ParcelOrderView: UIView {
                                                          receiverName: name,
                                                          receiverMobile: mobile,
                                                          deliveryCost: cost,
-                                                         discount: discount)
+                                                         discount: discount,
+                                                         sendMethod: sendMethod)
         delegate.parcelOrderMade(parcelInformation)
     }
     
@@ -146,7 +157,7 @@ class ParcelOrderView: UIView {
         makeOrderButton.setTitle("택배 보내기", for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
-        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])
+        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, sendMethodSegmented, makeOrderButton])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 8
