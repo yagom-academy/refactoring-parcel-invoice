@@ -76,8 +76,6 @@ final class ParcelOrderView: UIView {
       return
     }
     
-    
-    
     let receiverName = Name(name)
     let receiverMobile = Mobile(mobile)
     let receiver: Receiver = .init(

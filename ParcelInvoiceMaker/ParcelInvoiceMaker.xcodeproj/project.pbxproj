@@ -16,6 +16,10 @@
 		C741F5102B4675AF00A4DDC0 /* InvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */; };
 		C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */; };
 		C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F5132B468AC300A4DDC0 /* InvoiceView.swift */; };
+		EF95326B2B5FFC5C00CBD258 /* DiscountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF95326A2B5FFC5C00CBD258 /* DiscountStrategy.swift */; };
+		EF95326D2B5FFE4400CBD258 /* NoDiscount.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF95326C2B5FFE4400CBD258 /* NoDiscount.swift */; };
+		EF95326F2B5FFE5400CBD258 /* VIPDiscount.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF95326E2B5FFE5400CBD258 /* VIPDiscount.swift */; };
+		EF9532712B5FFE6900CBD258 /* CouponDiscount.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9532702B5FFE6900CBD258 /* CouponDiscount.swift */; };
 		EFCC01342B5EBB1300224977 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCC01332B5EBB1300224977 /* Receiver.swift */; };
 		EFCC01362B5EBB2400224977 /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCC01352B5EBB2400224977 /* Delivery.swift */; };
 		EFCC01382B5EBC5C00224977 /* ParcelInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCC01372B5EBC5C00224977 /* ParcelInformation.swift */; };
@@ -44,6 +48,10 @@
 		C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewController.swift; sourceTree = "<group>"; };
 		C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelOrderView.swift; sourceTree = "<group>"; };
 		C741F5132B468AC300A4DDC0 /* InvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceView.swift; sourceTree = "<group>"; };
+		EF95326A2B5FFC5C00CBD258 /* DiscountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountStrategy.swift; sourceTree = "<group>"; };
+		EF95326C2B5FFE4400CBD258 /* NoDiscount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDiscount.swift; sourceTree = "<group>"; };
+		EF95326E2B5FFE5400CBD258 /* VIPDiscount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPDiscount.swift; sourceTree = "<group>"; };
+		EF9532702B5FFE6900CBD258 /* CouponDiscount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponDiscount.swift; sourceTree = "<group>"; };
 		EFCC01332B5EBB1300224977 /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		EFCC01352B5EBB2400224977 /* Delivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delivery.swift; sourceTree = "<group>"; };
 		EFCC01372B5EBC5C00224977 /* ParcelInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformation.swift; sourceTree = "<group>"; };
@@ -129,6 +137,7 @@
 				EFCC014B2B5ECC7A00224977 /* ParcelOrderService.swift */,
 				EFCC01472B5EC88C00224977 /* DatabaseParcelInformationPersistence.swift */,
 				EFCC01492B5EC93900224977 /* ParcelInformationPersistence.swift */,
+				EF95326A2B5FFC5C00CBD258 /* DiscountStrategy.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -137,6 +146,9 @@
 			isa = PBXGroup;
 			children = (
 				EFCC01392B5EBC6C00224977 /* Discount.swift */,
+				EF95326C2B5FFE4400CBD258 /* NoDiscount.swift */,
+				EF95326E2B5FFE5400CBD258 /* VIPDiscount.swift */,
+				EF9532702B5FFE6900CBD258 /* CouponDiscount.swift */,
 				EFCC01372B5EBC5C00224977 /* ParcelInformation.swift */,
 				EFCC013B2B5EC2D300224977 /* ReceiverInformation.swift */,
 				EFCC01332B5EBB1300224977 /* Receiver.swift */,
@@ -223,14 +235,18 @@
 				EFCC01422B5EC2FF00224977 /* Mobile.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
 				EFCC014A2B5EC93900224977 /* ParcelInformationPersistence.swift in Sources */,
+				EF9532712B5FFE6900CBD258 /* CouponDiscount.swift in Sources */,
 				EFCC014C2B5ECC7A00224977 /* ParcelOrderService.swift in Sources */,
 				EFCC013A2B5EBC6C00224977 /* Discount.swift in Sources */,
+				EF95326B2B5FFC5C00CBD258 /* DiscountStrategy.swift in Sources */,
 				EFCC013E2B5EC2E500224977 /* Address.swift in Sources */,
 				EFCC014E2B5ED7C300224977 /* AppDependency.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
 				C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */,
 				EFCC01482B5EC88C00224977 /* DatabaseParcelInformationPersistence.swift in Sources */,
 				C741F50E2B46659500A4DDC0 /* ParcelProcessor.swift in Sources */,
+				EF95326F2B5FFE5400CBD258 /* VIPDiscount.swift in Sources */,
+				EF95326D2B5FFE4400CBD258 /* NoDiscount.swift in Sources */,
 				EFCC01462B5EC34C00224977 /* DiscountCost.swift in Sources */,
 				C741F5102B4675AF00A4DDC0 /* InvoiceViewController.swift in Sources */,
 				C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */,

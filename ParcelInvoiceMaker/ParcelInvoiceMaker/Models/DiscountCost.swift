@@ -30,10 +30,6 @@ extension DiscountCost {
     by discount: Discount,
     to cost: Cost
   ) -> Cost {
-    switch discount {
-    case .none: return cost
-    case .vip: return  Cost(cost.value / 5 * 4)
-    case .coupon: return Cost(cost.value / 2)
-    }
+    return discount.apply(cost)
   }
 }
