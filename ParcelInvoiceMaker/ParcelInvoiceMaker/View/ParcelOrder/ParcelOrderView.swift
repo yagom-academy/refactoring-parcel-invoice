@@ -67,10 +67,10 @@ class ParcelOrderView: UIView {
               let costString: String = costField.text,
               let cost: Int = Int(costString),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex),
-              BusinessLogic.validateAddress(address),
-              BusinessLogic.validateName(name),
-              BusinessLogic.validateMobile(mobile),
-              BusinessLogic.validateDeliveryCost(cost)
+              ParcelOrderValidator.validate(address: address),
+              ParcelOrderValidator.validate(name: name),
+              ParcelOrderValidator.validate(mobile: mobile),
+              ParcelOrderValidator.validate(cost: cost)
         else {
             return
         }

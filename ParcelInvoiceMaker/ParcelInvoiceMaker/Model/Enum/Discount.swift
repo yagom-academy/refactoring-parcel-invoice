@@ -8,9 +8,9 @@
 import Foundation
 
 enum Discount: Int {
-    case none = 0,
-         vip,
-         coupon
+    case none = 0
+    case vip
+    case coupon
     
     var strategy: DiscountStrategy {
         switch self {
