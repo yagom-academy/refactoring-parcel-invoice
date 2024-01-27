@@ -9,8 +9,8 @@ import Foundation
 
 // 택배정보 입력 에러
 enum ParcelInformationError: Int, Error {
-    case addressError = 0,
-         nameError,
-         mobileError,
-         deliveryCostError
+    case addressError = 0
+    case nameError
+    case mobileError
+    case deliveryCostError
 }
