@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BusinessLogic {
+struct ParcelOrderValidator {
     // 주소 유효성 체크
     static func validate(address: String) -> Bool {
         guard !address.isEmpty else {

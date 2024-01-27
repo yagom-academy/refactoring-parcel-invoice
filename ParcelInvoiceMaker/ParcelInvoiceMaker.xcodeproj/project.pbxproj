@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2468C74D2B61A2C500840F12 /* BusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C74C2B61A2C500840F12 /* BusinessLogic.swift */; };
+		2468C74D2B61A2C500840F12 /* ParcelOrderValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C74C2B61A2C500840F12 /* ParcelOrderValidator.swift */; };
 		2468C7502B61A2F000840F12 /* ParcelInformationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C74F2B61A2F000840F12 /* ParcelInformationError.swift */; };
 		2468C7532B61A30700840F12 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C7522B61A30700840F12 /* Receiver.swift */; };
 		2468C7552B61A31D00840F12 /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C7542B61A31D00840F12 /* Cost.swift */; };
@@ -28,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2468C74C2B61A2C500840F12 /* BusinessLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLogic.swift; sourceTree = "<group>"; };
+		2468C74C2B61A2C500840F12 /* ParcelOrderValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelOrderValidator.swift; sourceTree = "<group>"; };
 		2468C74F2B61A2F000840F12 /* ParcelInformationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformationError.swift; sourceTree = "<group>"; };
 		2468C7522B61A30700840F12 /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		2468C7542B61A31D00840F12 /* Cost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cost.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				2468C74E2B61A2E600840F12 /* Error */,
 				C741F4F92B46658300A4DDC0 /* AppDelegate.swift */,
 				C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */,
-				2468C74C2B61A2C500840F12 /* BusinessLogic.swift */,
+				2468C74C2B61A2C500840F12 /* ParcelOrderValidator.swift */,
 				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
 				C741F5072B46658400A4DDC0 /* Info.plist */,
 			);
@@ -271,7 +271,7 @@
 			files = (
 				2468C7552B61A31D00840F12 /* Cost.swift in Sources */,
 				2468C7642B63088C00840F12 /* ParcelOrderProcessorProtocol.swift in Sources */,
-				2468C74D2B61A2C500840F12 /* BusinessLogic.swift in Sources */,
+				2468C74D2B61A2C500840F12 /* ParcelOrderValidator.swift in Sources */,
 				2468C76D2B63103300840F12 /* ResourceText.swift in Sources */,
 				2468C75E2B61A81000840F12 /* Discount.swift in Sources */,
 				2468C7682B630BB300840F12 /* AssetName.swift in Sources */,
