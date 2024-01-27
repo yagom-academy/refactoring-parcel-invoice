@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		765D27A92B5F701200B91505 /* ParcelInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27A82B5F701200B91505 /* ParcelInformation.swift */; };
+		765D27AC2B5F72B300B91505 /* ReceiverInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27AB2B5F72B300B91505 /* ReceiverInfo.swift */; };
+		765D27AE2B5F72D300B91505 /* CostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27AD2B5F72D300B91505 /* CostInfo.swift */; };
+		765D27B02B5F72E000B91505 /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27AF2B5F72E000B91505 /* Cost.swift */; };
+		765D27B22B5F72FD00B91505 /* DiscountCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27B12B5F72FD00B91505 /* DiscountCalculator.swift */; };
+		765D27B42B5F730C00B91505 /* Discount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27B32B5F730C00B91505 /* Discount.swift */; };
+		765D27B62B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27B52B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift */; };
+		765D27BA2B601DD200B91505 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27B92B601DD200B91505 /* DataError.swift */; };
+		765D27BC2B60220200B91505 /* PersonName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27BB2B60220200B91505 /* PersonName.swift */; };
+		765D27BE2B60221900B91505 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27BD2B60221800B91505 /* PhoneNumber.swift */; };
+		765D27C02B60222A00B91505 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D27BF2B60222A00B91505 /* Address.swift */; };
 		C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4F92B46658300A4DDC0 /* AppDelegate.swift */; };
 		C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */; };
 		C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */; };
@@ -19,6 +30,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		765D27A82B5F701200B91505 /* ParcelInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformation.swift; sourceTree = "<group>"; };
+		765D27AB2B5F72B300B91505 /* ReceiverInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInfo.swift; sourceTree = "<group>"; };
+		765D27AD2B5F72D300B91505 /* CostInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostInfo.swift; sourceTree = "<group>"; };
+		765D27AF2B5F72E000B91505 /* Cost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cost.swift; sourceTree = "<group>"; };
+		765D27B12B5F72FD00B91505 /* DiscountCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculator.swift; sourceTree = "<group>"; };
+		765D27B32B5F730C00B91505 /* Discount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discount.swift; sourceTree = "<group>"; };
+		765D27B52B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseParcelInformationPersistence.swift; sourceTree = "<group>"; };
+		765D27B92B601DD200B91505 /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
+		765D27BB2B60220200B91505 /* PersonName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonName.swift; sourceTree = "<group>"; };
+		765D27BD2B60221800B91505 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
+		765D27BF2B60222A00B91505 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C741F4F62B46658300A4DDC0 /* ParcelInvoiceMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParcelInvoiceMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C741F4F92B46658300A4DDC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +65,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		765D27AA2B5F72A000B91505 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				765D27A82B5F701200B91505 /* ParcelInformation.swift */,
+				765D27AB2B5F72B300B91505 /* ReceiverInfo.swift */,
+				765D27BF2B60222A00B91505 /* Address.swift */,
+				765D27BB2B60220200B91505 /* PersonName.swift */,
+				765D27BD2B60221800B91505 /* PhoneNumber.swift */,
+				765D27AD2B5F72D300B91505 /* CostInfo.swift */,
+				765D27AF2B5F72E000B91505 /* Cost.swift */,
+				765D27B12B5F72FD00B91505 /* DiscountCalculator.swift */,
+				765D27B32B5F730C00B91505 /* Discount.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		765D27B72B5FC37100B91505 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				765D27B52B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		765D27B82B601DC600B91505 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				765D27B92B601DD200B91505 /* DataError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		C741F4ED2B46658300A4DDC0 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +123,9 @@
 				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
 				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
 				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
+				765D27B82B601DC600B91505 /* Error */,
+				765D27AA2B5F72A000B91505 /* Model */,
+				765D27B72B5FC37100B91505 /* Service */,
 				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
 				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
 				C741F5072B46658400A4DDC0 /* Info.plist */,
@@ -146,13 +203,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				765D27C02B60222A00B91505 /* Address.swift in Sources */,
+				765D27BA2B601DD200B91505 /* DataError.swift in Sources */,
+				765D27B62B5F7E2100B91505 /* DatabaseParcelInformationPersistence.swift in Sources */,
+				765D27B02B5F72E000B91505 /* Cost.swift in Sources */,
+				765D27BC2B60220200B91505 /* PersonName.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
+				765D27AC2B5F72B300B91505 /* ReceiverInfo.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
+				765D27BE2B60221900B91505 /* PhoneNumber.swift in Sources */,
 				C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */,
+				765D27AE2B5F72D300B91505 /* CostInfo.swift in Sources */,
+				765D27B42B5F730C00B91505 /* Discount.swift in Sources */,
+				765D27B22B5F72FD00B91505 /* DiscountCalculator.swift in Sources */,
 				C741F50E2B46659500A4DDC0 /* ParcelProcessor.swift in Sources */,
 				C741F5102B4675AF00A4DDC0 /* InvoiceViewController.swift in Sources */,
 				C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */,
 				C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */,
+				765D27A92B5F701200B91505 /* ParcelInformation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +364,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P9MW78T4QB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ParcelInvoiceMaker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -322,6 +391,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P9MW78T4QB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ParcelInvoiceMaker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
