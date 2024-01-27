@@ -76,15 +76,9 @@ class ParcelOrderView: UIView {
             return
         }
         
-        /* 주소와 유저이름, 연락처를 유저정보로 묶었다.
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
-                                                         discount: discount)
-         */
-        
-        let userInfo: UserInfo = .init(address: address, receiverName: name, receiverMobile: mobile)
+        let userInfo: UserInfo = .init(address: address, 
+                                       receiverName: name,
+                                       receiverMobile: mobile)
         
         let parcelInformation: ParcelInformation = .init(userInfo: userInfo,
                                                          deliveryCost: cost,
@@ -154,7 +148,13 @@ class ParcelOrderView: UIView {
         makeOrderButton.setTitle("택배 보내기", for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
-        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])
+        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, 
+                                                                  nameStackView,
+                                                                  mobileStackView,
+                                                                  addressStackView,
+                                                                  costStackView,
+                                                                  discountStackView,
+                                                                  makeOrderButton])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 8
