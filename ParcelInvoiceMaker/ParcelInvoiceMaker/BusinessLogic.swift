@@ -9,7 +9,7 @@ import Foundation
 
 struct BusinessLogic {
     // 주소 유효성 체크
-    static func validateAddress(_ address: String) -> Bool {
+    static func validate(address: String) -> Bool {
         guard !address.isEmpty else {
             return false
         }
