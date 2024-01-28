@@ -14,8 +14,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene: UIWindowScene = (scene as? UIWindowScene) else { return }
         
-        let parcelProcessor = ParcelOrderProcessor(databaseParcelInformationPersistence: DatabaseParcelInformationPersistence())
-        let viewController: ParcelOrderViewController = ParcelOrderViewController(parcelProcessor: parcelProcessor)
+        let factory = ConcreteParcelFactory()
+        
+        let databaseParcelInformationPersistence: ParcelInformationPersistence = factory.createParcelInformationPersistence()
+        let parcelProcessor: ParcelOrderProcessor = factory.createParcelOrderProcessor(parcelInformationPersistence: databaseParcelInformationPersistence)
+        let viewController: ParcelOrderViewController = factory.createParcelOrderViewController(processor: parcelProcessor)
+        
         let navigationController: UINavigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.navigationBar.tintColor = .black

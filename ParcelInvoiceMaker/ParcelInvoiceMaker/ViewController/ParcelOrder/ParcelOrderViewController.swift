@@ -6,7 +6,6 @@
 
 import UIKit
 
-
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     private enum ResourceText {
         static let sendParcel = "택배 보내기"

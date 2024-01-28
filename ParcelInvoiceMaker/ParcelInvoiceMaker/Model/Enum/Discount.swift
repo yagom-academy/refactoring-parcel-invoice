@@ -11,17 +11,6 @@ enum Discount: Int {
     case none = 0
     case vip
     case coupon
-    
-    var strategy: DiscountStrategy {
-        switch self {
-        case .none:
-            return NoDiscount()
-        case .vip:
-            return VIPDiscount()
-        case .coupon:
-            return CouponDiscount()
-        }
-    }
 }
 
 protocol DiscountStrategy {
