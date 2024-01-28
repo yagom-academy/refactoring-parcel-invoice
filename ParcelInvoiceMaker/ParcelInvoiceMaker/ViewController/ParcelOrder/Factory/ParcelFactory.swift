@@ -26,7 +26,3 @@ class ConcreteParcelFactory: ParcelFactory {
         return ParcelOrderViewController(parcelProcessor: processor)
     }
 }
-
-class Client {
-    
-}
