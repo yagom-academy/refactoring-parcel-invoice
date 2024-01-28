@@ -14,6 +14,8 @@ class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
     
+    private let currentDiscountStrategies: [DiscountStrategy] = [NoDiscount(), VIPDiscount(), CouponDiscount(), HolidayDiscount()]
+    
     private let receiverNameField: UITextField = {
         let field: UITextField = .init()
         field.borderStyle = .roundedRect
@@ -45,6 +47,7 @@ class ParcelOrderView: UIView {
         control.insertSegment(withTitle: "없음", at: 0, animated: false)
         control.insertSegment(withTitle: "VIP", at: 1, animated: false)
         control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+        control.insertSegment(withTitle: "명절", at: 3, animated: false)
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -70,17 +73,16 @@ class ParcelOrderView: UIView {
               mobile.isEmpty == false,
               address.isEmpty == false,
               costString.isEmpty == false,
-              let cost: Int = Int(costString),
-              let deliveryCost: DeliveryCost = try? .init(cost),
+              let cost: Double = Double(costString),
+              let deliveryCost: DeliveryCost = .init(cost),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
         else {
             return
         }
-        let parcelInformation: ParcelInformation = .init(receiverInfo: ReceiverInfo(address: address, 
-                                                                                    receiverName: name,
-                                                                                    receiverMobile: mobile),
-                                                         deliveryCost: deliveryCost,
-                                                         discount: discount)
+        let receiverInfo = Receiver(name: name, mobile: mobile)
+        let discountCostCalculator = DiscountCostCalculator(deliveryCost: deliveryCost, discount: discount, discountStrategies: currentDiscountStrategies)
+        
+        let parcelInformation: ParcelInformation = .init(address: Address(address), receiverInfo: receiverInfo, discountCostCalculator: discountCostCalculator)
         delegate.parcelOrderMade(parcelInformation)
     }
     
