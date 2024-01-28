@@ -10,11 +10,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene, 
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions
+    ) {
         
         guard let scene: UIWindowScene = (scene as? UIWindowScene) else { return }
         
-        let viewController: ParcelOrderViewController = ParcelOrderViewController()
+        let database: ParcelInformationPersistence = DatabaseParcelInformationPersistence()
+        let parcelProcessor: ParcelOrderProcessorPersistence = ParcelOrderProcessor(database: database)
+        
+        let viewController: ParcelOrderViewController = ParcelOrderViewController(parcelProcessor: parcelProcessor)
         let navigationController: UINavigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.navigationBar.tintColor = .black

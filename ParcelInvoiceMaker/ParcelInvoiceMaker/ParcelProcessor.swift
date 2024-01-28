@@ -6,10 +6,15 @@
 
 import Foundation
 
-class ParcelInformation {
+struct UserInfo {
     let address: String
-    var receiverName: String
-    var receiverMobile: String
+    let receiverName: String
+    let receiverMobile: String
+}
+
+// MARK: - ParcelInformation
+class ParcelInformation {
+    let userInfo: UserInfo
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -23,10 +28,11 @@ class ParcelInformation {
         }
     }
 
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    init(userInfo: UserInfo, 
+         deliveryCost: Int,
+         discount: Discount
+    ) {
+        self.userInfo = userInfo
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
@@ -36,19 +42,43 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
+// MARK: - (protocol)ParcelOrderProcessorPersistence
+protocol ParcelOrderProcessorPersistence {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+// MARK: - ParcelOrderProcessor
 class ParcelOrderProcessor {
+ 
+    private let database: ParcelInformationPersistence
     
-    // 택배 주문 처리 로직
+    init(database: ParcelInformationPersistence) {
+        self.database = database
+    }
+}
+    
+// MARK: - ParcelOrderProcessorPersistence
+extension ParcelOrderProcessor: ParcelOrderProcessorPersistence {
+    
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
-        
-        // 데이터베이스에 주문 저장
-        save(parcelInformation: parcelInformation)
-        
+        database.save(parcelInformation: parcelInformation)
         onComplete(parcelInformation)
     }
-    
+}
+
+// MARK: - (protocol)ParcelInformationPersistence
+protocol ParcelInformationPersistence {
+    func save(parcelInformation: ParcelInformation)
+}
+
+// MARK: - DatabaseParcelInformationPersistence
+class DatabaseParcelInformationPersistence {
+
+}
+
+// MARK: - ParcelInformationPersistence
+extension DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation) {
-        // 데이터베이스에 주문 정보 저장
         print("발송 정보를 데이터베이스에 저장했습니다.")
     }
 }

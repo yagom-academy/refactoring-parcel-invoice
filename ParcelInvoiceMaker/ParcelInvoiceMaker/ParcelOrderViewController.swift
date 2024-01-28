@@ -6,10 +6,12 @@
 
 import UIKit
 
-class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+class ParcelOrderViewController: UIViewController {
     
-    init() {
+    private let parcelProcessor: ParcelOrderProcessorPersistence
+    
+    init(parcelProcessor: ParcelOrderProcessorPersistence) {
+        self.parcelProcessor = parcelProcessor
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
     }
@@ -18,11 +20,9 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-        parcelProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
-            let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
-            navigationController?.pushViewController(invoiceViewController, animated: true)
-        }
+    private func pushInvoiceViewController(parcelInformation: ParcelInformation) {
+        let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
+        navigationController?.pushViewController(invoiceViewController, animated: true)
     }
     
     override func loadView() {
@@ -31,3 +31,9 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
 
 }
 
+// MARK: - ParcelOrderViewDelegate
+extension ParcelOrderViewController: ParcelOrderViewDelegate {
+    func parcelOrderMade(_ parcelInformation: ParcelInformation) {
+        parcelProcessor.process(parcelInformation: parcelInformation, onComplete: pushInvoiceViewController)
+    }
+}
