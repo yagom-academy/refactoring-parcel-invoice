@@ -11,6 +11,18 @@ protocol ParcelOrderViewDelegate {
 }
 
 class ParcelOrderView: UIView {
+    private enum ResourceText {
+        static let none = "없음"
+        static let vip = "VIP"
+        static let coupon = "쿠폰"
+        static let name = "이름"
+        static let mobile = "전화"
+        static let address = "주소"
+        static let cost = "요금"
+        static let discount = "할인"
+        static let sendParcel = "택배 보내기"
+    }
+    
     private var delegate: ParcelOrderViewDelegate!
     
     private let receiverNameField: UITextField = {
@@ -75,8 +87,8 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let receiver: Receiver = Receiver(address: Address(value: address), name: Name(value: name), mobile: Mobile(value: mobile))
-        let deliveryCost: Cost = Cost(value: cost)
+        let receiver: Receiver = Receiver(address: address, name: name, mobile: mobile)
+        let deliveryCost: Cost = cost
         
         let parcelInformation: ParcelInformation = .init(receiver: receiver,
                                                          deliveryCost: deliveryCost,

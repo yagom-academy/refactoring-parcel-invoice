@@ -7,6 +7,13 @@
 import UIKit
 
 class InvoiceView: UIView {
+    private enum ResourceText {
+        static let inputName = "이름 :"
+        static let inputMobile = "전화 :"
+        static let inputAddress = "주소 :"
+        static let inputCost = "요금 :"
+    }
+    
     let parcelInformation: ParcelInformation
     
     init(parcelInformation: ParcelInformation) {

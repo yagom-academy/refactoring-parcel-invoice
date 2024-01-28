@@ -7,43 +7,12 @@
 
 import Foundation
 
-struct Address {
-    private let value: String
-    
-    init(value: String) {
-        self.value = value
-    }
-    
-    func getValue() -> String {
-        return value
-    }
-}
-
-struct Name {
-    private let value: String
-    
-    init(value: String) {
-        self.value = value
-    }
-    
-    func getValue() -> String {
-        return value
-    }
-}
-
-struct Mobile {
-    private let value: String
-    
-    init(value: String) {
-        self.value = value
-    }
-    
-    func getValue() -> String {
-        return value
-    }
-}
+typealias Address = String
+typealias Name = String
+typealias Mobile = String
 
 struct Receiver {
+    
     private let address: Address
     private let name: Name
     private let mobile: Mobile
@@ -55,14 +24,14 @@ struct Receiver {
     }
     
     func getAddress() -> String {
-        return address.getValue()
+        return address
     }
     
     func getName() -> String {
-        return name.getValue()
+        return name
     }
     
     func getMobile() -> String {
-        return mobile.getValue()
+        return mobile
     }
 }

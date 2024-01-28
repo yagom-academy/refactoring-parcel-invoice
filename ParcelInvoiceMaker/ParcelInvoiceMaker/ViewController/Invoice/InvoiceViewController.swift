@@ -7,7 +7,10 @@
 import UIKit
 
 class InvoiceViewController: UIViewController {
-
+    private enum ResourceText {
+        static let invoiceInformation = "송장정보"
+    }
+    
     private let parcelInformation: ParcelInformation
     
     init(parcelInformation: ParcelInformation) {

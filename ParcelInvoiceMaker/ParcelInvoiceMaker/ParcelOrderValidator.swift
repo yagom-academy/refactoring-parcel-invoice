@@ -7,7 +7,14 @@
 
 import Foundation
 
-struct ParcelOrderValidator {
+protocol ParcelOrderValidatorProtocol {
+    static func validate(address: String) -> Bool
+    static func validate(name: String) -> Bool
+    static func validate(mobile: String) -> Bool
+    static func validate(cost: Int) -> Bool
+}
+
+struct ParcelOrderValidator: ParcelOrderValidatorProtocol {
     // 주소 유효성 체크
     static func validate(address: String) -> Bool {
         guard !address.isEmpty else {

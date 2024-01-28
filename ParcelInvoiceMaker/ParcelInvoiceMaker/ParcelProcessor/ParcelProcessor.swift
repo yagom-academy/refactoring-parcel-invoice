@@ -6,13 +6,15 @@
 
 import Foundation
 
+typealias Cost = Int
+
 class ParcelInformation {
     let receiver: Receiver
     let deliveryCost: Cost
     private let discount: Discount
     var discountedCost: Int {
         discount.strategy
-            .applyDiscount(deliveryCost: deliveryCost.getValue())
+            .applyDiscount(deliveryCost: deliveryCost)
     }
 
     init(receiver: Receiver, deliveryCost: Cost, discount: Discount) {

@@ -8,6 +8,10 @@ import UIKit
 
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
+    private enum ResourceText {
+        static let sendParcel = "택배 보내기"
+    }
+    
     private let parcelProcessor: ParcelOrderProcessorProtocol
     
     init(parcelProcessor: ParcelOrderProcessorProtocol) {
