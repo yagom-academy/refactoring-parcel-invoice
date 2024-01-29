@@ -21,15 +21,17 @@ class InvoiceView: UIView {
     }
     
     private func layoutView() {
+        let receiverInfomation = parcelInformation.receiverInfomation
+        
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.receiverInfomation.name)"
+        nameLabel.text = "이름 : \(receiverInfomation.name)"
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.receiverInfomation.mobile)"
+        mobileLabel.text = "전화 : \(receiverInfomation.mobile)"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
