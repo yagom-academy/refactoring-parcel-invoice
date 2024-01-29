@@ -45,6 +45,6 @@ struct ParcelInfo {
     }
     
     func getReceiptSendMethod() -> String {
-        return receipt.getSendMethod()
+        return receipt.method
     }
 }

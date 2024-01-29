@@ -9,10 +9,10 @@ import Foundation
 
 // 보내는사람 정보
 struct ReceiverInfo {
-    private let receiverName: Name
-    private let receiverMobile: Mobile
+    private let receiverName: ReceiverName
+    private let receiverMobile: MobileNumber
     
-    init(receiverName: Name, receiverMobile: Mobile) {
+    init(receiverName: ReceiverName, receiverMobile: MobileNumber) {
         self.receiverName = receiverName
         self.receiverMobile = receiverMobile
     }

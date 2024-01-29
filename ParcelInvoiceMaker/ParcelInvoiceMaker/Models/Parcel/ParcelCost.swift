@@ -9,13 +9,13 @@ import Foundation
 
 // 소포 비용
 struct ParcelCost {
-    private let deliveryCost: Cost
+    private let deliveryCost: DeliveryCost
     private let discountStrategy: DiscountStrategy
     private var discountedCost: Int {
         discountStrategy.applyDiscount(deliveryCost.getValue())
     }
     
-    init(deliveryCost: Cost, discountStrategy: DiscountStrategy) {
+    init(deliveryCost: DeliveryCost, discountStrategy: DiscountStrategy) {
         self.deliveryCost = deliveryCost
         self.discountStrategy = discountStrategy
     }

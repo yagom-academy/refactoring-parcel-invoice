@@ -8,10 +8,19 @@
 import Foundation
 
 // 객체 미용 체조, 8원칙 일급 콜렉션 사용
-class DiscountStrategyManager {
+final class DiscountStrategyManager {
     private var items: [DiscountStrategy]
     
-    init(items: [DiscountStrategy]) {
+    init(items: [DiscountStrategy]) throws {
+        var typeName: [String] = []
+        
+        for item in items {
+            let type = "\(type(of: item))"
+            if typeName.contains(type) {
+                throw ParcelError.discountStrategy
+            }
+            typeName.append(type)
+        }
         self.items = items
     }
     
@@ -21,12 +30,12 @@ class DiscountStrategyManager {
     }
     
     // 특정 할인 정책이 아이템에 존재하는지 확인합니다.
-    func isContainsStrategy<T: DiscountStrategy>(_ strategyType: T.Type) -> Bool {
+    func isContainsStrategy<T: DiscountStrategy>(_ strategyType: T.Type)-> Bool {
         return items.contains { $0 is T }
     }
     
     // 할인 정책을 삭제합니다.
-    func removeStrategy<T: DiscountStrategy>(_ strategyType: T.Type) {
+    func removeStrategy<T: DiscountStrategy>(_ : T.Type) {
         guard let index = items.firstIndex(where: {
             $0 is T }) else {
             return
@@ -38,6 +47,7 @@ class DiscountStrategyManager {
     // 할인 정책을 추가합니다.
     func addStrategy(_ strategy: DiscountStrategy) {
         guard (items.contains {type(of: $0) == type(of: strategy)}) else { return }
+//        guard (items.contains {type(of: $0) == type(of: strategy)}) else { return }
         
         items.append(strategy)
     }

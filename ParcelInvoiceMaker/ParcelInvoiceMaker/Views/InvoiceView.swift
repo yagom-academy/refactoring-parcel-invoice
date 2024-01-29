@@ -6,7 +6,7 @@
 
 import UIKit
 
-class InvoiceView: UIView {
+final class InvoiceView: UIView {
     // SOLID DIP 적용 추상화된 프로토콜을 가지도록 수정
     let parcelInformation: ParcelInformationProvider
     

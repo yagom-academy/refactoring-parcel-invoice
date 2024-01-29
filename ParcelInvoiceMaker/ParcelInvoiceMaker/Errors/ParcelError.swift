@@ -8,7 +8,8 @@
 import Foundation
 
 enum ParcelError: Error {
-    case name
-    case mobile
-    case cost
+    case ReceiverName
+    case mobileNumber
+    case DeliveryCost
+    case discountStrategy
 }

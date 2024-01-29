@@ -10,7 +10,7 @@ protocol ParcelOrderViewDelegate {
     func parcelOrderMade(_ parcelInformation: ParcelInformationProvider)
 }
 
-class ParcelOrderView: UIView {
+final class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
     
@@ -87,28 +87,31 @@ class ParcelOrderView: UIView {
         }
         
         // 객체 미용 체조, 8원칙 일급 콜렉션 사용
-        let discountStrategyManager = DiscountStrategyManager(items: [
-            NoDiscountStrategy(discountRate: 1),
-            VIPDiscountStrategy(discountRate: 0.8),
-            CouponDiscountStrategy(discountRate: 0.5),
-            EventDiscountStrategy(discountRate: 0.9)
-        ])
-        
-        let selectedDiscountStrategy = discountStrategyManager
-            .getStrategies()[
-                discountSegmented.selectedSegmentIndex
-            ]
-        
         do {
+            let discountStrategyManager = try DiscountStrategyManager(items: [
+                NoDiscountStrategy(discountRate: 1),
+                VIPDiscountStrategy(discountRate: 0.8),
+                CouponDiscountStrategy(discountRate: 0.5),
+                EventDiscountStrategy(discountRate: 0.9),
+            ])
+            
+            let selectedDiscountStrategy = discountStrategyManager
+                .getStrategies()[
+                    discountSegmented.selectedSegmentIndex
+                ]
+            
+//            discountStrategyManager.removeStrategy(NoDiscountStrategy(discountRate: 0.1))
+            print(discountStrategyManager.isContainsStrategy(NoDiscountStrategy.self))
+            
             // 객체미용체조 7원칙 '2개 이상의 원시타입 프로퍼티를 갖는 타입 금지'를 적용하면서 변경
             let parcelInformation: ParcelInformationProvider = ParcelInformation(
                 parcelInfo: ParcelInfo(
                     address: address,
                     receiver: ReceiverInfo(
-                        receiverName: try Name(name),
-                        receiverMobile: try Mobile(mobile)),
+                        receiverName: try ReceiverName(name),
+                        receiverMobile: try MobileNumber(mobile)),
                     cost: ParcelCost(
-                        deliveryCost: try Cost(cost),
+                        deliveryCost: try DeliveryCost(cost),
                         discountStrategy: selectedDiscountStrategy),
                     receipt: receipt))
             
