@@ -42,9 +42,18 @@ final class ParcelOrderView: UIView {
     
     private let discountSegmented: UISegmentedControl = {
         let control: UISegmentedControl = .init()
-        control.insertSegment(withTitle: "없음", at: 0, animated: false)
-        control.insertSegment(withTitle: "VIP", at: 1, animated: false)
-        control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+        control.insertSegment(withTitle: Discount.none.title, at: 0, animated: false)
+        control.insertSegment(withTitle: Discount.vip.title, at: 1, animated: false)
+        control.insertSegment(withTitle: Discount.coupon.title, at: 2, animated: false)
+        control.insertSegment(withTitle: Discount.subscribe.title, at: 3, animated: false)
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
+    private let receiptSegmented: UISegmentedControl = {
+        let control: UISegmentedControl = .init()
+        control.insertSegment(withTitle: Receipt.emailTitle, at: 0, animated: false)
+        control.insertSegment(withTitle: Receipt.smsTitle, at: 1, animated: false)
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -89,37 +98,42 @@ final class ParcelOrderView: UIView {
     
     private func layoutView() {
         
-        let logoImageView: UIImageView = UIImageView(image: UIImage(named: "post_office_logo"))
+        let logoImageView: UIImageView = UIImageView(image: UIImage(named: AssetName.postOfficeLogo))
         logoImageView.contentMode = .scaleAspectFit
         
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
-        nameLabel.text = "이름"
+        nameLabel.text = ParcelOrderInfo.name
         nameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
-        mobileLabel.text = "전화"
+        mobileLabel.text = ParcelOrderInfo.mobile
         mobileLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
-        addressLabel.text = "주소"
+        addressLabel.text = ParcelOrderInfo.address
         addressLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
-        costLabel.text = "요금"
+        costLabel.text = ParcelOrderInfo.cost
         costLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let discountLabel: UILabel = UILabel()
         discountLabel.textColor = .black
-        discountLabel.text = "할인"
+        discountLabel.text = ParcelOrderInfo.discount
         discountLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        let receiptLabel: UILabel = UILabel()
+        receiptLabel.textColor = .black
+        receiptLabel.text = ParcelOrderInfo.discount
+        receiptLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let notificationLabel: UILabel = UILabel()
         notificationLabel.textColor = .black
-        notificationLabel.text = "알림"
+        notificationLabel.text = ParcelOrderInfo.notification
         notificationLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let nameStackView: UIStackView = .init(arrangedSubviews: [nameLabel, receiverNameField])
@@ -143,12 +157,16 @@ final class ParcelOrderView: UIView {
         discountStackView.spacing = 8
         discountStackView.axis = .horizontal
         
+        let receiptStackView: UIStackView = .init(arrangedSubviews: [notificationLabel, receiptSegmented])
+        receiptStackView.spacing = 8
+        receiptStackView.axis = .horizontal
+        
         let makeOrderButton: UIButton = UIButton(type: .system)
         makeOrderButton.backgroundColor = .white
-        makeOrderButton.setTitle("택배 보내기", for: .normal)
+        makeOrderButton.setTitle(ParcelOrderMessage.sendParcel, for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
-        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])
+        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, receiptStackView, makeOrderButton])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 8
@@ -161,7 +179,16 @@ final class ParcelOrderView: UIView {
             mainStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
             mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: -16)
+            mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: -8)
         ])
     }
+}
+
+enum ParcelOrderInfo {
+    static let name: String = "이름"
+    static let mobile: String = "전화"
+    static let address: String = "주소"
+    static let cost: String = "요금"
+    static let discount: String = "할인"
+    static let notification: String = "알림"
 }

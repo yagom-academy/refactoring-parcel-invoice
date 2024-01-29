@@ -12,7 +12,7 @@ final class ParcelOrderViewController: UIViewController {
     init(processor: OrderProcessable) {
         self.parcelProcessor = processor
         super.init(nibName: nil, bundle: nil)
-        navigationItem.title = "택배보내기"
+        navigationItem.title = ParcelOrderMessage.title
     }
     
     required init?(coder: NSCoder) {
@@ -28,9 +28,14 @@ final class ParcelOrderViewController: UIViewController {
 extension ParcelOrderViewController: ParcelOrderViewDelegate {
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
         parcelProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
+            parcelProcessor.sendReceipt(parcelInformation: parcelInformation)
             let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
             navigationController?.pushViewController(invoiceViewController, animated: true)
         }
     }
 }
 
+struct ParcelOrderMessage: Titleable {
+    static let title: String = "택배보내기"
+    static let sendParcel: String = "택배 보내기"
+}

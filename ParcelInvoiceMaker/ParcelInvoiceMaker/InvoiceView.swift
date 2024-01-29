@@ -24,22 +24,22 @@ final class InvoiceView: UIView {
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.getReceiverName())"
+        nameLabel.text = "\(ParcelOrderInfo.name) : \(parcelInformation.getReceiverName())"
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.getReceiverMobile())"
+        mobileLabel.text = "\(ParcelOrderInfo.mobile) : \(parcelInformation.getReceiverMobile())"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.getReceiverAddress())"
+        addressLabel.text = "\(ParcelOrderInfo.address) : \(parcelInformation.getReceiverAddress())"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
         costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        costLabel.text = "요금 : \(parcelInformation.discountedCost)"
+        costLabel.text = "\(ParcelOrderInfo.cost) : \(parcelInformation.discountedCost)"
                 
         let mainStackView: UIStackView = .init(arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel])
         mainStackView.axis = .vertical
@@ -47,7 +47,7 @@ final class InvoiceView: UIView {
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainStackView)
         
-        let stampImageView: UIImageView = UIImageView(image: UIImage(named: "stamp"))
+        let stampImageView: UIImageView = UIImageView(image: UIImage(named: AssetName.stamp))
         stampImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stampImageView)
         
@@ -78,4 +78,9 @@ final class InvoiceView: UIView {
         context.setStrokeColor(UIColor.red.cgColor)
         context.drawPath(using: .stroke)
     }
+}
+
+struct AssetName {
+    static let stamp: String = "stamp"
+    static let postOfficeLogo: String = "post_office_logo"
 }

@@ -13,7 +13,7 @@ final class InvoiceViewController: UIViewController {
     init(parcelInformation: ParcelInformation) {
         self.parcelInformation = parcelInformation
         super.init(nibName: nil, bundle: nil)
-        navigationItem.title = "송장정보"
+        navigationItem.title = InvoiceMessage.title
     }
     
     required init?(coder: NSCoder) {
@@ -24,4 +24,12 @@ final class InvoiceViewController: UIViewController {
         view = InvoiceView(parcelInformation: parcelInformation)
     }
     
+}
+
+protocol Titleable {
+    static var title: String { get }
+}
+
+struct InvoiceMessage: Titleable {
+    static let title: String = "송장정보"
 }
