@@ -6,8 +6,9 @@
 
 import UIKit
 
-class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor(databaseParcelInformationPersistence: DatabaseParcelInformationPersistence())
+final class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
+    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor(databaseParcelInformationPersistence: DatabaseParcelInformationPersistence(),
+                                                                             receiptProcessor: ReceiptProcessor())
     
     init() {
         super.init(nibName: nil, bundle: nil)

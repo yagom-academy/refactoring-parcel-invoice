@@ -1,8 +1,8 @@
 //
 //  ParcelInvoiceMaker - ParcelOrderView.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -10,7 +10,7 @@ protocol ParcelOrderViewDelegate {
     func parcelOrderMade(_ parcelInformation: ParcelInformationProvider)
 }
 
-class ParcelOrderView: UIView {
+final class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
     
@@ -45,6 +45,15 @@ class ParcelOrderView: UIView {
         control.insertSegment(withTitle: "없음", at: 0, animated: false)
         control.insertSegment(withTitle: "VIP", at: 1, animated: false)
         control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+        control.insertSegment(withTitle: "이벤트", at: 3, animated: false)
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
+    private let receiptSegmented: UISegmentedControl = {
+        let control: UISegmentedControl = .init()
+        control.insertSegment(withTitle: "이메일", at: 0, animated: false)
+        control.insertSegment(withTitle: "문자", at: 1, animated: false)
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -71,31 +80,46 @@ class ParcelOrderView: UIView {
               mobile.isEmpty == false,
               address.isEmpty == false,
               costString.isEmpty == false,
-              let cost: Double = Double(costString)
+              let cost: Double = Double(costString),
+              let receipt = Receipt(rawValue: receiptSegmented.selectedSegmentIndex)
         else {
             return
         }
         
-        let discountStrategies: [DiscountStrategy] = [
-            NoDiscountStrategy(discountRate: 1),
-            VIPDiscountStrategy(discountRate: 0.8),
-            CouponDiscountStrategy(discountRate: 0.5)
-        ]
-        
-        let selectedDiscountStrategy = discountStrategies[discountSegmented.selectedSegmentIndex]
-        
-        // 객체미용체조 7원칙 '2개 이상의 원시타입 프로퍼티를 갖는 타입 금지'를 적용하면서 변경
-        let parcelInformation: ParcelInformationProvider = ParcelInformation(
-            parcelInfo: ParcelInfo(
-                address: address,
-                receiver: ReceiverInfo(
-                    receiverName: name,
-                    receiverMobile: mobile),
-                cost: ParcelCost(
-                    deliveryCost: cost,
-                    discountStrategy: selectedDiscountStrategy)))
-        
-        delegate.parcelOrderMade(parcelInformation)
+        // 객체 미용 체조, 8원칙 일급 콜렉션 사용
+        do {
+            let discountStrategyManager = try DiscountStrategyManager(items: [
+                NoDiscountStrategy(discountRate: 1),
+                VIPDiscountStrategy(discountRate: 0.8),
+                CouponDiscountStrategy(discountRate: 0.5),
+                EventDiscountStrategy(discountRate: 0.9),
+            ])
+            
+            let selectedDiscountStrategy = discountStrategyManager
+                .getStrategies()[
+                    discountSegmented.selectedSegmentIndex
+                ]
+            
+//            discountStrategyManager.removeStrategy(NoDiscountStrategy(discountRate: 0.1))
+            print(discountStrategyManager.isContainsStrategy(NoDiscountStrategy.self))
+            
+            // 객체미용체조 7원칙 '2개 이상의 원시타입 프로퍼티를 갖는 타입 금지'를 적용하면서 변경
+            let parcelInformation: ParcelInformationProvider = ParcelInformation(
+                parcelInfo: ParcelInfo(
+                    address: address,
+                    receiver: ReceiverInfo(
+                        receiverName: try ReceiverName(name),
+                        receiverMobile: try MobileNumber(mobile)),
+                    cost: ParcelCost(
+                        deliveryCost: try DeliveryCost(cost),
+                        discountStrategy: selectedDiscountStrategy),
+                    receipt: receipt))
+            
+            delegate.parcelOrderMade(parcelInformation)
+        } catch let error {
+            // 에러 처리
+            print("Error: \(error)")
+        }
     }
     
     private func layoutView() {
@@ -128,6 +152,11 @@ class ParcelOrderView: UIView {
         discountLabel.text = "할인"
         discountLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
+        let receiptLabel: UILabel = UILabel()
+        receiptLabel.textColor = .black
+        receiptLabel.text = "영수증"
+        receiptLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
         let notificationLabel: UILabel = UILabel()
         notificationLabel.textColor = .black
         notificationLabel.text = "알림"
@@ -154,12 +183,16 @@ class ParcelOrderView: UIView {
         discountStackView.spacing = 8
         discountStackView.axis = .horizontal
         
+        let receiptStackView: UIStackView = .init(arrangedSubviews: [receiptLabel, receiptSegmented])
+        receiptStackView.spacing = 8
+        receiptStackView.axis = .horizontal
+        
         let makeOrderButton: UIButton = UIButton(type: .system)
         makeOrderButton.backgroundColor = .white
         makeOrderButton.setTitle("택배 보내기", for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
-        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])
+        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, receiptStackView, makeOrderButton])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 8
@@ -172,7 +205,7 @@ class ParcelOrderView: UIView {
             mainStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
             mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: -16)
+            mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: 0)
         ])
     }
 }
