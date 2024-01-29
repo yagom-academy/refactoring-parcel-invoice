@@ -35,14 +35,9 @@ struct SubscribeDiscount: DiscountStrategy {
     }
 }
 
-struct SubscribeDiscount: DiscountStrategy {
-    func applyDiscount(to deliveryCost: Int) -> Int {
-        return deliveryCost / 5 * 4
-    }
-}
-
 enum Discount: Int {
     case none = 0, vip, coupon, subscribe
+  
     var strategy: DiscountStrategy {
         switch self {
         case .none: return NoDiscount()
