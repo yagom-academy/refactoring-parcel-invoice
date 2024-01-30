@@ -18,14 +18,7 @@ class ParcelInformation {
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+        discount.strategy.applyDiscount(deliveryCost: deliveryCost)
     }
 
     init(userInfo: UserInfo, 
@@ -40,6 +33,16 @@ class ParcelInformation {
 
 enum Discount: Int {
     case none = 0, vip, coupon
+    var strategy: DiscountStrategy {
+        switch self {
+        case .none:
+            return NoDiscount()
+        case .vip:
+            return VIPDiscount()
+        case .coupon:
+            return CouponDiscount()
+        }
+    }
 }
 
 // MARK: - (protocol)ParcelOrderProcessorPersistence
