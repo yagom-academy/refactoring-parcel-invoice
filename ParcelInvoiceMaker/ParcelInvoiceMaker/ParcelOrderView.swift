@@ -8,6 +8,7 @@ import UIKit
 
 protocol ParcelOrderViewDelegate {
     func parcelOrderMade(_ parcelInformation: ParcelInformation)
+    
 }
 
 class ParcelOrderView: UIView {
@@ -45,9 +46,13 @@ class ParcelOrderView: UIView {
         control.insertSegment(withTitle: "없음", at: 0, animated: false)
         control.insertSegment(withTitle: "VIP", at: 1, animated: false)
         control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+        control.insertSegment(withTitle: "VVIP", at: 3, animated: false)
         control.selectedSegmentIndex = 0
         return control
     }()
+    
+    private lazy var emailReceiptButton: UIButton = self.makeSnsButton(with: .email)
+    private lazy var smsReceiptButton: UIButton = self.makeSnsButton(with: .sms)
     
     init(delegate: ParcelOrderViewDelegate) {
         self.delegate = delegate
@@ -79,12 +84,41 @@ class ParcelOrderView: UIView {
         let userInfo: UserInfo = .init(address: address, 
                                        receiverName: name,
                                        receiverMobile: mobile)
+    
+        let receiptTypes: [ReceiptType] = [emailReceiptButton, smsReceiptButton].compactMap { button in
+            guard button.isSelected,
+                  let receiptType = ReceiptType(rawValue: button.tag)
+            else {
+                return nil
+            }
+            
+            return receiptType
+        }
         
         let parcelInformation: ParcelInformation = .init(userInfo: userInfo,
                                                          deliveryCost: cost,
-                                                         discount: discount)
+                                                         discount: discount,
+                                                         receiptTypes: receiptTypes)
         
         delegate.parcelOrderMade(parcelInformation)
+    }
+    
+    private func makeSnsButton(with type: ReceiptType) -> UIButton {
+        let button =  UIButton()
+        
+        let action: UIAction = UIAction {[weak self] action in
+            guard let button = action.sender as? UIButton else { return }
+            button.isSelected.toggle()
+            button.backgroundColor = button.isSelected ? .blue : .white
+        }
+        
+        button.setTitle(type.title, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.tag = type.rawValue
+        
+        button.addAction(action, for: .touchUpInside)
+        return button
     }
     
     private func layoutView() {
@@ -143,17 +177,22 @@ class ParcelOrderView: UIView {
         discountStackView.spacing = 8
         discountStackView.axis = .horizontal
         
+        let receiptsStackView: UIStackView = .init(arrangedSubviews: [emailReceiptButton, smsReceiptButton])
+        receiptsStackView.spacing = 8
+        receiptsStackView.axis = .horizontal
+        receiptsStackView.distribution = .fillEqually
+        
         let makeOrderButton: UIButton = UIButton(type: .system)
         makeOrderButton.backgroundColor = .white
         makeOrderButton.setTitle("택배 보내기", for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
-        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, 
-                                                                  nameStackView,
+        let mainStackView: UIStackView = .init(arrangedSubviews: [nameStackView,
                                                                   mobileStackView,
                                                                   addressStackView,
                                                                   costStackView,
                                                                   discountStackView,
+                                                                  receiptsStackView,
                                                                   makeOrderButton])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
@@ -163,7 +202,7 @@ class ParcelOrderView: UIView {
         
         let safeArea: UILayoutGuide = safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            logoImageView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.1),
+            nameStackView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.1),
             mainStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
             mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),

@@ -31,3 +31,10 @@ struct CouponDiscount: DiscountStrategy {
         return deliveryCost / 2
     }
 }
+
+// MARK: - VVIPDiscount
+struct VVIPDiscouut: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 100
+    }
+}
