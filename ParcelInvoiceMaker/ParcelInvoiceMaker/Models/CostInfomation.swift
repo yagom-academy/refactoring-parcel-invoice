@@ -14,8 +14,8 @@ struct CostInfomation {
         return discountStrategy.applyDiscount(deliveryCost: deliveryCost)
     }
     
-    init(deliveryCost: DeliveryCost, discountStrategy: DiscountStrategy) {
+    init(deliveryCost: DeliveryCost, discount: Discount) {
         self.deliveryCost = deliveryCost
-        self.discountStrategy = discountStrategy
+        self.discountStrategy = discount.strategy
     }
 }
