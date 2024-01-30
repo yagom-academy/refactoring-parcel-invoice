@@ -9,6 +9,6 @@ import Foundation
 
 struct ReceiverInfomation {
     let address: String
-    var receiverName: Name
-    var receiverMobile: PhoneNumber
+    var name: Name
+    var mobileNumber: PhoneNumber
 }
