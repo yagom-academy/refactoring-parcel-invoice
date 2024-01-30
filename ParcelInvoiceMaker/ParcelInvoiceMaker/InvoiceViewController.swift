@@ -14,6 +14,7 @@ class InvoiceViewController: UIViewController {
         self.parcelInformation = parcelInformation
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "송장정보"
+        sendReceipt(receiptTypes: parcelInformation.receiptTypes)
     }
     
     required init?(coder: NSCoder) {
@@ -24,4 +25,9 @@ class InvoiceViewController: UIViewController {
         view = InvoiceView(parcelInformation: parcelInformation)
     }
     
+    private func sendReceipt(receiptTypes: [ReceiptType]) {
+        receiptTypes.forEach { receiptType in
+            receiptType.strategy.sendReceipt()
+        }
+    }
 }

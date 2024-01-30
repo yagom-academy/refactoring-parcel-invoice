@@ -12,6 +12,29 @@ struct UserInfo {
     let receiverMobile: String
 }
 
+enum ReceiptType: Int {
+    case sms = 0
+    case email
+    
+    var strategy: ReceiptSendStrategy {
+        switch self {
+        case .sms:
+            return SMSReceiptSendStrategy()
+        case .email:
+            return EmailReceiptSendStrategy()
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .sms:
+            return "문자"
+        case .email:
+            return "이메일"
+        }
+    }
+}
+
 // MARK: - ParcelInformation
 class ParcelInformation {
     let userInfo: UserInfo
@@ -20,19 +43,22 @@ class ParcelInformation {
     var discountedCost: Int {
         discount.strategy.applyDiscount(deliveryCost: deliveryCost)
     }
+    let receiptTypes: [ReceiptType]
 
     init(userInfo: UserInfo, 
          deliveryCost: Int,
-         discount: Discount
+         discount: Discount,
+         receiptTypes: [ReceiptType]
     ) {
         self.userInfo = userInfo
         self.deliveryCost = deliveryCost
         self.discount = discount
+        self.receiptTypes = receiptTypes
     }
 }
 
 enum Discount: Int {
-    case none = 0, vip, coupon
+    case none = 0, vip, coupon, vvip
     var strategy: DiscountStrategy {
         switch self {
         case .none:
@@ -41,6 +67,8 @@ enum Discount: Int {
             return VIPDiscount()
         case .coupon:
             return CouponDiscount()
+        case .vvip:
+            return VVIPDiscouut()
         }
     }
 }
