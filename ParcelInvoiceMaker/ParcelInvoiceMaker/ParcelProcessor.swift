@@ -16,6 +16,15 @@ enum ReceiptType: Int {
     case sms = 0
     case email
     
+    var strategy: ReceiptSendStrategy {
+        switch self {
+        case .sms:
+            return SMSReceiptSendStrategy()
+        case .email:
+            return EmailReceiptSendStrategy()
+        }
+    }
+    
     var title: String {
         switch self {
         case .sms:
@@ -23,10 +32,6 @@ enum ReceiptType: Int {
         case .email:
             return "이메일"
         }
-    }
-    
-    func makeReceipt() {
-        print("\(self.title)로 영수증 발송")
     }
 }
 
