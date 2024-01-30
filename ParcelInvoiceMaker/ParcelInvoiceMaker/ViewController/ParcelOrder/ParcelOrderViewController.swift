@@ -7,11 +7,16 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+    private enum ResourceText {
+        static let sendParcel = "택배 보내기"
+    }
     
-    init() {
+    private let parcelProcessor: ParcelOrderProcessorProtocol
+    
+    init(parcelProcessor: ParcelOrderProcessorProtocol) {
+        self.parcelProcessor = parcelProcessor
         super.init(nibName: nil, bundle: nil)
-        navigationItem.title = "택배보내기"
+        navigationItem.title = ResourceText.sendParcel
     }
     
     required init?(coder: NSCoder) {

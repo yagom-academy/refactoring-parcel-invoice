@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2468C74D2B61A2C500840F12 /* ParcelOrderValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C74C2B61A2C500840F12 /* ParcelOrderValidator.swift */; };
+		2468C7502B61A2F000840F12 /* ParcelInformationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C74F2B61A2F000840F12 /* ParcelInformationError.swift */; };
+		2468C7532B61A30700840F12 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C7522B61A30700840F12 /* Receiver.swift */; };
+		2468C75E2B61A81000840F12 /* Discount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C75D2B61A81000840F12 /* Discount.swift */; };
+		2468C7612B61A83E00840F12 /* ParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C7602B61A83E00840F12 /* ParcelInformationPersistence.swift */; };
+		2468C7642B63088C00840F12 /* ParcelOrderProcessorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C7632B63088C00840F12 /* ParcelOrderProcessorProtocol.swift */; };
+		2468C7682B630BB300840F12 /* AssetName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C7672B630BB300840F12 /* AssetName.swift */; };
+		2468C7702B667C6400840F12 /* ParcelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C76F2B667C6400840F12 /* ParcelFactory.swift */; };
 		C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4F92B46658300A4DDC0 /* AppDelegate.swift */; };
 		C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */; };
 		C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */; };
@@ -19,6 +27,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2468C74C2B61A2C500840F12 /* ParcelOrderValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelOrderValidator.swift; sourceTree = "<group>"; };
+		2468C74F2B61A2F000840F12 /* ParcelInformationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformationError.swift; sourceTree = "<group>"; };
+		2468C7522B61A30700840F12 /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
+		2468C75D2B61A81000840F12 /* Discount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discount.swift; sourceTree = "<group>"; };
+		2468C7602B61A83E00840F12 /* ParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformationPersistence.swift; sourceTree = "<group>"; };
+		2468C7632B63088C00840F12 /* ParcelOrderProcessorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelOrderProcessorProtocol.swift; sourceTree = "<group>"; };
+		2468C7672B630BB300840F12 /* AssetName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetName.swift; sourceTree = "<group>"; };
+		2468C76F2B667C6400840F12 /* ParcelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelFactory.swift; sourceTree = "<group>"; };
 		C741F4F62B46658300A4DDC0 /* ParcelInvoiceMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParcelInvoiceMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C741F4F92B46658300A4DDC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +59,117 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2468C74E2B61A2E600840F12 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				2468C74F2B61A2F000840F12 /* ParcelInformationError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		2468C7512B61A2FF00840F12 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2468C7622B61A88B00840F12 /* Enum */,
+				2468C7522B61A30700840F12 /* Receiver.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2468C7562B61A36600840F12 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2468C7582B61A37600840F12 /* ParcelOrder */,
+				2468C7572B61A36D00840F12 /* Invoice */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2468C7572B61A36D00840F12 /* Invoice */ = {
+			isa = PBXGroup;
+			children = (
+				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
+			);
+			path = Invoice;
+			sourceTree = "<group>";
+		};
+		2468C7582B61A37600840F12 /* ParcelOrder */ = {
+			isa = PBXGroup;
+			children = (
+				C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */,
+			);
+			path = ParcelOrder;
+			sourceTree = "<group>";
+		};
+		2468C7592B61A38200840F12 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2468C75A2B61A38600840F12 /* ParcelOrder */,
+				2468C75B2B61A38C00840F12 /* Invoice */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2468C75A2B61A38600840F12 /* ParcelOrder */ = {
+			isa = PBXGroup;
+			children = (
+				2468C76E2B667B1F00840F12 /* Factory */,
+				C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */,
+			);
+			path = ParcelOrder;
+			sourceTree = "<group>";
+		};
+		2468C75B2B61A38C00840F12 /* Invoice */ = {
+			isa = PBXGroup;
+			children = (
+				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
+			);
+			path = Invoice;
+			sourceTree = "<group>";
+		};
+		2468C75C2B61A7F500840F12 /* ParcelProcessor */ = {
+			isa = PBXGroup;
+			children = (
+				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
+				2468C75F2B61A83500840F12 /* Interface */,
+			);
+			path = ParcelProcessor;
+			sourceTree = "<group>";
+		};
+		2468C75F2B61A83500840F12 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				2468C7602B61A83E00840F12 /* ParcelInformationPersistence.swift */,
+				2468C7632B63088C00840F12 /* ParcelOrderProcessorProtocol.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		2468C7622B61A88B00840F12 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				2468C75D2B61A81000840F12 /* Discount.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		2468C7652B630B9400840F12 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
+				2468C7672B630BB300840F12 /* AssetName.swift */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		2468C76E2B667B1F00840F12 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				2468C76F2B667C6400840F12 /* ParcelFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
 		C741F4ED2B46658300A4DDC0 = {
 			isa = PBXGroup;
 			children = (
@@ -62,14 +189,15 @@
 		C741F4F82B46658300A4DDC0 /* ParcelInvoiceMaker */ = {
 			isa = PBXGroup;
 			children = (
+				2468C7652B630B9400840F12 /* Resource */,
+				2468C7512B61A2FF00840F12 /* Model */,
+				2468C75C2B61A7F500840F12 /* ParcelProcessor */,
+				2468C7592B61A38200840F12 /* ViewController */,
+				2468C7562B61A36600840F12 /* View */,
+				2468C74E2B61A2E600840F12 /* Error */,
 				C741F4F92B46658300A4DDC0 /* AppDelegate.swift */,
 				C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */,
-				C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */,
-				C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */,
-				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
-				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
-				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
-				C741F5022B46658400A4DDC0 /* Assets.xcassets */,
+				2468C74C2B61A2C500840F12 /* ParcelOrderValidator.swift */,
 				C741F5042B46658400A4DDC0 /* LaunchScreen.storyboard */,
 				C741F5072B46658400A4DDC0 /* Info.plist */,
 			);
@@ -146,11 +274,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2468C7642B63088C00840F12 /* ParcelOrderProcessorProtocol.swift in Sources */,
+				2468C74D2B61A2C500840F12 /* ParcelOrderValidator.swift in Sources */,
+				2468C75E2B61A81000840F12 /* Discount.swift in Sources */,
+				2468C7682B630BB300840F12 /* AssetName.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
+				2468C7532B61A30700840F12 /* Receiver.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
 				C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */,
+				2468C7612B61A83E00840F12 /* ParcelInformationPersistence.swift in Sources */,
 				C741F50E2B46659500A4DDC0 /* ParcelProcessor.swift in Sources */,
 				C741F5102B4675AF00A4DDC0 /* InvoiceViewController.swift in Sources */,
+				2468C7502B61A2F000840F12 /* ParcelInformationError.swift in Sources */,
+				2468C7702B667C6400840F12 /* ParcelFactory.swift in Sources */,
 				C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */,
 				C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */,
 			);
