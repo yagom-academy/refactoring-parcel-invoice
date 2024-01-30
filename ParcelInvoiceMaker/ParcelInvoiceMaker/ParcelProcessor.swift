@@ -225,6 +225,8 @@ protocol DiscountStrategy {
 
 enum Discount: Int {
     case none = 0, vip, coupon
+    
+    static let strategies: [DiscountStrategy] = [NoDiscount(), VIPDiscount(), CouponDiscount()]
 }
 
 enum DiscountAmount {
