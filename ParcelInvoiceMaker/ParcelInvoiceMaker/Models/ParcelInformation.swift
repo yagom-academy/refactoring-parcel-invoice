@@ -8,11 +8,11 @@
 import Foundation
 
 final class ParcelInformation {
-    let receiverInfomation: ReceiverInfomation
-    let costInfomation: CostInfomation
+    let receiver: ReceiverInfomation
+    let cost: CostInfomation
 
     init(receiverInfomation: ReceiverInfomation, costInfomation: CostInfomation) {
-        self.receiverInfomation = receiverInfomation
-        self.costInfomation = costInfomation
+        self.receiver = receiverInfomation
+        self.cost = costInfomation
     }
 }

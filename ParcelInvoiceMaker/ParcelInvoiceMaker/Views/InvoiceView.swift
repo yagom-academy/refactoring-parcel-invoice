@@ -24,22 +24,22 @@ final class InvoiceView: UIView {
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.receiverInfomation.name)"
+        nameLabel.text = "이름 : \(parcelInformation.receiver.name)"
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.receiverInfomation.mobileNumber)"
+        mobileLabel.text = "전화 : \(parcelInformation.receiver.mobileNumber)"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.receiverInfomation.address)"
+        addressLabel.text = "주소 : \(parcelInformation.receiver.address)"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
         costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        costLabel.text = "요금 : \(parcelInformation.costInfomation.discountedCost)"
+        costLabel.text = "요금 : \(parcelInformation.cost.discountedCost)"
                 
         let mainStackView: UIStackView = .init(arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel])
         mainStackView.axis = .vertical
