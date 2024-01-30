@@ -10,7 +10,7 @@ protocol ParcelOrderProcessing {
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
 }
 
-class ParcelOrderProcessor: ParcelOrderProcessing {
+final class ParcelOrderProcessor: ParcelOrderProcessing {
     private let database: ParcelInformationPersistence
     
     init(database: ParcelInformationPersistence) {

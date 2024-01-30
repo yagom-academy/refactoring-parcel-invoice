@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ParcelInformation {
+final class ParcelInformation {
     let receiverInfomation: ReceiverInfomation
     let costInfomation: CostInfomation
 
