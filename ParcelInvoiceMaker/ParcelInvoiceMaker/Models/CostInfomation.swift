@@ -8,7 +8,7 @@
 import Foundation
 
 struct CostInfomation {
-    let deliveryCost: DeliveryCost
+    private let deliveryCost: DeliveryCost
     private let discountStrategy: DiscountStrategy
     var discountedCost: DeliveryCost {
         return discountStrategy.applyDiscount(deliveryCost: deliveryCost)
