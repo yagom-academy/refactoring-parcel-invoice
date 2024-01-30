@@ -11,9 +11,9 @@ protocol ParcelOrderProcessing {
 }
 
 final class ParcelOrderProcessor: ParcelOrderProcessing {
-    private let database: ParcelInformationPersistence
+    private let database: ParcelInformationSavable
     
-    init(database: ParcelInformationPersistence) {
+    init(database: ParcelInformationSavable) {
         self.database = database
     }
     
