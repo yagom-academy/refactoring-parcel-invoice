@@ -7,7 +7,6 @@
 import Foundation
 
 // STEP 1-1: 객체미용체조 7원칙 적용
-// 궁금증 1: 원시값 포장을 하다보면 계속 깊이가 깊어져서 단순히 하나의 property를 읽는데도 객체미용체조 4원칙인 '한 줄에 한 점만 사용'을 어기게 되는데 이건 어떻게 해야하나요? 그때마다 getter와 setter등의 메서드로 따로 구현해야할까요?
 class ParcelInformation {
     private let deliveryInfo: DeliveryInfo?
     private var costs: Costs?
@@ -37,7 +36,6 @@ enum Discount: Int {
 
 fileprivate struct DeliveryInfo {
     let address: String
-    
     // 1-2 이렇게 또 묶을 수 있겠다
 //        var recieverName: String
 //        var receiverMobile: String
@@ -129,7 +127,7 @@ class ParcelOrderProcessor {
 }
 
 struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
-    func save(parcelInformation: ParcelInformation) {
+    func save<T: ParcelInformation>(parcelInformation: T) {
         // 데이터베이스에 주문 정보 저장
         print("발송 정보를 데이터베이스에 저장했습니다.")
     }
@@ -140,5 +138,5 @@ struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
 // 현재 의존 관계 ParcelProcessor -> DatabaseParcelInformationPersistence
 // 가운데에 프로토콜을 하나 생성해서 직접 소유를 하지 않고 init 시점에 persistence 인스턴스를 생성해 주입
 protocol ParcelInformationPersistence {
-    func save(parcelInformation: ParcelInformation) // 프로토콜 안에는 메서드에 Body는 없어야하고 메서드를 가리키는 이름만 있어야함
+    func save<T: ParcelInformation> (parcelInformation: T) // 프로토콜 안에는 메서드에 Body는 없어야하고 메서드를 가리키는 이름만 있어야함
 }
