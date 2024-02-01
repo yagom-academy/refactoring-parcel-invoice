@@ -76,20 +76,26 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let parcelInformation: ParcelInformation = .init(
-            user: .init(
-                address: address,
-                receiver: .init(
-                    name: name,
-                    mobile: mobile
+        do {
+            let parcelInformation: ParcelInformation = .init(
+                user: .init(
+                    address: address,
+                    receiver: .init(
+                        name: name,
+                        mobile: mobile
+                    )
+                ),
+                cost: try .init(
+                    delivery: cost,
+                    discountStrategies: Discount.strategies,
+                    discountCategory: discount
                 )
-            ),
-            cost: .init(
-                delivery: cost,
-                discountCategory: discount
             )
-        )
-        delegate.parcelOrderMade(parcelInformation)
+            delegate.parcelOrderMade(parcelInformation)
+            
+        } catch {
+            print("discount에 해당되는 DiscountStrategy가 존재하지 않습니다.")
+        }
     }
     
     private func layoutView() {
