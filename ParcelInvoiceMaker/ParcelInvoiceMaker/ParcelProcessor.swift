@@ -42,7 +42,7 @@ protocol DiscountStrategy {
     func applyDiscount(deliveryCost : Int) -> Int
 }
 
-final class NoDiscount : DiscountStrategy{
+final class NoDiscount: DiscountStrategy {
     func applyDiscount(deliveryCost: Int) -> Int {
         return deliveryCost
     }
