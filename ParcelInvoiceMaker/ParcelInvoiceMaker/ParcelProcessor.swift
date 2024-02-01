@@ -86,9 +86,9 @@ final class ParcelOrderProcessor {
     }
     
     func process(parcelInformation : ParcelInformation){
-        delegate.save(parcelInformation: parcelInformation, { _ in
+        delegate.save(parcelInformation: parcelInformation) { _ in
             print("저장에 성공했습니다.")
-        })
+        }
     }
 }
 final class DatabaseParcelInformationPersistence : ParcelInformationPersistence{
