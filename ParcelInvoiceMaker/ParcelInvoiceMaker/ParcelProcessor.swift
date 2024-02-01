@@ -79,8 +79,8 @@ protocol ParcelInformationPersistence {
 final class ParcelOrderProcessor {
     var delegate : ParcelInformationPersistence
 
-    init(delegate: ParcelInformationPersistence, parcelInformation: ParcelInformation? = nil) {
-        self.delegate = DatabaseParcelInformationPersistence()
+    init(delegate: ParcelInformationPersistence) {
+        self.delegate = delegate
     }
     
     func process(parcelInformation : ParcelInformation){
