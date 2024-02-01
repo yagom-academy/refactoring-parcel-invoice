@@ -41,17 +41,17 @@ protocol DiscountStrategy {
     func applyDiscount(deliveryCost : Int) -> Int
 }
 
-final class NoDiscount: DiscountStrategy {
+struct NoDiscount : DiscountStrategy{
     func applyDiscount(deliveryCost: Int) -> Int {
         return deliveryCost
     }
 }
-final class VIPDiscount : DiscountStrategy{
+struct VIPDiscount : DiscountStrategy{
     func applyDiscount(deliveryCost: Int) -> Int {
         return deliveryCost / 20
     }
 }
-final class CouponDiscount : DiscountStrategy{
+struct CouponDiscount : DiscountStrategy{
     func applyDiscount(deliveryCost: Int) -> Int {
         return deliveryCost / 2
     }
