@@ -17,9 +17,9 @@ struct ParcelInformation {
 }
 /// private 과 var , let을 해줘야하는 기준이 헷갈린다. 처음 설정할때 말고 변할일 없으니까 let 이라고 생각
 struct ReceiverInformation{
-    let address : String
-    let name : String
-    let mobile : String
+    let address: String
+    let name: String
+    let mobile: String
     init(address: String, name: String, mobile: String) {
         self.address = address
         self.name = name
