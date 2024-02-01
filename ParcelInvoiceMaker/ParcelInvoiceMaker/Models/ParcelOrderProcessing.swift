@@ -10,10 +10,10 @@ protocol ParcelOrderProcessing {
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
 }
 
-class ParcelOrderProcessor: ParcelOrderProcessing {
-    private let database: ParcelInformationPersistence
+final class ParcelOrderProcessor: ParcelOrderProcessing {
+    private let database: ParcelInformationSavable
     
-    init(database: ParcelInformationPersistence) {
+    init(database: ParcelInformationSavable) {
         self.database = database
     }
     
