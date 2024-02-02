@@ -7,9 +7,14 @@
 import Foundation
 
 // STEP 1-1: 객체미용체조 7원칙 적용
-class ParcelInformation {
-    private let deliveryInfo: DeliveryInfo?
-    private var costs: Costs?
+protocol Information {
+    var deliveryInfo: DeliveryInformation? { get }
+    var costs: Costs? { get set }
+}
+
+struct ParcelInformation: Information {
+    internal let deliveryInfo: DeliveryInformation?
+    internal(set) var costs: Costs?
     
     init(
         address: String,
@@ -18,7 +23,7 @@ class ParcelInformation {
         deliveryCost: Int,
         discount: Discount
     ) {
-        self.deliveryInfo = try? DeliveryInfo(
+        self.deliveryInfo = try? DeliveryInformation(
             address: address,
             receiverName: receiverName,
             receiverMobile: receiverMobile
@@ -34,12 +39,12 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
-fileprivate struct DeliveryInfo {
-    let address: String
+internal struct DeliveryInformation {
+    private let address: String
     // 1-2 이렇게 또 묶을 수 있겠다
 //        var recieverName: String
 //        var receiverMobile: String
-    var receiverInfo: ReceiverInfo
+    private(set) var receiverInfo: ReceiverInfo
     
     init(
         address: String,
@@ -59,9 +64,9 @@ fileprivate struct DeliveryInfo {
 }
 
 // 1-2-1 원시타입 포장
-fileprivate struct ReceiverInfo {
-    var recieverName: String
-    var receiverMobile: String
+internal struct ReceiverInfo {
+    private(set) var recieverName: String
+    private(set) var receiverMobile: String
     
     init(
         recieverName: String,
@@ -76,7 +81,7 @@ fileprivate struct ReceiverInfo {
 }
 
 // 2-1 셋 다 엮여있는데, 결국엔 discountedCost를 구하기 위한거 아닐까?
-fileprivate struct Costs {
+internal struct Costs {
     private let discount: Discount
     let deliveryCost: Int
     var discountedCost: Int {
@@ -103,11 +108,11 @@ fileprivate struct Costs {
 }
 
 // 2. SOLID SRP 적용
-class ParcelOrderProcessor {
+internal struct ParcelOrderProcessor {
     // 택배 주문 처리 로직
     // SOLID DIP 적용해서 변경
 //    let databasePercelInformationPersistence: DatabaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
-    let databasePercelInformationPersistence: ParcelInformationPersistence
+    private let databasePercelInformationPersistence: ParcelInformationPersistence
     
     // ParcelOrderProcessor는 process 로직 하나만 처리
     func process(
@@ -126,8 +131,8 @@ class ParcelOrderProcessor {
     }
 }
 
-struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
-    func save<T: ParcelInformation>(parcelInformation: T) {
+internal struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
+    func save<T: Information>(parcelInformation: T) {
         // 데이터베이스에 주문 정보 저장
         print("발송 정보를 데이터베이스에 저장했습니다.")
     }
@@ -138,5 +143,5 @@ struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
 // 현재 의존 관계 ParcelProcessor -> DatabaseParcelInformationPersistence
 // 가운데에 프로토콜을 하나 생성해서 직접 소유를 하지 않고 init 시점에 persistence 인스턴스를 생성해 주입
 protocol ParcelInformationPersistence {
-    func save<T: ParcelInformation> (parcelInformation: T) // 프로토콜 안에는 메서드에 Body는 없어야하고 메서드를 가리키는 이름만 있어야함
+    func save<T: Information> (parcelInformation: T) // 프로토콜 안에는 메서드에 Body는 없어야하고 메서드를 가리키는 이름만 있어야함
 }
