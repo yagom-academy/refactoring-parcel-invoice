@@ -12,7 +12,7 @@ protocol ParcelOrderViewDelegate {
 
 class ParcelOrderView: UIView {
     
-    private var delegate: ParcelOrderViewDelegate!
+    private var delegate: ParcelOrderViewDelegate?
     
     private let receiverNameField: UITextField = {
         let field: UITextField = .init()
@@ -75,13 +75,10 @@ class ParcelOrderView: UIView {
         else {
             return
         }
-        
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
-                                                         discount: discount)
-        delegate.parcelOrderMade(parcelInformation)
+        let receiverInfo = ReceiverInformation(address: address, name: name, mobile: mobile)
+        let parcelInformation = ParcelInformation(receiverInformation: receiverInfo, deliveryCost: cost, discount: discount)
+
+        delegate?.parcelOrderMade(parcelInformation)
     }
     
     private func layoutView() {

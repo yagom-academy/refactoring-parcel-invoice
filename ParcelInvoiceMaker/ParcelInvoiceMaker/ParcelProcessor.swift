@@ -2,53 +2,96 @@
 //  ParcelInvoiceMaker - ParcelProcessor.swift
 //  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import Foundation
 
-class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
-    let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+struct ParcelInformation {
+    let receiverInformation : ReceiverInformation
+    let deliveryCost: DeliveryCost
+    init(receiverInformation : ReceiverInformation, deliveryCost: Int , discount : Discount) {
+        self.receiverInformation = receiverInformation
+        let discountStrategy = discount.strategy
+        self.deliveryCost = DeliveryCost(deliveryCost: deliveryCost, strategy: discountStrategy)
     }
-
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
+}
+struct ReceiverInformation{
+    let address: String
+    let name: String
+    let mobile: String
+    init(address: String, name: String, mobile: String) {
         self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+        self.name = name
+        self.mobile = mobile
+    }
+}
+//MARK: - Discount
+struct DeliveryCost {
+    let deliveryCost : Int
+    var discountStrategy : DiscountStrategy
+    var discountedCost : Int {
+        return discountStrategy.applyDiscount(deliveryCost: deliveryCost)
+    }
+    init(deliveryCost: Int, strategy: DiscountStrategy) {
         self.deliveryCost = deliveryCost
-        self.discount = discount
+        self.discountStrategy = strategy
+    }
+}
+protocol DiscountStrategy {
+    func applyDiscount(deliveryCost : Int) -> Int
+}
+
+struct NoDiscount : DiscountStrategy{
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost
+    }
+}
+struct VIPDiscount : DiscountStrategy{
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 20
+    }
+}
+struct CouponDiscount : DiscountStrategy{
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 2
     }
 }
 
 enum Discount: Int {
     case none = 0, vip, coupon
+    var strategy : DiscountStrategy{
+        switch self {
+        case .none:
+            return NoDiscount()
+        case .vip:
+            return VIPDiscount()
+        case .coupon:
+            return CouponDiscount()
+        }
+    }
 }
+//MARK: - 배송처리
 
-class ParcelOrderProcessor {
-    
-    // 택배 주문 처리 로직
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
-        
-        // 데이터베이스에 주문 저장
-        save(parcelInformation: parcelInformation)
-        
-        onComplete(parcelInformation)
+protocol ParcelInformationPersistence {
+    func save(parcelInformation : ParcelInformation, _ onComplete : (ParcelInformation) -> Void)
+
+}
+final class ParcelOrderProcessor {
+    var delegate : ParcelInformationPersistence
+
+    init(delegate: ParcelInformationPersistence) {
+        self.delegate = delegate
     }
     
-    func save(parcelInformation: ParcelInformation) {
-        // 데이터베이스에 주문 정보 저장
-        print("발송 정보를 데이터베이스에 저장했습니다.")
+    func process(parcelInformation : ParcelInformation){
+        delegate.save(parcelInformation: parcelInformation) { _ in
+            print("저장에 성공했습니다.")
+        }
+    }
+}
+final class DatabaseParcelInformationPersistence : ParcelInformationPersistence{
+    func save(parcelInformation : ParcelInformation, _ onComplete : (ParcelInformation) -> Void){
+        print("발송 정보를 데이터베이스에 저장했습니다.\(parcelInformation)")
+        onComplete(parcelInformation)
     }
 }
