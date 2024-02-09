@@ -8,15 +8,13 @@
 import Foundation
 
 struct CostInfo {
-    private(set) var deliveryCost: Cost
-    private let discountCalculator: DiscountCalculator
-    private var discountedCost: Cost {
-        return discountCalculator.calcDiscountedCost(cost: deliveryCost)
-    }
+    private var deliveryCost: Cost
+    private var discountedCost: Cost
     
     init(deliveryCost: Int, discount: Discount) {
         self.deliveryCost = Cost(value: deliveryCost)
-        self.discountCalculator = DiscountCalculator(discount: discount)
+        let discountedCost: Int = discount.strategy.applyDiscount(deliveryCost: deliveryCost)
+        self.discountedCost = Cost(value: discountedCost)
     }
     
     func getDiscountedCost() -> Int {

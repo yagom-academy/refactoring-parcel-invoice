@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
+final class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     private let parcelProcessor: ParcelOrderable
     
     init(parcelProcessor: ParcelOrderable) {
