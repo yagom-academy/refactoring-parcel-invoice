@@ -6,13 +6,81 @@
 
 import Foundation
 
+struct MobileNumber {
+    private let value: String
+    
+    init(value: String) {
+        self.value = value
+    }
+
+    func getValue() -> String {
+        return self.value
+    }
+}
+
+struct Name {
+    private let value: String
+    
+    init(value: String) {
+        self.value = value
+    }
+
+    func getValue() -> String {
+        return self.value
+    }
+}
+
+struct ReceiverInformation {
+    private let address: String
+    private var name: Name
+    private var mobileNumber: MobileNumber
+    
+    func getAddress() -> String {
+        return self.address
+    }
+    
+    func getReceiverName() -> String {
+        return self.name.getValue()
+    }
+    
+    func getReceiverMobile() -> String {
+        return self.mobileNumber.getValue()
+    }
+    
+    init(address: String, name: Name, mobileNumber: MobileNumber) {
+        self.address = address
+        self.name = name
+        self.mobileNumber = mobileNumber
+    }
+}
+
 class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
-    let deliveryCost: Int
+    private let receiverInformation: ReceiverInformation
+    private let deliveryCost: Int
     private let discount: Discount
-    var discountedCost: Int {
+
+    init(receiverInformation: ReceiverInformation, 
+         deliveryCost: Int, 
+         discount: Discount)
+    {
+        self.receiverInformation = receiverInformation
+        self.deliveryCost = deliveryCost
+        self.discount = discount
+    }
+    
+    func getReceiverName() -> String {
+        return receiverInformation.getReceiverName()
+    }
+    
+    func getReceiverAddress() -> String {
+        return receiverInformation.getAddress()
+    }
+    
+    func getReceiverMobile() -> String {
+        return receiverInformation.getReceiverMobile()
+    }
+    
+    func getDiscountedCost() -> Int {
         switch discount {
         case .none:
             return deliveryCost
@@ -21,14 +89,6 @@ class ParcelInformation {
         case .coupon:
             return deliveryCost / 2
         }
-    }
-
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
-        self.deliveryCost = deliveryCost
-        self.discount = discount
     }
 }
 
