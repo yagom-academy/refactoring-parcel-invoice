@@ -12,7 +12,7 @@ struct MobileNumber {
     init(value: String) {
         self.value = value
     }
-
+    
     func getValue() -> String {
         return self.value
     }
@@ -24,7 +24,7 @@ struct Name {
     init(value: String) {
         self.value = value
     }
-
+    
     func getValue() -> String {
         return self.value
     }
@@ -47,7 +47,10 @@ struct ReceiverInformation {
         return self.mobileNumber.getValue()
     }
     
-    init(address: String, name: Name, mobileNumber: MobileNumber) {
+    init(address: String, 
+         name: Name,
+         mobileNumber: MobileNumber)
+    {
         self.address = address
         self.name = name
         self.mobileNumber = mobileNumber
@@ -58,9 +61,9 @@ final class ParcelInformation {
     private let receiverInformation: ReceiverInformation
     private let deliveryCost: Int
     private let discount: Discount
-
-    init(receiverInformation: ReceiverInformation, 
-         deliveryCost: Int, 
+    
+    init(receiverInformation: ReceiverInformation,
+         deliveryCost: Int,
          discount: Discount)
     {
         self.receiverInformation = receiverInformation
@@ -96,25 +99,36 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
-final class DatabaseParcelInformationPersistence {
+protocol ParcelInformationPersistence {
+    func save(parcelInformation: ParcelInformation)
+}
+
+final class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation) {
         // 데이터베이스에 주문 정보 저장
         print("발송 정보를 데이터베이스에 저장했습니다.")
     }
 }
 
-final class ParcelOrderProcessor {
-    private let persistence: DatabaseParcelInformationPersistence
+protocol ParcelOrderProcessable {
+    var persistence: ParcelInformationPersistence { get }
+    func process(parcelInformation: ParcelInformation,
+                 onComplete: (ParcelInformation) -> Void)
+}
+
+final class ParcelOrderProcessor: ParcelOrderProcessable {
+    let persistence: ParcelInformationPersistence
     
-    init(persistence: DatabaseParcelInformationPersistence) {
+    init(persistence: ParcelInformationPersistence) {
         self.persistence = persistence
     }
     
     // 택배 주문 처리 로직
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
+    func process(parcelInformation: ParcelInformation, 
+                 onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        persistence.save(parcelInformation: parcelInformation)
+        self.persistence.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }
