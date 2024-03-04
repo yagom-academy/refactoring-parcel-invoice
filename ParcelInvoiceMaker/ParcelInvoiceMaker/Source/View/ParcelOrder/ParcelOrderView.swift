@@ -76,13 +76,15 @@ final class ParcelOrderView: UIView {
             return
         }
         
-        let receiverInformation = ReceiverInformation(address: address,
+        let receiverInformation: ReceiverInformation = .init(address: address,
                                                       name: .init(value: name),
                                                       mobileNumber: .init(value: mobile))
+        let costInformation: CostInformation = .init(policy: discount, 
+                                              deliveryCost: cost)
         
-        let parcelInformation: ParcelInformation = .init(receiverInformation: receiverInformation,
-                                                         deliveryCost: cost,
-                                                         discount: discount)
+        let parcelInformation: ParcelInformation = .init(receiverInformation: receiverInformation, 
+                                                         costInformation: costInformation)
+        
         delegate.parcelOrderMade(with: parcelInformation)
     }
     

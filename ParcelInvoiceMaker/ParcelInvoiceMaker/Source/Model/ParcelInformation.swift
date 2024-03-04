@@ -7,22 +7,15 @@
 
 import Foundation
 
-enum Discount: Int {
-    case none = 0, vip, coupon
-}
-
 struct ParcelInformation {
     private let receiverInformation: ReceiverInformation
-    private let deliveryCost: Int
-    private let discount: Discount
+    private let costInformation: CostInformation
     
     init(receiverInformation: ReceiverInformation,
-         deliveryCost: Int,
-         discount: Discount)
+         costInformation: CostInformation)
     {
         self.receiverInformation = receiverInformation
-        self.deliveryCost = deliveryCost
-        self.discount = discount
+        self.costInformation = costInformation
     }
     
     func getReceiverName() -> String {
@@ -38,13 +31,6 @@ struct ParcelInformation {
     }
     
     func getDiscountedCost() -> Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+        return costInformation.getDiscountedCost()
     }
 }
