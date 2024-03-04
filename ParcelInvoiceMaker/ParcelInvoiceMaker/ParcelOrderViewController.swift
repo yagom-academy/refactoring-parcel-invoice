@@ -7,7 +7,7 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor(persistence: .init())
     
     init() {
         super.init(nibName: nil, bundle: nil)

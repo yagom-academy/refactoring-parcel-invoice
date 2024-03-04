@@ -54,7 +54,7 @@ struct ReceiverInformation {
     }
 }
 
-class ParcelInformation {
+final class ParcelInformation {
     private let receiverInformation: ReceiverInformation
     private let deliveryCost: Int
     private let discount: Discount
@@ -96,19 +96,26 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
-class ParcelOrderProcessor {
+final class DatabaseParcelInformationPersistence {
+    func save(parcelInformation: ParcelInformation) {
+        // 데이터베이스에 주문 정보 저장
+        print("발송 정보를 데이터베이스에 저장했습니다.")
+    }
+}
+
+final class ParcelOrderProcessor {
+    private let persistence: DatabaseParcelInformationPersistence
+    
+    init(persistence: DatabaseParcelInformationPersistence) {
+        self.persistence = persistence
+    }
     
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        save(parcelInformation: parcelInformation)
+        persistence.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
-    }
-    
-    func save(parcelInformation: ParcelInformation) {
-        // 데이터베이스에 주문 정보 저장
-        print("발송 정보를 데이터베이스에 저장했습니다.")
     }
 }
