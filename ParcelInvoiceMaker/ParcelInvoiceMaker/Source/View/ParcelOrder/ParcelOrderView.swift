@@ -164,3 +164,17 @@ final class ParcelOrderView: UIView {
         ])
     }
 }
+
+extension ParcelOrderView {
+    private func createReceiverInformation(name: String, 
+                                           mobile: String,
+                                           address: String) -> ReceiverInformation {
+        return ReceiverInformation(address: address, 
+                                   name: .init(value: name),
+                                   mobileNumber: .init(value: mobile))
+    }
+
+    private func createParcelInformation() {
+        
+    }
+}
