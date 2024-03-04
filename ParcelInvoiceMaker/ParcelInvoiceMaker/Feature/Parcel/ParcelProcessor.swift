@@ -6,16 +6,34 @@
 
 import Foundation
 
-struct DatabaseParcelInformationPersistence {
+protocol ParcelInformationPersistence {
+    
+    func save(parcelInformation: ParcelInformation)
+}
+
+struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
+    
     func save(parcelInformation: ParcelInformation) {
         // 데이터베이스에 주문 정보 저장
         print("발송 정보를 데이터베이스에 저장했습니다.")
     }
 }
 
-final class ParcelOrderProcessor {
+protocol ParcelOrderProcessor {
     
-    private let databaseParcelInformationPersistence: DatabaseParcelInformationPersistence = .init()
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+final class ParcelOrderProcessorImpl: ParcelOrderProcessor {
+    
+    private let databaseParcelInformationPersistence: ParcelInformationPersistence
+    
+    init(databaseParcelInformationPersistence: ParcelInformationPersistence) {
+        self.databaseParcelInformationPersistence = databaseParcelInformationPersistence
+    }
+}
+
+extension ParcelOrderProcessorImpl {
     
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
