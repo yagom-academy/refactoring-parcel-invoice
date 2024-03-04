@@ -32,8 +32,8 @@ struct Name {
 
 struct ReceiverInformation {
     private let address: String
-    private var name: Name
-    private var mobileNumber: MobileNumber
+    private let name: Name
+    private let mobileNumber: MobileNumber
     
     func getAddress() -> String {
         return self.address
@@ -111,13 +111,12 @@ final class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
 }
 
 protocol ParcelOrderProcessable {
-    var persistence: ParcelInformationPersistence { get }
     func process(parcelInformation: ParcelInformation,
                  onComplete: (ParcelInformation) -> Void)
 }
 
 final class ParcelOrderProcessor: ParcelOrderProcessable {
-    let persistence: ParcelInformationPersistence
+    private let persistence: ParcelInformationPersistence
     
     init(persistence: ParcelInformationPersistence) {
         self.persistence = persistence

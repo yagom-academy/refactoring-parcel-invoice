@@ -6,8 +6,9 @@
 
 import UIKit
 
-class InvoiceView: UIView {
-    let parcelInformation: ParcelInformation
+final class InvoiceView: UIView {
+    
+    private let parcelInformation: ParcelInformation
     
     init(parcelInformation: ParcelInformation) {
         self.parcelInformation = parcelInformation
