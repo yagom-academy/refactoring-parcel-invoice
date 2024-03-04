@@ -7,7 +7,7 @@
 import UIKit
 
 protocol ParcelOrderViewDelegate {
-    func parcelOrderMade(_ parcelInformation: ParcelInformation)
+    func parcelOrderMade(with parcelInformation: ParcelInformation)
 }
 
 final class ParcelOrderView: UIView {
@@ -83,7 +83,7 @@ final class ParcelOrderView: UIView {
         let parcelInformation: ParcelInformation = .init(receiverInformation: receiverInformation,
                                                          deliveryCost: cost,
                                                          discount: discount)
-        delegate.parcelOrderMade(parcelInformation)
+        delegate.parcelOrderMade(with: parcelInformation)
     }
     
     private func layoutView() {
