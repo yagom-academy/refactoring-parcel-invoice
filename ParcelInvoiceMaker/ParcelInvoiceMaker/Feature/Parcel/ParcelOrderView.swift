@@ -82,8 +82,11 @@ class ParcelOrderView: UIView {
                     receiverName: try .init(value: name),
                     receiverMobile: try .init(value: mobile),
                     address: try .init(value: address)),
-                deliveryCost: try .init(value: cost),
-                discount: discount)
+                costInfo: .init(
+                    deliveryCost: try .init(value: cost),
+                    discount: discount
+                )
+            )
             
             delegate.parcelOrderMade(parcelInformation)
         } catch {

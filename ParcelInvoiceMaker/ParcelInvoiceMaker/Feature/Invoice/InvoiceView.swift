@@ -34,7 +34,7 @@ class InvoiceView: UIView {
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.address)"
+        addressLabel.text = "주소 : \(parcelInformation.receiverAddress)"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black

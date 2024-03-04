@@ -14,15 +14,6 @@ protocol ValidatedString {
     init(value: String) throws
 }
 
-protocol ValidatedNumeric {
-    associatedtype Numeric
-    
-    var value: Numeric { get set }
-    
-    static func isValid(_ value: Numeric) -> Bool
-    init(value: Numeric) throws
-}
-
 struct ParcelReceiverName: ValidatedString {
     var value: String
     
