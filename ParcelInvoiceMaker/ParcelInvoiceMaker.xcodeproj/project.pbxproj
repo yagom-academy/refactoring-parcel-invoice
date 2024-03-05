@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18E6B63C2B95F6B000B369D2 /* ParcelCostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6B63B2B95F6B000B369D2 /* ParcelCostInfo.swift */; };
+		A78F20F52B96A57000C76783 /* ParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78F20F42B96A57000C76783 /* ParcelInformationPersistence.swift */; };
 		A79083B72B95BDCE00803B0A /* ParcelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79083B62B95BDCE00803B0A /* ParcelError.swift */; };
 		A79083BA2B95C16900803B0A /* ParcelReceiverInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79083B92B95C16900803B0A /* ParcelReceiverInfo.swift */; };
 		A79083BC2B95C18B00803B0A /* ParcelInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79083BB2B95C18B00803B0A /* ParcelInformation.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		18E6B63B2B95F6B000B369D2 /* ParcelCostInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelCostInfo.swift; sourceTree = "<group>"; };
+		A78F20F42B96A57000C76783 /* ParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformationPersistence.swift; sourceTree = "<group>"; };
 		A79083B62B95BDCE00803B0A /* ParcelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelError.swift; sourceTree = "<group>"; };
 		A79083B92B95C16900803B0A /* ParcelReceiverInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelReceiverInfo.swift; sourceTree = "<group>"; };
 		A79083BB2B95C18B00803B0A /* ParcelInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformation.swift; sourceTree = "<group>"; };
@@ -51,6 +53,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A78F20F12B96A51300C76783 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
+				C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A78F20F22B96A54600C76783 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A78F20F32B96A56300C76783 /* Parcel */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		A78F20F32B96A56300C76783 /* Parcel */ = {
+			isa = PBXGroup;
+			children = (
+				A78F20F42B96A57000C76783 /* ParcelInformationPersistence.swift */,
+			);
+			path = Parcel;
+			sourceTree = "<group>";
+		};
+		A78F20F62B96A57E00C76783 /* Processor */ = {
+			isa = PBXGroup;
+			children = (
+				A78F20F72B96A58700C76783 /* Parcel */,
+			);
+			path = Processor;
+			sourceTree = "<group>";
+		};
+		A78F20F72B96A58700C76783 /* Parcel */ = {
+			isa = PBXGroup;
+			children = (
+				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
+			);
+			path = Parcel;
+			sourceTree = "<group>";
+		};
 		A79083B02B95BD6000803B0A /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -63,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				A79083B52B95BDA600803B0A /* Invoice */,
-				A79083B42B95BD9C00803B0A /* Parcel */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -71,11 +113,9 @@
 		A79083B42B95BD9C00803B0A /* Parcel */ = {
 			isa = PBXGroup;
 			children = (
-				A79083B82B95C15D00803B0A /* Model */,
-				A79083B02B95BD6000803B0A /* Error */,
-				C741F50D2B46659500A4DDC0 /* ParcelProcessor.swift */,
-				C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */,
-				C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */,
+				A79083B92B95C16900803B0A /* ParcelReceiverInfo.swift */,
+				A79083BB2B95C18B00803B0A /* ParcelInformation.swift */,
+				18E6B63B2B95F6B000B369D2 /* ParcelCostInfo.swift */,
 			);
 			path = Parcel;
 			sourceTree = "<group>";
@@ -83,8 +123,11 @@
 		A79083B52B95BDA600803B0A /* Invoice */ = {
 			isa = PBXGroup;
 			children = (
+				A79083B02B95BD6000803B0A /* Error */,
+				A79083B82B95C15D00803B0A /* Model */,
+				A78F20F12B96A51300C76783 /* View */,
 				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
-				C741F5132B468AC300A4DDC0 /* InvoiceView.swift */,
+				C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */,
 			);
 			path = Invoice;
 			sourceTree = "<group>";
@@ -92,9 +135,7 @@
 		A79083B82B95C15D00803B0A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A79083B92B95C16900803B0A /* ParcelReceiverInfo.swift */,
-				A79083BB2B95C18B00803B0A /* ParcelInformation.swift */,
-				18E6B63B2B95F6B000B369D2 /* ParcelCostInfo.swift */,
+				A79083B42B95BD9C00803B0A /* Parcel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -118,6 +159,8 @@
 		C741F4F82B46658300A4DDC0 /* ParcelInvoiceMaker */ = {
 			isa = PBXGroup;
 			children = (
+				A78F20F62B96A57E00C76783 /* Processor */,
+				A78F20F22B96A54600C76783 /* Repository */,
 				A79083B32B95BD9300803B0A /* Feature */,
 				C741F4F92B46658300A4DDC0 /* AppDelegate.swift */,
 				C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */,
@@ -205,6 +248,7 @@
 				C741F50E2B46659500A4DDC0 /* ParcelProcessor.swift in Sources */,
 				C741F5102B4675AF00A4DDC0 /* InvoiceViewController.swift in Sources */,
 				A79083B72B95BDCE00803B0A /* ParcelError.swift in Sources */,
+				A78F20F52B96A57000C76783 /* ParcelInformationPersistence.swift in Sources */,
 				C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */,
 				C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */,
 				18E6B63C2B95F6B000B369D2 /* ParcelCostInfo.swift in Sources */,
