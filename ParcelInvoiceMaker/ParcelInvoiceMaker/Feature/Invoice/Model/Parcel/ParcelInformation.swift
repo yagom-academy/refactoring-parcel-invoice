@@ -12,14 +12,7 @@ class ParcelInformation {
     private let costInfo: ParcelCostInfo
     
     var discountedCost: Int {
-        switch costInfo.discount {
-        case .none:
-            return costInfo.deliveryCost.value
-        case .vip:
-            return costInfo.deliveryCost.value / 5 * 4
-        case .coupon:
-            return costInfo.deliveryCost.value / 2
-        }
+        costInfo.discount.strategy.applyDiscount(deliveryCost: costInfo.deliveryCost.value)
     }
     
     var receiverName: String {
