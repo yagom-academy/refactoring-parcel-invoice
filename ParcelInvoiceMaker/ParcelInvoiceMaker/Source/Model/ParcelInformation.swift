@@ -17,16 +17,16 @@ struct ParcelInformation {
         self.costInformation = costInformation
     }
     
-    func getReceiverName() -> String {
-        return receiverInformation.getReceiverName()
+    var receiverName: String {
+        return receiverInformation.name
     }
     
-    func getReceiverAddress() -> String {
-        return receiverInformation.getAddress()
+    var receiverAddress: String {
+        return receiverInformation.address
     }
     
-    func getReceiverMobile() -> String {
-        return receiverInformation.getReceiverMobile()
+    var receiverMobile: String {
+        return receiverInformation.mobileNumber
     }
     
     func getDiscountedCost() -> Int {

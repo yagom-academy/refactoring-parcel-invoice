@@ -8,51 +8,51 @@
 import Foundation
 
 struct Name {
-    private let value: String
+    private let _value: String
     
     init(value: String) {
-        self.value = value
+        self._value = value
     }
     
-    func getValue() -> String {
-        return self.value
+    var value: String {
+        return self._value
     }
 }
 
 struct MobileNumber {
-    private let value: String
+    private let _value: String
     
     init(value: String) {
-        self.value = value
+        self._value = value
     }
     
-    func getValue() -> String {
-        return self.value
+    var value: String {
+        return self._value
     }
 }
 
 struct ReceiverInformation {
-    private let address: String
-    private let name: Name
-    private let mobileNumber: MobileNumber
+    private let _address: String
+    private let _name: Name
+    private let _mobileNumber: MobileNumber
     
-    func getAddress() -> String {
-        return self.address
+    var address: String {
+        return _address
     }
     
-    func getReceiverName() -> String {
-        return self.name.getValue()
+    var name: String {
+        return _name.value
     }
     
-    func getReceiverMobile() -> String {
-        return self.mobileNumber.getValue()
+    var mobileNumber: String {
+        return _mobileNumber.value
     }
     
     init(address: String,
          name: Name,
          mobileNumber: MobileNumber) {
-        self.address = address
-        self.name = name
-        self.mobileNumber = mobileNumber
+        self._address = address
+        self._name = name
+        self._mobileNumber = mobileNumber
     }
 }
