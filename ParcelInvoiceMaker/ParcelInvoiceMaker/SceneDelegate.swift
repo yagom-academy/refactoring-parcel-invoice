@@ -14,7 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene: UIWindowScene = (scene as? UIWindowScene) else { return }
         
-        let viewController: ParcelOrderViewController = ParcelOrderViewController()
+        // DatabaseParcelInformationPersistence 같은 서비스 인스턴스를 생성하는 시점이 언제가 좋은가?
+        let parcelInformationPersistence = DatabaseParcelInformationPersistence()
+        
+        let viewController: ParcelOrderViewController = ParcelOrderViewController(parcelInformationPersistence: parcelInformationPersistence)
         let navigationController: UINavigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.navigationBar.tintColor = .black

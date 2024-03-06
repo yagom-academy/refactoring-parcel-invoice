@@ -76,10 +76,13 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let parcelInformation: ParcelInformation = .init(receiverInformation: ReceiverInformation(address: address,
-                                                                                                  receiverName: name,
-                                                                                                  receiverMobile: mobile),
-                                                         costInformation: CostInformation(deliveryCost: cost,
+        // ParcelInformation같은 data entity를 생성하는 시점이 View? 아니면 ViewController?
+        // data entity에 passive하게 입력되는 데이터가 들어간다면 (예를 들어, 생성 시점 등) VC에서 관리하는게 맞지 않을까?
+        
+        let parcelInformation: ParcelInformation = .init(receiverInformation: ReceiverInformation(address: Address(address: address),
+                                                                                                  receiverName: Name(name: name),
+                                                                                                  receiverMobile: Mobile(mobile: mobile)),
+                                                         costInformation: CostInformation(deliveryCost: Cost(cost: cost),
                                                                                           discount: discount))
         delegate.parcelOrderMade(parcelInformation)
     }
