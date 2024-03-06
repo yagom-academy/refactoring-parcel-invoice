@@ -32,7 +32,7 @@ struct CostInformation {
     }
 }
 
-class Cost {
+struct Cost {
     let cost: Int
     
     init(cost: Int) {

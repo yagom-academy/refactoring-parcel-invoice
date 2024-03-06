@@ -13,7 +13,7 @@ struct ReceiverInformation {
     var receiverMobile: Mobile
 }
 
-class Address {
+struct Address {
     private let address: String
     
     init(address: String) {
@@ -25,7 +25,7 @@ class Address {
     }
 }
 
-class Name {
+struct Name {
     private let name: String
     
     init(name: String) {
@@ -37,7 +37,7 @@ class Name {
     }
 }
 
-class Mobile {
+struct Mobile {
     private let mobile: String
     
     init(mobile: String) {
