@@ -20,7 +20,7 @@ enum Discount: Int {
         }
     }
     
-    func getDiscountedCost(deliveryCost: Double) -> Int {
+    func calculateDiscountedCost(deliveryCost: Double) -> Int {
         return strategy.applyDiscount(deliveryCost: deliveryCost)
     }
 }

@@ -29,7 +29,7 @@ struct ParcelInformation {
         return receiverInformation.mobileNumber
     }
     
-    func getDiscountedCost() -> Int {
-        return costInformation.getDiscountedCost()
+    func calculateTotalCost() -> Int {
+        return costInformation.calculateTotalCost()
     }
 }

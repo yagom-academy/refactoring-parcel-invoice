@@ -18,7 +18,7 @@ struct CostInformation {
         self.deliveryCost = deliveryCost
     }
     
-    func getDiscountedCost() -> Int {
-        return discountPolicy.getDiscountedCost(deliveryCost: deliveryCost)
+    func calculateTotalCost() -> Int {
+        return discountPolicy.calculateDiscountedCost(deliveryCost: deliveryCost)
     }
 }
