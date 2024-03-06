@@ -50,8 +50,7 @@ struct ReceiverInformation {
     
     init(address: String,
          name: Name,
-         mobileNumber: MobileNumber)
-    {
+         mobileNumber: MobileNumber) {
         self.address = address
         self.name = name
         self.mobileNumber = mobileNumber
