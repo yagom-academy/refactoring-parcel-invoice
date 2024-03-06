@@ -12,8 +12,7 @@ struct ParcelInformation {
     private let costInformation: CostInformation
     
     init(receiverInformation: ReceiverInformation,
-         costInformation: CostInformation)
-    {
+         costInformation: CostInformation) {
         self.receiverInformation = receiverInformation
         self.costInformation = costInformation
     }
