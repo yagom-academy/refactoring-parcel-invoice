@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+extension Double {
+    func convertToInt() -> Int {
+        return Int(self)
+    }
+}

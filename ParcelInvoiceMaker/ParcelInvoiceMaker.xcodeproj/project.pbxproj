@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		602A18A52B98485900E7B73C /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602A18A42B98485900E7B73C /* Double+.swift */; };
 		6060F64C2B970F1900AE4402 /* Discount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6060F64B2B970F1900AE4402 /* Discount.swift */; };
 		6060F64E2B970F5500AE4402 /* DiscountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6060F64D2B970F5500AE4402 /* DiscountStrategy.swift */; };
 		6060F6512B970F7E00AE4402 /* DiscountRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6060F6502B970F7E00AE4402 /* DiscountRatio.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		602A18A42B98485900E7B73C /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		6060F64B2B970F1900AE4402 /* Discount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discount.swift; sourceTree = "<group>"; };
 		6060F64D2B970F5500AE4402 /* DiscountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountStrategy.swift; sourceTree = "<group>"; };
 		6060F6502B970F7E00AE4402 /* DiscountRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountRatio.swift; sourceTree = "<group>"; };
@@ -57,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		602A18A32B98485100E7B73C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				602A18A42B98485900E7B73C /* Double+.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		6060F64F2B970F7500AE4402 /* Constant */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 		60BDBB122B95EA7B0025D49D /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				602A18A32B98485100E7B73C /* Utils */,
 				6060F64F2B970F7500AE4402 /* Constant */,
 				60BDBB132B95EB3F0025D49D /* Service */,
 				60BDBB0E2B95EA100025D49D /* View */,
@@ -235,6 +246,7 @@
 				60BDBB092B95E7950025D49D /* ParcelInformation.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
+				602A18A52B98485900E7B73C /* Double+.swift in Sources */,
 				60BDBB172B95F5220025D49D /* DatabaseParcelInformationPersistence.swift in Sources */,
 				C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */,
 				C741F50E2B46659500A4DDC0 /* ParcelProcessor.swift in Sources */,

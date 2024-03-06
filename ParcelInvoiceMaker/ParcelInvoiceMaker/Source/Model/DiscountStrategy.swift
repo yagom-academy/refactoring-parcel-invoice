@@ -13,18 +13,20 @@ protocol DiscountStrategy {
 
 struct NoDiscountStrategy: DiscountStrategy {
     func applyDiscount(deliveryCost: Double) -> Int {
-        return Int(deliveryCost)
+        return deliveryCost.convertToInt()
     }
 }
 
 struct VIPDiscountStrategy: DiscountStrategy {
     func applyDiscount(deliveryCost: Double) -> Int {
-        return Int(deliveryCost * DiscountRatio.vip)
+        let discountedCost = deliveryCost * DiscountRatio.vip
+        return discountedCost.convertToInt()
     }
 }
 
 struct CouponDiscountStrategy: DiscountStrategy {
     func applyDiscount(deliveryCost: Double) -> Int {
-        return Int(deliveryCost * DiscountRatio.coupon)
+        let discountedCost = deliveryCost * DiscountRatio.coupon
+        return discountedCost.convertToInt()
     }
 }
