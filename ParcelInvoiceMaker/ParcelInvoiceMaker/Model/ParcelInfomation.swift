@@ -19,17 +19,12 @@ class ParcelInformation {
     }
 }
 
-class ReceiverInfomation {
+struct ReceiverInfomation {
     var receiverName: String
     var receiverMobile: String
-    
-    init(receiverName: String, receiverMobile: String) {
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
-    }
 }
 
-class CostInfomation {
+struct CostInfomation {
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -41,11 +36,6 @@ class CostInfomation {
         case .coupon:
             return deliveryCost / 2
         }
-    }
-    
-    init(deliveryCost: Int, discount: Discount) {
-        self.deliveryCost = deliveryCost
-        self.discount = discount
     }
 }
 
