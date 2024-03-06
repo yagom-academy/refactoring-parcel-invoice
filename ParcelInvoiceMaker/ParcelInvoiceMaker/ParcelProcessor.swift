@@ -2,14 +2,33 @@
 //  ParcelInvoiceMaker - ParcelProcessor.swift
 //  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import Foundation
 
 class ParcelInformation {
     let address: String
+    let receiverInfomation: ReceiverInfomation
+    let costInfomation: CostInfomation
+    
+    init(address: String, receiverInfomation: ReceiverInfomation, costInfomation: CostInfomation) {
+        self.address = address
+        self.receiverInfomation = receiverInfomation
+        self.costInfomation = costInfomation
+    }
+}
+
+class ReceiverInfomation {
     var receiverName: String
     var receiverMobile: String
+    
+    init(receiverName: String, receiverMobile: String) {
+        self.receiverName = receiverName
+        self.receiverMobile = receiverMobile
+    }
+}
+
+class CostInfomation {
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -22,11 +41,8 @@ class ParcelInformation {
             return deliveryCost / 2
         }
     }
-
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    
+    init(deliveryCost: Int, discount: Discount) {
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
