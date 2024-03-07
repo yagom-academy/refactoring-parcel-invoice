@@ -6,13 +6,13 @@
 
 import UIKit
 
-protocol ParcelOrderViewDelegate {
+protocol ParcelOrderViewDelegate: AnyObject {
   func parcelOrderMade(_ parcelInformation: ParcelInformation)
 }
 
 final class ParcelOrderView: UIView {
   
-  private var delegate: ParcelOrderViewDelegate!
+  private weak var delegate: ParcelOrderViewDelegate?
   
   private let receiverNameField: UITextField = {
     let field: UITextField = .init()
@@ -83,7 +83,7 @@ final class ParcelOrderView: UIView {
         discount: discount
     )
     
-    delegate.parcelOrderMade(parcelInformation)
+    delegate?.parcelOrderMade(parcelInformation)
   }
   
   private func layoutView() {
