@@ -24,4 +24,9 @@ struct CostInfomation {
             return deliveryCost / 2
         }
     }
+    
+    init(deliveryCost: Int, discount: Discount) {
+        self.deliveryCost = deliveryCost
+        self.discount = discount
+    }
 }
