@@ -6,34 +6,67 @@
 
 import Foundation
 
-class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
-    let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+final class ParcelInformation {
+  private let receiverInformation: ReceiverInformation
+  private let deliveryCost: Int
+  private let discount: Discount
+  
+  init(receiverInformation: ReceiverInformation, deliveryCost: Int, discount: Discount) {
+    self.receiverInformation = receiverInformation
+    self.deliveryCost = deliveryCost
+    self.discount = discount
+  }
+  
+  func getReceiverAddress() -> String {
+    return receiverInformation.getAddress()
+  }
+  
+  func getReceiverName() -> String {
+    return receiverInformation.getName()
+  }
+  
+  func getReceiverMobile() -> String {
+    return receiverInformation.getMobile()
+  }
+  
+  func getDiscountedCost() -> Int {
+    switch discount {
+    case .none:
+      return deliveryCost
+    case .vip:
+      return deliveryCost / 5 * 4
+    case .coupon:
+      return deliveryCost / 2
     }
+  }
+}
 
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
-        self.deliveryCost = deliveryCost
-        self.discount = discount
-    }
+final class ReceiverInformation {
+  private let address: String
+  private let name: String
+  private let mobile: String
+  
+  init(address: String, name: String, mobile: String) {
+    self.address = address
+    self.name = name
+    self.mobile = mobile
+  }
+  
+  func getAddress() -> String {
+    return address
+  }
+  
+  func getName() -> String {
+    return name
+  }
+  
+  func getMobile() -> String {
+    return mobile
+  }
 }
 
 enum Discount: Int {
-    case none = 0, vip, coupon
+  case none = 0, vip, coupon
 }
 
 protocol ParcelOrderProcessable {
