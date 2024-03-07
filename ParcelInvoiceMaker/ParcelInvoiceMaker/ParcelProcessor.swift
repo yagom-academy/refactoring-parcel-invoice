@@ -6,6 +6,14 @@
 
 import Foundation
 
+protocol ParcelOrderProcessorProcessProtocol {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+protocol ParcelOrderProcessorSaveProtocol {
+    func save(parcelInformation: ParcelInformation)
+}
+
 class ParcelInformation {
     let address: String
     var receiverName: String
@@ -36,6 +44,7 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
+/*
 class ParcelOrderProcessor {
     
     // 택배 주문 처리 로직
@@ -52,3 +61,5 @@ class ParcelOrderProcessor {
         print("발송 정보를 데이터베이스에 저장했습니다.")
     }
 }
+*/
+
