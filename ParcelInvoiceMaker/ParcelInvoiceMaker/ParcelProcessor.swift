@@ -6,12 +6,12 @@
 
 import Foundation
 
-protocol ParcelOrderProcessorProcessProtocol {
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+protocol ParcelInformationPersistenceProtocol {
+    func save(parcelInformation: ParcelInformation)
 }
 
-protocol ParcelOrderProcessorSaveProtocol {
-    func save(parcelInformation: ParcelInformation)
+protocol ParcelInformationProcessProtocol {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
 }
 
 class ParcelInformation {
@@ -45,27 +45,36 @@ enum Discount: Int {
 }
 
 
-class ParcelOrderProcessor {
+class ParcelOrderProcessor : ParcelInformationPersistenceProtocol {
+        
+    private var databaseParcelInformationPersistence: DatabaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
     
-    let databaseParcelInformationPersistence: DatabaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
+    
+    init(databaseParcelInformationPersistence: DatabaseParcelInformationPersistence) {
+        self.databaseParcelInformationPersistence = databaseParcelInformationPersistence
+    }
 
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        databaseParcelInformationPersistence.save(parcelInformation: parcelInformation)
+        save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
+    }
+    
+    func save(parcelInformation: ParcelInformation) {
+        // 데이터베이스에 주문 정보 저장
+        print("발송 정보를 데이터베이스에 저장했습니다.")
     }
 }
 
 
 class DatabaseParcelInformationPersistence {
     
-    func save(parcelInformation: ParcelInformation) {
-        // 데이터베이스에 주문 정보 저장
-        print("발송 정보를 데이터베이스에 저장했습니다.")
-    }
-
+    func save(parcelInformation: ParcelInformation) { }
+//        // 데이터베이스에 주문 정보 저장
+//        print("발송 정보를 데이터베이스에 저장했습니다.")
+//    }
 }
 
