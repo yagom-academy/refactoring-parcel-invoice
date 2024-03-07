@@ -16,7 +16,11 @@ struct ReceiverInformation {
 struct Address {
     private let address: String
     
-    init(address: String) {
+    init?(address: String) {
+        let pattern = "^[가-힣a-zA-Z0-9()\\s]+$"
+        guard let _ = address.range(of: pattern, options: .regularExpression) else {
+            return nil
+        }
         self.address = address
     }
     
@@ -28,7 +32,12 @@ struct Address {
 struct Name {
     private let name: String
     
-    init(name: String) {
+    init?(name: String) {
+        let pattern = "^[가-힣a-zA-Z\\s]+$"
+        guard let _ = name.range(of: pattern, options: .regularExpression) else {
+            return nil
+        }
+        
         self.name = name
     }
     
@@ -40,7 +49,11 @@ struct Name {
 struct Mobile {
     private let mobile: String
     
-    init(mobile: String) {
+    init?(mobile: String) {
+        let pattern = "^[0-9]+$"
+        guard let _ = mobile.range(of: pattern, options: .regularExpression) else {
+            return nil
+        }
         self.mobile = mobile
     }
     

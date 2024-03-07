@@ -35,7 +35,11 @@ struct CostInformation {
 struct Cost {
     let cost: Int
     
-    init(cost: Int) {
+    init?(cost: Int) {
+        if cost < 0 {
+            return nil
+        }
+        
         self.cost = cost
     }
 }
