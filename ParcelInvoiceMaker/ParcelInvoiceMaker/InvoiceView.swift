@@ -70,10 +70,10 @@ final class InvoiceView: UIView {
       return
     }
     
-    let (width, height) = (bounds.width, bounds.height)
+    let (dx, dy) = (bounds.width * 0.08, bounds.height * 0.15)
     
-    context.move(to: CGPoint(x: width * 0.08, y: height * 0.15))
-    context.addRect(bounds.insetBy(dx: width * 0.08, dy: height * 0.15))
+    context.move(to: CGPoint(x: dx, y: dy))
+    context.addRect(bounds.insetBy(dx: dx, dy:dy))
     context.setLineWidth(5)
     context.setStrokeColor(UIColor.red.cgColor)
     context.drawPath(using: .stroke)
