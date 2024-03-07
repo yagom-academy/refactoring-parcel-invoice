@@ -23,11 +23,11 @@ struct CostInformation {
     var discountedCost: Int {
         switch discount {
         case .none:
-            return deliveryCost.getValue()
+            return deliveryCost.cost
         case .vip:
-            return deliveryCost.getValue() / 5 * 4
+            return deliveryCost.cost / 5 * 4
         case .coupon:
-            return deliveryCost.getValue() / 2
+            return deliveryCost.cost / 2
         }
     }
 }
@@ -37,9 +37,5 @@ struct Cost {
     
     init(cost: Int) {
         self.cost = cost
-    }
-    
-    func getValue() -> Int {
-        return self.cost
     }
 }

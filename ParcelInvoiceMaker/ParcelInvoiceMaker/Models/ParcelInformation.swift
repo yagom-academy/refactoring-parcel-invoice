@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class ParcelInformation {
+struct ParcelInformation {
     let receiverInformation: ReceiverInformation
     let costInformation: CostInformation
 

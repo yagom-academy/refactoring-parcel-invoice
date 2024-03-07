@@ -8,9 +8,9 @@
 import Foundation
 
 struct ReceiverInformation {
-    var address: Address
-    var receiverName: Name
-    var receiverMobile: Mobile
+    let address: Address
+    let receiverName: Name
+    let receiverMobile: Mobile
 }
 
 struct Address {
