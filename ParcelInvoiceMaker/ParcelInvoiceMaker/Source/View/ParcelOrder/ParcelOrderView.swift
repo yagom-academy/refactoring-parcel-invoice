@@ -178,7 +178,7 @@ extension ParcelOrderView {
     
     private func createCostInformation(discount: Discount,
                                        deliveryCost: Int) -> CostInformation {
-        return CostInformation(policy: discount,
+        return CostInformation(discount: discount,
                                deliveryCost: Double(deliveryCost))
     }
     
