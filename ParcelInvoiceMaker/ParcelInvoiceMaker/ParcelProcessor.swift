@@ -6,7 +6,7 @@
 
 import Foundation
 
-final class ParcelInformation {
+struct ParcelInformation {
   private let receiverInformation: ReceiverInformation
   private let deliveryCost: Int
   private let discount: Discount
@@ -41,7 +41,7 @@ final class ParcelInformation {
   }
 }
 
-final class ReceiverInformation {
+struct ReceiverInformation {
   private let address: String
   private let name: String
   private let mobile: String
