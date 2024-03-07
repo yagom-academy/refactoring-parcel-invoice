@@ -7,9 +7,7 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    
-//    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
-    
+        
     private var parcelProcessor: ParcelProcessor = ParcelProcessor()
     
         
@@ -39,7 +37,7 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
 
 }
 
-class ParcelProcessor: ParcelInformationProcessProtocol & ParcelInformationPersistenceProtocol{
+class ParcelProcessor: ParcelInformationProcessProtocol & ParcelInformationPersistenceProtocol {
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         // 데이터베이스에 주문 저장
         save(parcelInformation: parcelInformation)
