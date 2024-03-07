@@ -36,22 +36,29 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
-final class ParcelOrderProcessor {
-  private let persistance: DatabaseParcelInformationPersistence
+protocol ParcelOrderProcessable {
+  func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+final class ParcelOrderProcessor: ParcelOrderProcessable {
+  private let persistence: ParcelInformationPersistence
   
-  init(persistance: DatabaseParcelInformationPersistence) {
-    self.persistance = persistance
+  init(persistence: ParcelInformationPersistence) {
+    self.persistence = persistence
   }
   
   func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
-    
-    persistance.save(parcelInformation: parcelInformation)
+    persistence.save(parcelInformation: parcelInformation)
     
     onComplete(parcelInformation)
   }
 }
 
-final class DatabaseParcelInformationPersistence {
+protocol ParcelInformationPersistence {
+  func save(parcelInformation: ParcelInformation)
+}
+
+final class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
   func save(parcelInformation: ParcelInformation) {
     print("발송 정보를 데이터베이스에 저장했습니다.")
   }
