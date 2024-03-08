@@ -6,8 +6,9 @@
 
 import UIKit
 
-class InvoiceView: UIView {
-    let parcelInformation: ParcelInformation
+final class InvoiceView: UIView {
+    
+    private let parcelInformation: ParcelInformation
     
     init(parcelInformation: ParcelInformation) {
         self.parcelInformation = parcelInformation
@@ -34,12 +35,12 @@ class InvoiceView: UIView {
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.address)"
+        addressLabel.text = "주소 : \(parcelInformation.receiverAddress)"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
         costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        costLabel.text = "요금 : \(parcelInformation.discountedCost)"
+        costLabel.text = "요금 : \(parcelInformation.calculateTotalCost())"
                 
         let mainStackView: UIStackView = .init(arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel])
         mainStackView.axis = .vertical

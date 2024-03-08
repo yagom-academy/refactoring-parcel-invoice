@@ -7,10 +7,10 @@
 import UIKit
 
 protocol ParcelOrderViewDelegate {
-    func parcelOrderMade(_ parcelInformation: ParcelInformation)
+    func parcelOrderMade(with parcelInformation: ParcelInformation)
 }
 
-class ParcelOrderView: UIView {
+final class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
     
@@ -76,12 +76,16 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
-                                                         discount: discount)
-        delegate.parcelOrderMade(parcelInformation)
+        let receiverInformation: ReceiverInformation = createReceiverInformation(address: address,
+                                                                                 name: name,
+                                                                                 mobile: mobile)
+        let costInformation: CostInformation = createCostInformation(discount: discount,
+                                                                     deliveryCost: cost)
+        
+        let parcelInformation: ParcelInformation = createParcelInformation(receiverInfomation: receiverInformation, 
+                                                                           costInformation: costInformation)
+        
+        delegate.parcelOrderMade(with: parcelInformation)
     }
     
     private func layoutView() {
@@ -160,5 +164,27 @@ class ParcelOrderView: UIView {
             mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
             mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: -16)
         ])
+    }
+}
+
+extension ParcelOrderView {
+    private func createReceiverInformation(address: String,
+                                           name: String,
+                                           mobile: String) -> ReceiverInformation {
+        return ReceiverInformation(address: address,
+                            name: .init(value: name),
+                            mobileNumber: .init(value: mobile))
+    }
+    
+    private func createCostInformation(discount: Discount,
+                                       deliveryCost: Int) -> CostInformation {
+        return CostInformation(policy: discount,
+                               deliveryCost: Double(deliveryCost))
+    }
+    
+    private func createParcelInformation(receiverInfomation: ReceiverInformation,
+                                         costInformation: CostInformation) -> ParcelInformation {
+        return ParcelInformation(receiverInformation: receiverInfomation,
+                                 costInformation: costInformation)
     }
 }
