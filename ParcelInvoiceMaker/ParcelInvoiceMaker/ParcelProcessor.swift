@@ -42,10 +42,13 @@ class ReceiverInfo {
         self.receiverName = receiverName
         self.receiverMobile = receiverMobile
     }
-        
-    func setValue(receiverName: String, receiverMobile: String) {
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    
+    func getReceiverName() -> String {
+        return receiverName
+    }
+    
+    func getReceiverMobile() -> String {
+        return receiverMobile
     }
 }
 
