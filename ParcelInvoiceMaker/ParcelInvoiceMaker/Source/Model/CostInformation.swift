@@ -9,16 +9,16 @@ import Foundation
 
 
 struct CostInformation {
-    private let discountPolicy: Discount
+    private let discountInformation: Discount
     private let deliveryCost: Double
     
-    init(policy: Discount,
+    init(discount: Discount,
          deliveryCost: Double) {
-        self.discountPolicy = policy
+        self.discountInformation = discount
         self.deliveryCost = deliveryCost
     }
     
     func calculateTotalCost() -> Int {
-        return discountPolicy.calculateDiscountedCost(deliveryCost: deliveryCost)
+        return discountInformation.calculateDiscountedCost(deliveryCost: deliveryCost)
     }
 }
