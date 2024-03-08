@@ -9,24 +9,12 @@ import Foundation
 class ParcelInformation {
     let address: String
     var receiverInfo: ReceiverInfo
-    let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
-    }
+    var costInfo: CostInfo
 
     init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
         self.address = address
         self.receiverInfo = ReceiverInfo(receiverName: receiverName, receiverMobile: receiverMobile)
-        self.deliveryCost = deliveryCost
-        self.discount = discount
+        self.costInfo = CostInfo(deliveryCost: deliveryCost, discount: discount)
     }
 }
 
@@ -49,6 +37,34 @@ class ReceiverInfo {
     
     func getReceiverMobile() -> String {
         return receiverMobile
+    }
+}
+
+class CostInfo {
+    private(set) var deliveryCost: Int
+    private(set) var discount: Discount
+    private(set) var discountedCost: Int
+    
+    init(deliveryCost: Int, discount: Discount) {
+        self.deliveryCost = deliveryCost
+        self.discount = discount
+        self.discountedCost = 0
+        self.discountedCost = calculDiscount()
+    }
+    
+    private func calculDiscount() -> Int {
+        switch discount {
+        case .none:
+            return deliveryCost
+        case .vip:
+            return deliveryCost / 5 * 4
+        case .coupon:
+            return deliveryCost / 2
+        }
+    }
+    
+    func getDiscountedCost() -> Int {
+        return discountedCost
     }
 }
 
