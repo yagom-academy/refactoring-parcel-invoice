@@ -8,8 +8,7 @@ import Foundation
 
 class ParcelInformation {
     let address: String
-    var receiverName: String
-    var receiverMobile: String
+    var receiverInfo: ReceiverInfo
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -25,8 +24,7 @@ class ParcelInformation {
 
     init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
         self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+        self.receiverInfo = ReceiverInfo(receiverName: receiverName, receiverMobile: receiverMobile)
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
@@ -34,6 +32,21 @@ class ParcelInformation {
 
 enum Discount: Int {
     case none = 0, vip, coupon
+}
+
+class ReceiverInfo {
+    private(set) var receiverName: String
+    private(set) var receiverMobile: String
+        
+    init(receiverName: String, receiverMobile: String) {
+        self.receiverName = receiverName
+        self.receiverMobile = receiverMobile
+    }
+        
+    func setValue(receiverName: String, receiverMobile: String) {
+        self.receiverName = receiverName
+        self.receiverMobile = receiverMobile
+    }
 }
 
 class ParcelOrderProcessor {
