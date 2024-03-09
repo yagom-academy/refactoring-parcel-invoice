@@ -79,12 +79,13 @@ class ParcelOrderView: UIView {
         do {
             let parcelInformation: ParcelInformation = .init(
                 receiverInfo: .init(
-                    receiverName: try .init(value: name),
-                    receiverMobile: try .init(value: mobile),
+                    name: try .init(value: name),
+                    mobile: try .init(value: mobile),
                     address: try .init(value: address)),
                 costInfo: .init(
                     deliveryCost: try .init(value: cost),
-                    discount: discount
+                    discount: discount, 
+                    strategies: [NoDiscount(), VIPDiscount(), CouponDiscount()]
                 )
             )
             

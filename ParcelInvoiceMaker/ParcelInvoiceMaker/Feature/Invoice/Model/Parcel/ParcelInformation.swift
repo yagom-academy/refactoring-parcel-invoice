@@ -7,23 +7,9 @@
 
 import Foundation
 
-class ParcelInformation {
+struct ParcelInformation {
     private let receiverInfo: ParcelReceiverInfo
     private let costInfo: ParcelCostInfo
-    
-    var discountedCost: Int {
-        costInfo.discount.strategy.applyDiscount(deliveryCost: costInfo.deliveryCost.value)
-    }
-    
-    var receiverName: String {
-        receiverInfo.receiverName.value
-    }
-    var receiverMobile: String {
-        receiverInfo.receiverMobile.value
-    }
-    var receiverAddress: String {
-        receiverInfo.address.value
-    }
 
     init(
         receiverInfo: ParcelReceiverInfo,
@@ -31,5 +17,21 @@ class ParcelInformation {
     ) {
         self.receiverInfo = receiverInfo
         self.costInfo = costInfo
+    }
+}
+
+extension ParcelInformation {
+    var discountedCost: Int {
+        costInfo.discountedCost
+    }
+    
+    var receiverName: String {
+        receiverInfo.nameValue
+    }
+    var receiverMobile: String {
+        receiverInfo.mobileValue
+    }
+    var receiverAddress: String {
+        receiverInfo.addressValue
     }
 }
