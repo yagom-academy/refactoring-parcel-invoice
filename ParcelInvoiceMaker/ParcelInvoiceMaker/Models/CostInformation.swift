@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum Discount: Int {
-    case none = 0, vip, coupon
-}
-
 struct CostInformation {
     init(deliveryCost: Cost, discount: Discount) {
         self.deliveryCost = deliveryCost
@@ -21,25 +17,18 @@ struct CostInformation {
     private let discount: Discount
     
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost.getValue()
-        case .vip:
-            return deliveryCost.getValue() / 5 * 4
-        case .coupon:
-            return deliveryCost.getValue() / 2
-        }
+        return discount.strategy.applyDiscount(deliveryCost: deliveryCost.cost)
     }
 }
 
 struct Cost {
     let cost: Int
     
-    init(cost: Int) {
+    init?(cost: Int) {
+        if cost < 0 {
+            return nil
+        }
+        
         self.cost = cost
-    }
-    
-    func getValue() -> Int {
-        return self.cost
     }
 }
