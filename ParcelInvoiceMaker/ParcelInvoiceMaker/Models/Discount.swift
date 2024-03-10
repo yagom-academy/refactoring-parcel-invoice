@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Discount: Int {
+enum Discount: Int, CaseIterable {
   case none = 0, vip, coupon
   
   var strategy: DiscountStrategy {
@@ -18,6 +18,17 @@ enum Discount: Int {
       VIPDiscount()
     case .coupon:
       CouponDiscount()
+    }
+  }
+  
+  var title: String {
+    switch self {
+    case .none:
+      "없음"
+    case .vip:
+      "VIP"
+    case .coupon:
+      "쿠폰"
     }
   }
 }

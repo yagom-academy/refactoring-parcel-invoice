@@ -42,9 +42,9 @@ final class ParcelOrderView: UIView {
   
   private let discountSegmented: UISegmentedControl = {
     let control: UISegmentedControl = .init()
-    control.insertSegment(withTitle: "없음", at: 0, animated: false)
-    control.insertSegment(withTitle: "VIP", at: 1, animated: false)
-    control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+    for discount in Discount.allCases {
+      control.insertSegment(withTitle: discount.title, at: discount.rawValue, animated: false)
+    }
     control.selectedSegmentIndex = 0
     return control
   }()
