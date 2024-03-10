@@ -24,17 +24,17 @@ final class InvoiceView: UIView {
     let nameLabel: UILabel = .init()
     nameLabel.textColor = .black
     nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-    nameLabel.text = "이름 : \(parcelInformation.getReceiverName())"
+    nameLabel.text = "이름 : \(parcelInformation.receiver.name)"
     
     let mobileLabel: UILabel = .init()
     mobileLabel.textColor = .black
     mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-    mobileLabel.text = "전화 : \(parcelInformation.getReceiverMobile())"
+    mobileLabel.text = "전화 : \(parcelInformation.receiver.mobile)"
     
     let addressLabel: UILabel = .init()
     addressLabel.textColor = .black
     addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-    addressLabel.text = "주소 : \(parcelInformation.getReceiverAddress())"
+    addressLabel.text = "주소 : \(parcelInformation.receiver.address)"
     
     let costLabel: UILabel = .init()
     costLabel.textColor = .black

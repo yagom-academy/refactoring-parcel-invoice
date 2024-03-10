@@ -8,26 +8,14 @@
 import Foundation
 
 struct ParcelInformation {
-  private let receiverInformation: ReceiverInformation
+  let receiver: ReceiverInformation
   private let deliveryCost: Int
   private let discount: Discount
   
-  init(receiverInformation: ReceiverInformation, deliveryCost: Int, discount: Discount) {
-    self.receiverInformation = receiverInformation
+  init(receiver: ReceiverInformation, deliveryCost: Int, discount: Discount) {
+    self.receiver = receiver
     self.deliveryCost = deliveryCost
     self.discount = discount
-  }
-  
-  func getReceiverAddress() -> String {
-    return receiverInformation.getAddress()
-  }
-  
-  func getReceiverName() -> String {
-    return receiverInformation.getName()
-  }
-  
-  func getReceiverMobile() -> String {
-    return receiverInformation.getMobile()
   }
   
   func getDiscountedCost() -> Int {
