@@ -9,27 +9,10 @@ import Foundation
 
 struct ParcelInformation {
   let receiver: ReceiverInformation
-  private let deliveryCost: Int
-  private let discount: Discount
+  let deliveryCost: DeliveryCost
   
-  init(receiver: ReceiverInformation, deliveryCost: Int, discount: Discount) {
+  init(receiver: ReceiverInformation, deliveryCost: DeliveryCost) {
     self.receiver = receiver
     self.deliveryCost = deliveryCost
-    self.discount = discount
   }
-  
-  func getDiscountedCost() -> Int {
-    switch discount {
-    case .none:
-      return deliveryCost
-    case .vip:
-      return deliveryCost / 5 * 4
-    case .coupon:
-      return deliveryCost / 2
-    }
-  }
-}
-
-enum Discount: Int {
-  case none = 0, vip, coupon
 }

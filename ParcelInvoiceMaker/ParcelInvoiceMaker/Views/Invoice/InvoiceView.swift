@@ -40,7 +40,7 @@ final class InvoiceView: UIView {
     )
     
     let costLabel: UILabel = .init(
-      text: "요금 : \(parcelInformation.getDiscountedCost())",
+      text: "요금 : \(parcelInformation.deliveryCost.getDiscountedCost())",
       color: .black,
       font: .preferredFont(forTextStyle: .largeTitle)
     )

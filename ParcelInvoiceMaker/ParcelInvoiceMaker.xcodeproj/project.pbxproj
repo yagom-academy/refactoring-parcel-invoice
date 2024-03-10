@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		517BC6D72B9DD3E600D7A9D3 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC6D62B9DD3E600D7A9D3 /* UILabel+.swift */; };
+		517BC6DA2B9DD7C200D7A9D3 /* DeliveryCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC6D92B9DD7C200D7A9D3 /* DeliveryCost.swift */; };
 		519546682B99DD650090BD44 /* ParcelInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519546672B99DD650090BD44 /* ParcelInformation.swift */; };
 		5195466A2B99DD700090BD44 /* ReceiverInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519546692B99DD700090BD44 /* ReceiverInformation.swift */; };
 		519546752B99DFA90090BD44 /* ParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519546742B99DFA90090BD44 /* ParcelInformationPersistence.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		517BC6D62B9DD3E600D7A9D3 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		517BC6D92B9DD7C200D7A9D3 /* DeliveryCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryCost.swift; sourceTree = "<group>"; };
 		519546672B99DD650090BD44 /* ParcelInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformation.swift; sourceTree = "<group>"; };
 		519546692B99DD700090BD44 /* ReceiverInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInformation.swift; sourceTree = "<group>"; };
 		519546742B99DFA90090BD44 /* ParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformationPersistence.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				519546722B99DF960090BD44 /* Repository */,
 				519546672B99DD650090BD44 /* ParcelInformation.swift */,
 				519546692B99DD700090BD44 /* ReceiverInformation.swift */,
+				517BC6D92B9DD7C200D7A9D3 /* DeliveryCost.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				517BC6DA2B9DD7C200D7A9D3 /* DeliveryCost.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
 				5195467D2B99DFE60090BD44 /* ParcelOrderProcessor.swift in Sources */,
