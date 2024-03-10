@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		517BC6D72B9DD3E600D7A9D3 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC6D62B9DD3E600D7A9D3 /* UILabel+.swift */; };
 		517BC6DA2B9DD7C200D7A9D3 /* DeliveryCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC6D92B9DD7C200D7A9D3 /* DeliveryCost.swift */; };
+		517BC6DC2B9DDE6900D7A9D3 /* DiscountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC6DB2B9DDE6900D7A9D3 /* DiscountStrategy.swift */; };
+		517BC6DE2B9DDEDD00D7A9D3 /* Discount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC6DD2B9DDEDD00D7A9D3 /* Discount.swift */; };
 		519546682B99DD650090BD44 /* ParcelInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519546672B99DD650090BD44 /* ParcelInformation.swift */; };
 		5195466A2B99DD700090BD44 /* ReceiverInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519546692B99DD700090BD44 /* ReceiverInformation.swift */; };
 		519546752B99DFA90090BD44 /* ParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519546742B99DFA90090BD44 /* ParcelInformationPersistence.swift */; };
@@ -28,6 +30,8 @@
 /* Begin PBXFileReference section */
 		517BC6D62B9DD3E600D7A9D3 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		517BC6D92B9DD7C200D7A9D3 /* DeliveryCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryCost.swift; sourceTree = "<group>"; };
+		517BC6DB2B9DDE6900D7A9D3 /* DiscountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountStrategy.swift; sourceTree = "<group>"; };
+		517BC6DD2B9DDEDD00D7A9D3 /* Discount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discount.swift; sourceTree = "<group>"; };
 		519546672B99DD650090BD44 /* ParcelInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformation.swift; sourceTree = "<group>"; };
 		519546692B99DD700090BD44 /* ReceiverInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInformation.swift; sourceTree = "<group>"; };
 		519546742B99DFA90090BD44 /* ParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformationPersistence.swift; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 				519546672B99DD650090BD44 /* ParcelInformation.swift */,
 				519546692B99DD700090BD44 /* ReceiverInformation.swift */,
 				517BC6D92B9DD7C200D7A9D3 /* DeliveryCost.swift */,
+				517BC6DB2B9DDE6900D7A9D3 /* DiscountStrategy.swift */,
+				517BC6DD2B9DDEDD00D7A9D3 /* Discount.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,6 +287,7 @@
 			files = (
 				517BC6DA2B9DD7C200D7A9D3 /* DeliveryCost.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
+				517BC6DE2B9DDEDD00D7A9D3 /* Discount.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
 				5195467D2B99DFE60090BD44 /* ParcelOrderProcessor.swift in Sources */,
 				517BC6D72B9DD3E600D7A9D3 /* UILabel+.swift in Sources */,
@@ -290,6 +297,7 @@
 				C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */,
 				C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */,
 				519546682B99DD650090BD44 /* ParcelInformation.swift in Sources */,
+				517BC6DC2B9DDE6900D7A9D3 /* DiscountStrategy.swift in Sources */,
 				5195466A2B99DD700090BD44 /* ReceiverInformation.swift in Sources */,
 				519546772B99DFBB0090BD44 /* DatabaseParcelInformationPersistence.swift in Sources */,
 				519546752B99DFA90090BD44 /* ParcelInformationPersistence.swift in Sources */,
