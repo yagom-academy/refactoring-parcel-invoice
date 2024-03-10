@@ -126,26 +126,35 @@ final class ParcelOrderView: UIView {
       for: .horizontal
     )    
     
-    let nameStackView: UIStackView = .init(arrangedSubviews: [nameLabel, receiverNameField])
-    nameStackView.distribution = .fill
-    nameStackView.spacing = 8
-    nameStackView.axis = .horizontal
+    let nameStackView: UIStackView = .init(
+      arrangedSubviews: [nameLabel, receiverNameField],
+      spacing: 8,
+      axis: .horizontal
+    )
     
-    let mobileStackView: UIStackView = .init(arrangedSubviews: [mobileLabel, receiverMobileField])
-    mobileStackView.spacing = 8
-    mobileStackView.axis = .horizontal
+    let mobileStackView: UIStackView = .init(
+      arrangedSubviews: [mobileLabel, receiverMobileField],
+      spacing: 8,
+      axis: .horizontal
+    )
     
-    let addressStackView: UIStackView = .init(arrangedSubviews: [addressLabel, addressField])
-    addressStackView.spacing = 8
-    addressStackView.axis = .horizontal
+    let addressStackView: UIStackView = .init(
+      arrangedSubviews: [addressLabel, addressField],
+      spacing: 8,
+      axis: .horizontal
+    )
     
-    let costStackView: UIStackView = .init(arrangedSubviews: [costLabel, costField])
-    costStackView.spacing = 8
-    costStackView.axis = .horizontal
+    let costStackView: UIStackView = .init(
+      arrangedSubviews: [costLabel, costField],
+      spacing: 8,
+      axis: .horizontal
+    )
     
-    let discountStackView: UIStackView = .init(arrangedSubviews: [discountLabel, discountSegmented])
-    discountStackView.spacing = 8
-    discountStackView.axis = .horizontal
+    let discountStackView: UIStackView = .init(
+      arrangedSubviews: [discountLabel, discountSegmented],
+      spacing: 8,
+      axis: .horizontal
+    )
     
     let makeOrderButton: UIButton = .init(type: .system)
     makeOrderButton.backgroundColor = .white
@@ -161,11 +170,11 @@ final class ParcelOrderView: UIView {
         costStackView, 
         discountStackView,
         makeOrderButton
-      ]
+      ],
+      distribution: .fillEqually,
+      spacing: 8,
+      axis: .vertical
     )
-    mainStackView.axis = .vertical
-    mainStackView.distribution = .fillEqually
-    mainStackView.spacing = 8
     mainStackView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(mainStackView)
     

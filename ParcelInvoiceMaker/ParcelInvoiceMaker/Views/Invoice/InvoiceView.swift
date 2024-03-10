@@ -46,10 +46,10 @@ final class InvoiceView: UIView {
     )
     
     let mainStackView: UIStackView = .init(
-      arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel]
+      arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel],
+      spacing: 16,
+      axis: .vertical
     )
-    mainStackView.axis = .vertical
-    mainStackView.spacing = 16
     mainStackView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(mainStackView)
     
