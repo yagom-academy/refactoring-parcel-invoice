@@ -10,6 +10,11 @@ protocol ParcelOrderViewDelegate {
     func parcelOrderMade(_ parcelInformation: ParcelInformation)
 }
 
+protocol DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int
+}
+
+
 enum layoutViewTitle {
     static let name: String = "이름"
     static let mobail: String = "전화"
@@ -18,6 +23,26 @@ enum layoutViewTitle {
     static let discount: String = "할인"
     static let notice: String = "알림"
 }
+
+class NoDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return 0
+    }
+}
+
+class VIPDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 5 * 4
+    }
+}
+
+class CouponDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 2
+    }
+}
+
+
 
 class ParcelOrderView: UIView {
     
@@ -91,12 +116,23 @@ class ParcelOrderView: UIView {
             return
         }
         
+        
+        self.discount(discount: discount, cost: cost)
+            
+        
         let parcelInformation: ParcelInformation = .init(address: address,
                                                          receiverName: name,
                                                          receiverMobile: mobile,
                                                          deliveryCost: cost,
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)
+    }
+    
+    private func discount(discount: Discount, cost: Int) {
+        let discount = discount.strategy.applyDiscount(deliveryCost: cost)
+        
+        print("디스카운트 결과: \(discount)")
+        
     }
     
     private func layoutView() {

@@ -29,7 +29,6 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
         }
         
     }
-    
 
     override func loadView() {
         view = ParcelOrderView(delegate: self)
