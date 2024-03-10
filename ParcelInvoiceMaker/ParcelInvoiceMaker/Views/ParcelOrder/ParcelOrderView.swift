@@ -91,35 +91,40 @@ final class ParcelOrderView: UIView {
     let logoImageView: UIImageView = .init(image: .init(named: "post_office_logo"))
     logoImageView.contentMode = .scaleAspectFit
     
-    let nameLabel: UILabel = .init()
-    nameLabel.textColor = .black
-    nameLabel.text = "이름"
-    nameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    let nameLabel: UILabel = .init(
+      text: "이름",
+      color: .black,
+      huggingPriority: .defaultHigh,
+      for: .horizontal
+    )
     
-    let mobileLabel: UILabel = .init()
-    mobileLabel.textColor = .black
-    mobileLabel.text = "전화"
-    mobileLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    let mobileLabel: UILabel = .init(
+      text: "전화",
+      color: .black,
+      huggingPriority: .defaultHigh,
+      for: .horizontal
+    )
     
-    let addressLabel: UILabel = .init()
-    addressLabel.textColor = .black
-    addressLabel.text = "주소"
-    addressLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    let addressLabel: UILabel = .init(
+      text: "주소",
+      color: .black,
+      huggingPriority: .defaultHigh,
+      for: .horizontal
+    )
     
-    let costLabel: UILabel = .init()
-    costLabel.textColor = .black
-    costLabel.text = "요금"
-    costLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    let costLabel: UILabel = .init(
+      text: "요금",
+      color: .black,
+      huggingPriority: .defaultHigh,
+      for: .horizontal
+    )
     
-    let discountLabel: UILabel = .init()
-    discountLabel.textColor = .black
-    discountLabel.text = "할인"
-    discountLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    
-    let notificationLabel: UILabel = .init()
-    notificationLabel.textColor = .black
-    notificationLabel.text = "알림"
-    notificationLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    let discountLabel: UILabel = .init(
+      text: "할인",
+      color: .black,
+      huggingPriority: .defaultHigh,
+      for: .horizontal
+    )    
     
     let nameStackView: UIStackView = .init(arrangedSubviews: [nameLabel, receiverNameField])
     nameStackView.distribution = .fill
