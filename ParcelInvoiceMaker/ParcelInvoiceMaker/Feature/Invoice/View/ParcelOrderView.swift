@@ -85,7 +85,7 @@ class ParcelOrderView: UIView {
                 costInfo: .init(
                     deliveryCost: try .init(value: cost),
                     discount: discount, 
-                    strategies: [NoDiscount(), VIPDiscount(), CouponDiscount()]
+                    strategies: [NoDiscount(), VIPDiscount(), CouponDiscount(), EventDiscount()]
                 )
             )
             

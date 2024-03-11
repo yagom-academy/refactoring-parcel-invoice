@@ -66,11 +66,22 @@ struct CouponDiscount: DiscountStrategy {
     }
 }
 
+struct EventDiscount: DiscountStrategy {
+    func canAccept(_ discount: Discount) -> Bool {
+        discount == .event
+    }
+    
+    func applyDiscount(deliveryCost: Int) -> Int {
+        deliveryCost / Discount.EventRatio
+    }
+}
+
 enum Discount: Int {
-    case none = 0, vip, coupon
+    case none = 0, vip, coupon, event
     
     static let VIPRatio: Int = 5 * 4
     static let CouponRatio: Int = 2
+    static let EventRatio: Int = 10
 }
 
 struct ParcelCostInfo {
