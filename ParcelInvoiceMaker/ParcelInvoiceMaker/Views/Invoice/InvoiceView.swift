@@ -21,31 +21,35 @@ final class InvoiceView: UIView {
   }
   
   private func layoutView() {
-    let nameLabel: UILabel = .init()
-    nameLabel.textColor = .black
-    nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-    nameLabel.text = "이름 : \(parcelInformation.getReceiverName())"
+    let nameLabel: UILabel = .init(
+      text: "이름 : \(parcelInformation.receiver.name)",
+      color: .black,
+      font: .preferredFont(forTextStyle: .largeTitle)
+    )
     
-    let mobileLabel: UILabel = .init()
-    mobileLabel.textColor = .black
-    mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-    mobileLabel.text = "전화 : \(parcelInformation.getReceiverMobile())"
+    let mobileLabel: UILabel = .init(
+      text: "전화 : \(parcelInformation.receiver.mobile)",
+      color: .black,
+      font: .preferredFont(forTextStyle: .largeTitle)
+    )
     
-    let addressLabel: UILabel = .init()
-    addressLabel.textColor = .black
-    addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-    addressLabel.text = "주소 : \(parcelInformation.getReceiverAddress())"
+    let addressLabel: UILabel = .init(
+      text: "주소 : \(parcelInformation.receiver.address)",
+      color: .black,
+      font: .preferredFont(forTextStyle: .largeTitle)
+    )
     
-    let costLabel: UILabel = .init()
-    costLabel.textColor = .black
-    costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-    costLabel.text = "요금 : \(parcelInformation.getDiscountedCost())"
+    let costLabel: UILabel = .init(
+      text: "요금 : \(parcelInformation.deliveryCost.getDiscountedCost())",
+      color: .black,
+      font: .preferredFont(forTextStyle: .largeTitle)
+    )
     
     let mainStackView: UIStackView = .init(
-      arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel]
+      arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel],
+      spacing: 16,
+      axis: .vertical
     )
-    mainStackView.axis = .vertical
-    mainStackView.spacing = 16
     mainStackView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(mainStackView)
     
