@@ -14,9 +14,14 @@ protocol ParcelOrderProcessor {
 final class ParcelOrderProcessorImpl: ParcelOrderProcessor {
     
     private let databaseParcelInformationPersistence: ParcelInformationPersistence
+    private let receiptProvider: ReceiptProvider
     
-    init(databaseParcelInformationPersistence: ParcelInformationPersistence) {
+    init(
+        databaseParcelInformationPersistence: ParcelInformationPersistence,
+        receiptProvider: ReceiptProvider
+    ) {
         self.databaseParcelInformationPersistence = databaseParcelInformationPersistence
+        self.receiptProvider = receiptProvider
     }
 }
 
@@ -27,6 +32,11 @@ extension ParcelOrderProcessorImpl {
         
         // 데이터베이스에 주문 저장
         databaseParcelInformationPersistence.save(parcelInformation: parcelInformation)
+        
+        // 영수증 전송
+        Task {
+            await receiptProvider.send(content: parcelInformation.receiptContent)
+        }
         
         onComplete(parcelInformation)
     }

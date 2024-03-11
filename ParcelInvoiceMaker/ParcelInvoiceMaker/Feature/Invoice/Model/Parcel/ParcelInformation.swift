@@ -34,4 +34,8 @@ extension ParcelInformation {
     var receiverAddress: String {
         receiverInfo.addressValue
     }
+    
+    var receiptContent: String {
+        "상품 금액: \(costInfo.deliveryCostValue)\n결제 금액: \(costInfo.discountedCost)"
+    }
 }
