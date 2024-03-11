@@ -31,7 +31,7 @@ class InvoiceView: UIView {
         addressLabel.text = "\(layoutViewTitle.address) : \(parcelInformation.address)"
         
         let costLabel: UILabel = UILabel()
-        costLabel.text = "\(layoutViewTitle.cost) : \(parcelInformation.discountedCost)"
+        costLabel.text = "\(layoutViewTitle.cost) : \(parcelInformation.discount.strategy.applyDiscount(deliveryCost: parcelInformation.deliveryCost))"
                 
         
         [nameLabel, mobileLabel, addressLabel, costLabel].forEach {

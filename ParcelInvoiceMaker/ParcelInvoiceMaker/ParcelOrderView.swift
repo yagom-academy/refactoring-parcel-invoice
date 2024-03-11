@@ -14,6 +14,14 @@ protocol DiscountStrategy {
     func applyDiscount(deliveryCost: Int) -> Int
 }
 
+enum setButtonTitle {
+    static let parcelSend: String = "택배 보내기"
+}
+
+enum setNaviTitle {
+    static let parcelSend: String = "택배보내기"
+    static let labelInfo: String = "송장정보"
+}
 
 enum layoutViewTitle {
     static let name: String = "이름"
@@ -26,7 +34,7 @@ enum layoutViewTitle {
 
 class NoDiscount: DiscountStrategy {
     func applyDiscount(deliveryCost: Int) -> Int {
-        return 0
+        return deliveryCost
     }
 }
 
@@ -47,7 +55,7 @@ class CouponDiscount: DiscountStrategy {
 class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
-    
+
     private let receiverNameField: UITextField = {
         let field: UITextField = .init()
         field.borderStyle = .roundedRect
@@ -116,24 +124,18 @@ class ParcelOrderView: UIView {
             return
         }
         
-        
-        self.discount(discount: discount, cost: cost)
-            
-        
+                    
         let parcelInformation: ParcelInformation = .init(address: address,
                                                          receiverName: name,
                                                          receiverMobile: mobile,
                                                          deliveryCost: cost,
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)
+        
+//        print("디스카운트 결과:: \(parcelInformation.discount.strategy.applyDiscount(deliveryCost: cost))")
+
     }
     
-    private func discount(discount: Discount, cost: Int) {
-        let discount = discount.strategy.applyDiscount(deliveryCost: cost)
-        
-        print("디스카운트 결과: \(discount)")
-        
-    }
     
     private func layoutView() {
         
@@ -178,7 +180,7 @@ class ParcelOrderView: UIView {
         
         let makeOrderButton: UIButton = UIButton(type: .system)
         makeOrderButton.backgroundColor = .white
-        makeOrderButton.setTitle("택배 보내기", for: .normal)
+        makeOrderButton.setTitle(setButtonTitle.parcelSend, for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
         let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])
