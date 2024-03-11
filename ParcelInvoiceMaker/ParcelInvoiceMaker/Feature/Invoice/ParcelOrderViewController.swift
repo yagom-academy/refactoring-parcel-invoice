@@ -20,8 +20,8 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-        parcelProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
+    func parcelOrderMade(_ parcelInformation: ParcelInformation, receiptInfo: ReceiptProvideInfo) {
+        parcelProcessor.process(parcelInformation: parcelInformation, receiptInfo: receiptInfo) { (parcelInformation) in
             let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
             navigationController?.pushViewController(invoiceViewController, animated: true)
         }

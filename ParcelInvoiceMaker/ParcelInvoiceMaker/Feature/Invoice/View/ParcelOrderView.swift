@@ -7,7 +7,7 @@
 import UIKit
 
 protocol ParcelOrderViewDelegate {
-    func parcelOrderMade(_ parcelInformation: ParcelInformation)
+    func parcelOrderMade(_ parcelInformation: ParcelInformation, receiptInfo: ReceiptProvideInfo)
 }
 
 class ParcelOrderView: UIView {
@@ -49,6 +49,14 @@ class ParcelOrderView: UIView {
         return control
     }()
     
+    private let receiptSegmented: UISegmentedControl = {
+        let control: UISegmentedControl = .init()
+        control.insertSegment(withTitle: "이메일", at: 0, animated: false)
+        control.insertSegment(withTitle: "문자", at: 1, animated: false)
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
     init(delegate: ParcelOrderViewDelegate) {
         self.delegate = delegate
         super.init(frame: .zero)
@@ -71,7 +79,8 @@ class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
+              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex),
+              let receiptMethod: ReceiptProvideMethod = .init(rawValue: receiptSegmented.selectedSegmentIndex)
         else {
             return
         }
@@ -89,7 +98,14 @@ class ParcelOrderView: UIView {
                 )
             )
             
-            delegate.parcelOrderMade(parcelInformation)
+            delegate.parcelOrderMade(
+                parcelInformation,
+                receiptInfo: .init(
+                    receiptContent: parcelInformation.receiptContent,
+                    method: receiptMethod,
+                    providers: [EmailReceiptProvider(), SMSReceiptProvider()]
+                )
+            )
         } catch {
             // TODO: handle invalid input
         }
@@ -151,12 +167,16 @@ class ParcelOrderView: UIView {
         discountStackView.spacing = 8
         discountStackView.axis = .horizontal
         
+        let receiptNotificationStackView: UIStackView = .init(arrangedSubviews: [notificationLabel, receiptSegmented])
+        receiptNotificationStackView.spacing = 8
+        receiptNotificationStackView.axis = .horizontal
+        
         let makeOrderButton: UIButton = UIButton(type: .system)
         makeOrderButton.backgroundColor = .white
         makeOrderButton.setTitle("택배 보내기", for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
-        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])
+        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, receiptNotificationStackView, makeOrderButton])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 8
