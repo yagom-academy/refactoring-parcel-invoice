@@ -68,7 +68,7 @@ class CostInfo {
     }
 }
 
-class ParcelOrderProcessor {
+class ParcelOrderProcessor: ParcelOrderService {
     
     var parcelInformationPersistence: ParcelInformationPersistence
     

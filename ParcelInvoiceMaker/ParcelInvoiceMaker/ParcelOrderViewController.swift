@@ -7,9 +7,11 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor(parcelInformationPersistence: DatabaseParcelInformationPersistence())
     
-    init() {
+    let parcelOrderService: ParcelOrderService
+    
+    init(parcelOrderService: ParcelOrderService) {
+        self.parcelOrderService = parcelOrderService
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
     }
@@ -19,7 +21,7 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     }
     
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-        parcelProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
+        parcelOrderService.process(parcelInformation: parcelInformation) { (parcelInformation) in
             let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
             navigationController?.pushViewController(invoiceViewController, animated: true)
         }
@@ -31,3 +33,6 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
 
 }
 
+protocol ParcelOrderService {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
