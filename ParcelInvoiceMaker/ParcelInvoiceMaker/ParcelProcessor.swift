@@ -13,7 +13,7 @@ class ParcelInformation {
 
     init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
         self.address = address
-        self.receiverInfo = ReceiverInfo(receiverName: receiverName, receiverMobile: receiverMobile)
+        self.receiverInfo = ReceiverInfo(receiverNameInfo: receiverName, receiverMobileInfo: receiverMobile)
         self.costInfo = CostInfo(deliveryCost: deliveryCost, discount: discount)
     }
 }
