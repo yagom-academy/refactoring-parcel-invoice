@@ -49,10 +49,10 @@ class CostInfo {
         self.deliveryCost = deliveryCost
         self.discount = discount
         self.discountedCost = 0
-        self.discountedCost = calculDiscount()
+        self.discountedCost = applyDiscount()
     }
     
-    private func calculDiscount() -> Int {
+    private func applyDiscount() -> Int {
         switch discount {
         case .none:
             return deliveryCost
