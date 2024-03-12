@@ -23,20 +23,20 @@ enum Discount: Int {
 }
 
 class ReceiverInfo {
-    private(set) var receiverName: String
-    private(set) var receiverMobile: String
+    private(set) var receiverNameInfo: String
+    private(set) var receiverMobileInfo: String
         
-    init(receiverName: String, receiverMobile: String) {
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    init(receiverNameInfo: String, receiverMobileInfo: String) {
+        self.receiverNameInfo = receiverNameInfo
+        self.receiverMobileInfo = receiverMobileInfo
     }
     
-    func getReceiverName() -> String {
-        return receiverName
+    func receiverName() -> String {
+        return receiverNameInfo
     }
     
-    func getReceiverMobile() -> String {
-        return receiverMobile
+    func receiverMobile() -> String {
+        return receiverMobileInfo
     }
 }
 
