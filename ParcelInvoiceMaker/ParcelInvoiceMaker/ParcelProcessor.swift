@@ -6,23 +6,18 @@
 
 import Foundation
 
+
+protocol ParcelInformationPersistence {
+    func save(parcelInformation: ParcelInformation) 
+}
+
 class ParcelInformation {
     let address: String
     var receiverName: String
     var receiverMobile: String
     let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
-    }
-
+    let discount: Discount
+   
     init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
         self.address = address
         self.receiverName = receiverName
@@ -33,22 +28,50 @@ class ParcelInformation {
 }
 
 enum Discount: Int {
-    case none = 0, vip, coupon
+    case none = 0, vip, coupon, youth
+            
+    var strategy: DiscountStrategy {
+        switch self {
+        case .none:
+            return NoDiscount()
+        case .vip:
+            return VIPDiscount()
+        case .coupon:
+            return CouponDiscount()
+        case .youth:
+            return YouthDiscount()
+        }
+    }
+    
+}
+
+enum MessageText {
+    static let saveMsg = "발송 정보를 데이터베이스에 저장했습니다."
 }
 
 class ParcelOrderProcessor {
+        
+    let databaseParcelInformationPersistence: DatabaseParcelInformationPersistence?
     
+    init(databaseParcelInformationPersistence: DatabaseParcelInformationPersistence? = nil) {
+        self.databaseParcelInformationPersistence = databaseParcelInformationPersistence
+    }
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        save(parcelInformation: parcelInformation)
+        databaseParcelInformationPersistence?.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }
     
+}
+
+class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
+    
     func save(parcelInformation: ParcelInformation) {
         // 데이터베이스에 주문 정보 저장
-        print("발송 정보를 데이터베이스에 저장했습니다.")
+        print(MessageText.saveMsg)
     }
+
 }
