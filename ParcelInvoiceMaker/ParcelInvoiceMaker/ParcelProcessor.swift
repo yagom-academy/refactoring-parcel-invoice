@@ -7,6 +7,10 @@
 import Foundation
 
 
+protocol ParcelInformationPersistence {
+    func save(parcelInformation: ParcelInformation) 
+}
+
 class ParcelInformation {
     let address: String
     var receiverName: String
@@ -41,21 +45,24 @@ enum Discount: Int {
 
 
 class ParcelOrderProcessor {
+        
+    let databaseParcelInformationPersistence: DatabaseParcelInformationPersistence?
     
-    let databaseParcelInformationPersistence: DatabaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
-    
+    init(databaseParcelInformationPersistence: DatabaseParcelInformationPersistence? = nil) {
+        self.databaseParcelInformationPersistence = databaseParcelInformationPersistence
+    }
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        databaseParcelInformationPersistence.save(parcelInformation: parcelInformation)
+        databaseParcelInformationPersistence?.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }
     
 }
 
-class DatabaseParcelInformationPersistence {
+class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     
     func save(parcelInformation: ParcelInformation) {
         // 데이터베이스에 주문 정보 저장
