@@ -5,14 +5,19 @@
 // 
 
 import Foundation
+import Combine
 
 protocol ParcelOrderProcessor {
     
     func process(
         parcelInformation: ParcelInformation,
-        receiptInfo: ReceiptProvideInfo,
-        onComplete: (ParcelInformation) -> Void
-    )
+        receiptInfo: ReceiptProvideInfo
+    ) -> AnyPublisher<ParcelInformation, Error>
+    
+    func process(
+        parcelInformation: ParcelInformation,
+        receiptInfo: ReceiptProvideInfo
+    ) async throws -> ParcelInformation
 }
 
 final class ParcelOrderProcessorImpl: ParcelOrderProcessor {
@@ -29,16 +34,28 @@ extension ParcelOrderProcessorImpl {
     // 택배 주문 처리 로직
     func process(
         parcelInformation: ParcelInformation,
-        receiptInfo: ReceiptProvideInfo,
-        onComplete: (ParcelInformation) -> Void
-    ) {
+        receiptInfo: ReceiptProvideInfo
+    ) -> AnyPublisher<ParcelInformation, Error> {
         
         // 데이터베이스에 주문 저장
         databaseParcelInformationPersistence.save(parcelInformation: parcelInformation)
         
         // 영수증 전송
-        receiptInfo.sendReceipt()
+        return receiptInfo.sendReceipt()
+            .flatMap { _ in
+                Just(parcelInformation)
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func process(parcelInformation: ParcelInformation, receiptInfo: ReceiptProvideInfo) async throws -> ParcelInformation {
+        // 데이터베이스에 주문 저장
+        databaseParcelInformationPersistence.save(parcelInformation: parcelInformation)
         
-        onComplete(parcelInformation)
+        // 영수증 전송
+        try await receiptInfo.sendReceipt()
+        
+        return parcelInformation
     }
 }

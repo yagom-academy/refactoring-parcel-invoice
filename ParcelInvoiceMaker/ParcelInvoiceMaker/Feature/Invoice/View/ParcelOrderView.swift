@@ -7,7 +7,8 @@
 import UIKit
 
 protocol ParcelOrderViewDelegate {
-    func parcelOrderMade(_ parcelInformation: ParcelInformation, receiptInfo: ReceiptProvideInfo)
+    func parcelOrderMadeCombine(_ parcelInformation: ParcelInformation, receiptInfo: ReceiptProvideInfo)
+    func parcelOrderMadeAsyncAwait(_ parcelInformation: ParcelInformation, receiptInfo: ReceiptProvideInfo)
 }
 
 class ParcelOrderView: UIView {
@@ -45,6 +46,7 @@ class ParcelOrderView: UIView {
         control.insertSegment(withTitle: "없음", at: 0, animated: false)
         control.insertSegment(withTitle: "VIP", at: 1, animated: false)
         control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+        control.insertSegment(withTitle: "이벤트", at: 3, animated: false)
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -98,7 +100,7 @@ class ParcelOrderView: UIView {
                 )
             )
             
-            delegate.parcelOrderMade(
+            delegate.parcelOrderMadeCombine(
                 parcelInformation,
                 receiptInfo: .init(
                     receiptContent: parcelInformation.receiptContent,
