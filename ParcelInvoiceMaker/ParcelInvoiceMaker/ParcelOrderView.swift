@@ -32,6 +32,13 @@ enum layoutViewTitle {
     static let notice: String = "알림"
 }
 
+enum DiscountList {
+    static let vip = 5 * 4
+    static let coupon = 2
+    static let youth = 3
+    
+}
+
 class NoDiscount: DiscountStrategy {
     func applyDiscount(deliveryCost: Int) -> Int {
         return deliveryCost
@@ -40,16 +47,21 @@ class NoDiscount: DiscountStrategy {
 
 class VIPDiscount: DiscountStrategy {
     func applyDiscount(deliveryCost: Int) -> Int {
-        return deliveryCost / 5 * 4
+        return deliveryCost / DiscountList.vip
     }
 }
 
 class CouponDiscount: DiscountStrategy {
     func applyDiscount(deliveryCost: Int) -> Int {
-        return deliveryCost / 2
+        return deliveryCost / DiscountList.coupon
     }
 }
-
+class YouthDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / DiscountList.youth
+    }
+    
+}
 
 
 class ParcelOrderView: UIView {
@@ -86,6 +98,7 @@ class ParcelOrderView: UIView {
         static let not = "없음"
         static let vip = "VIP"
         static let coupone = "쿠폰"
+        static let youth = "청소년"
     }
     
     private let discountSegmented: UISegmentedControl = {
@@ -93,6 +106,7 @@ class ParcelOrderView: UIView {
         control.insertSegment(withTitle: segmentOption.not, at: 0, animated: false)
         control.insertSegment(withTitle: segmentOption.vip, at: 1, animated: false)
         control.insertSegment(withTitle: segmentOption.coupone, at: 2, animated: false)
+        control.insertSegment(withTitle: segmentOption.youth, at: 3, animated: false)
         control.selectedSegmentIndex = 0
         return control
     }()

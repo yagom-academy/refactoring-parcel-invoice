@@ -28,7 +28,7 @@ class ParcelInformation {
 }
 
 enum Discount: Int {
-    case none = 0, vip, coupon
+    case none = 0, vip, coupon, youth
             
     var strategy: DiscountStrategy {
         switch self {
@@ -38,11 +38,16 @@ enum Discount: Int {
             return VIPDiscount()
         case .coupon:
             return CouponDiscount()
+        case .youth:
+            return YouthDiscount()
         }
     }
     
 }
 
+enum MessageText {
+    static let saveMsg = "발송 정보를 데이터베이스에 저장했습니다."
+}
 
 class ParcelOrderProcessor {
         
@@ -66,7 +71,7 @@ class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     
     func save(parcelInformation: ParcelInformation) {
         // 데이터베이스에 주문 정보 저장
-        print("발송 정보를 데이터베이스에 저장했습니다.")
+        print(MessageText.saveMsg)
     }
 
 }
