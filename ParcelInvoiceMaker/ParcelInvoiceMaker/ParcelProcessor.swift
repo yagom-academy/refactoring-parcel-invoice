@@ -53,17 +53,17 @@ class ReceiverInfo {
 class CostInfo {
     private(set) var deliveryCost: Int
     private(set) var discount: Discount
-    private(set) var discountedCost: Int
+    private(set) var discountedCostInfo: Int
     
     init(deliveryCost: Int, discount: Discount) {
         self.deliveryCost = deliveryCost
         self.discount = discount
-        self.discountedCost = 0
-        self.discountedCost = discount.strategy.applyDiscount(deliveryCost: deliveryCost)
+        self.discountedCostInfo = 0
+        self.discountedCostInfo = discount.strategy.applyDiscount(deliveryCost: deliveryCost)
     }
     
-    func getDiscountedCost() -> Int {
-        return discountedCost
+    func discountedCost() -> Int {
+        return discountedCostInfo
     }
 }
 

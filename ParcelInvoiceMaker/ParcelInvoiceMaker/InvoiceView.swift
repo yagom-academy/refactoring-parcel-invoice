@@ -39,7 +39,7 @@ class InvoiceView: UIView {
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
         costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        costLabel.text = "요금 : \(parcelInformation.costInfo.getDiscountedCost())"
+        costLabel.text = "요금 : \(parcelInformation.costInfo.discountedCost())"
                 
         let mainStackView: UIStackView = .init(arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel])
         mainStackView.axis = .vertical
