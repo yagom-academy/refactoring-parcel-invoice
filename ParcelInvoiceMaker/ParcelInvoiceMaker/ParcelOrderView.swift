@@ -63,33 +63,28 @@ class YouthDiscount: DiscountStrategy {
     
 }
 
-
 class ParcelOrderView: UIView {
     
     private var delegate: ParcelOrderViewDelegate!
 
     private let receiverNameField: UITextField = {
-        let field: UITextField = .init()
-        field.borderStyle = .roundedRect
+        let field: RoundedTextField = .init()
         return field
     }()
     
     private let receiverMobileField: UITextField = {
-        let field: UITextField = .init()
-        field.borderStyle = .roundedRect
+        let field: RoundedTextField = .init()
         field.keyboardType = .phonePad
         return field
     }()
     
     private let addressField: UITextField = {
-        let field: UITextField = .init()
-        field.borderStyle = .roundedRect
+        let field: RoundedTextField = .init()
         return field
     }()
     
     private let costField: UITextField = {
-        let field: UITextField = .init()
-        field.borderStyle = .roundedRect
+        let field: RoundedTextField = .init()
         field.keyboardType = .decimalPad
         return field
     }()
@@ -146,8 +141,6 @@ class ParcelOrderView: UIView {
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)
         
-//        print("디스카운트 결과:: \(parcelInformation.discount.strategy.applyDiscount(deliveryCost: cost))")
-
     }
     
     
