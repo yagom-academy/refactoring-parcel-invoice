@@ -15,12 +15,14 @@ protocol ValidatedString {
 }
 
 struct ParcelReceiverName: ValidatedString {
+    typealias ErrorType = ParcelError
+    
     var value: String
     
     static func isValid(_ value: String) -> Bool {
         // 정규식 pattern. 한글, 영어, 숫자, 밑줄(_)만 있어야함
-        let pattern: String = "^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9_]$"
-        return pattern.range(of: value, options: .regularExpression) != nil
+        let pattern: String = "^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9_]+$"
+        return value.range(of: pattern, options: .regularExpression) != nil
     }
     
     init(value: String) throws {
@@ -37,7 +39,7 @@ struct ParcelReceiverMobile: ValidatedString {
     static func isValid(_ value: String) -> Bool {
         // 정규식 pattern. 전화번호 형식에 맞아야함
         let pattern: String = #"^\(?\d{3,4}\)?[ -]?\d{3,4}[ -]?\d{4}$"#
-        return pattern.range(of: value, options: .regularExpression) != nil
+        return value.range(of: pattern, options: .regularExpression) != nil
     }
     
     init(value: String) throws {
@@ -64,7 +66,31 @@ struct ParcelReceiverAddress: ValidatedString {
 }
 
 struct ParcelReceiverInfo {
-    let receiverName: ParcelReceiverName
-    let receiverMobile: ParcelReceiverMobile
-    let address: ParcelReceiverAddress
+    private let name: ParcelReceiverName
+    private let mobile: ParcelReceiverMobile
+    private let address: ParcelReceiverAddress
+    
+    init(
+        name: ParcelReceiverName,
+        mobile: ParcelReceiverMobile,
+        address: ParcelReceiverAddress
+    ) {
+        self.name = name
+        self.mobile = mobile
+        self.address = address
+    }
+}
+
+extension ParcelReceiverInfo {
+    var nameValue: String {
+        name.value
+    }
+    
+    var mobileValue: String {
+        mobile.value
+    }
+    
+    var addressValue: String {
+        address.value
+    }
 }

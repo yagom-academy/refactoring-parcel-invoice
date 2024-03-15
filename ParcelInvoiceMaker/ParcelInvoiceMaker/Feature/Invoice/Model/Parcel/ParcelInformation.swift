@@ -7,30 +7,9 @@
 
 import Foundation
 
-class ParcelInformation {
+struct ParcelInformation {
     private let receiverInfo: ParcelReceiverInfo
     private let costInfo: ParcelCostInfo
-    
-    var discountedCost: Int {
-        switch costInfo.discount {
-        case .none:
-            return costInfo.deliveryCost.value
-        case .vip:
-            return costInfo.deliveryCost.value / 5 * 4
-        case .coupon:
-            return costInfo.deliveryCost.value / 2
-        }
-    }
-    
-    var receiverName: String {
-        receiverInfo.receiverName.value
-    }
-    var receiverMobile: String {
-        receiverInfo.receiverMobile.value
-    }
-    var receiverAddress: String {
-        receiverInfo.address.value
-    }
 
     init(
         receiverInfo: ParcelReceiverInfo,
@@ -38,5 +17,25 @@ class ParcelInformation {
     ) {
         self.receiverInfo = receiverInfo
         self.costInfo = costInfo
+    }
+}
+
+extension ParcelInformation {
+    var discountedCost: Int {
+        costInfo.discountedCost
+    }
+    
+    var receiverName: String {
+        receiverInfo.nameValue
+    }
+    var receiverMobile: String {
+        receiverInfo.mobileValue
+    }
+    var receiverAddress: String {
+        receiverInfo.addressValue
+    }
+    
+    var receiptContent: String {
+        "상품 금액: \(costInfo.deliveryCostValue)\n결제 금액: \(costInfo.discountedCost)"
     }
 }

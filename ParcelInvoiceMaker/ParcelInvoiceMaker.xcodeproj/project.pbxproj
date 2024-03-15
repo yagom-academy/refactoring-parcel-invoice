@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18715CA02B9F42CC007FB85B /* ReceiptProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18715C9F2B9F42CC007FB85B /* ReceiptProvider.swift */; };
 		18E6B63C2B95F6B000B369D2 /* ParcelCostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6B63B2B95F6B000B369D2 /* ParcelCostInfo.swift */; };
 		A78F20F52B96A57000C76783 /* ParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78F20F42B96A57000C76783 /* ParcelInformationPersistence.swift */; };
 		A79083B72B95BDCE00803B0A /* ParcelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79083B62B95BDCE00803B0A /* ParcelError.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18715C9F2B9F42CC007FB85B /* ReceiptProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReceiptProvider.swift; path = ParcelInvoiceMaker/Provider/ReceiptProvider.swift; sourceTree = SOURCE_ROOT; };
 		18E6B63B2B95F6B000B369D2 /* ParcelCostInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelCostInfo.swift; sourceTree = "<group>"; };
 		A78F20F42B96A57000C76783 /* ParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformationPersistence.swift; sourceTree = "<group>"; };
 		A79083B62B95BDCE00803B0A /* ParcelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelError.swift; sourceTree = "<group>"; };
@@ -53,6 +55,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18715C9B2B9F424F007FB85B /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				18715C9C2B9F4277007FB85B /* Receipt */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		18715C9C2B9F4277007FB85B /* Receipt */ = {
+			isa = PBXGroup;
+			children = (
+				18715C9F2B9F42CC007FB85B /* ReceiptProvider.swift */,
+			);
+			name = Receipt;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		A78F20F12B96A51300C76783 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +178,7 @@
 		C741F4F82B46658300A4DDC0 /* ParcelInvoiceMaker */ = {
 			isa = PBXGroup;
 			children = (
+				18715C9B2B9F424F007FB85B /* Provider */,
 				A78F20F62B96A57E00C76783 /* Processor */,
 				A78F20F22B96A54600C76783 /* Repository */,
 				A79083B32B95BD9300803B0A /* Feature */,
@@ -241,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18715CA02B9F42CC007FB85B /* ReceiptProvider.swift in Sources */,
 				A79083BA2B95C16900803B0A /* ParcelReceiverInfo.swift in Sources */,
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
